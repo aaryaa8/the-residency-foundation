@@ -1,0 +1,15 @@
+---
+// A placeholder statue inside a hairline frame, with the 4 corner markers just
+// outside its corners. The frame sits on grid lines; the statue stands on the
+// bottom edge of the frame (and on the right edge when `pos` says so).
+import Icon from '../../base/Icon.astro';
+import { asset } from '../../base/url';
+interface Props { name: string; alt: string; ratio?: string; pos?: string; class?: string; eager?: boolean; arc?: boolean }
+const { name, alt, ratio = '4 / 5', pos = '50% 100%', class: cls, eager = false, arc = false } = Astro.props;
+---
+<figure class:list={['plate', arc && 'plate--arc', cls]} style={`--ratio:${ratio};--pos:${pos}`}>
+  {arc && <div class="plate__bg" aria-hidden="true"><div class="arc plate__arc"></div></div>}
+  <img src={asset(`img/placeholder/${name}-mono.webp`)} alt={alt} width="1600" height="1600" data-placeholder="true" loading={eager ? 'eager' : 'lazy'} decoding="async" />
+  <span class="plate__f plate__f--t"></span><span class="plate__f plate__f--r"></span><span class="plate__f plate__f--b"></span><span class="plate__f plate__f--l"></span>
+  <Icon name="marker" class="plate__m plate__m--tl" /><Icon name="marker" class="plate__m plate__m--tr" /><Icon name="marker" class="plate__m plate__m--br" /><Icon name="marker" class="plate__m plate__m--bl" />
+</figure>

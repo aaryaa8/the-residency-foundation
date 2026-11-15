@@ -1,0 +1,20 @@
+---
+// Collapsed question rows. `level` is the heading level of each question.
+interface Item { id: string; q: string; a: string[] }
+interface Props { items: Item[]; level?: 'h2' | 'h3'; prefix?: string }
+const { items, level = 'h3', prefix = 'q' } = Astro.props;
+const H = level;
+const n = (i: number) => String(i + 1).padStart(2, '0');
+---
+<div class="qa">
+  {items.map((item, i) => (
+    <details class:list={['qa__item ruled', i === items.length - 1 && 'ruled--end']} id={`${prefix}-${item.id}`} style={`--i:${Math.min(i, 6)}`}>
+      <summary>
+        <span class="num qa__n" aria-hidden="true">{n(i)}</span>
+        <H class="qa__q">{item.q}</H>
+        <span class="qa__x" aria-hidden="true"></span>
+      </summary>
+      <div class="qa__a">{item.a.map((p) => <p>{p}</p>)}</div>
+    </details>
+  ))}
+</div>

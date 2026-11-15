@@ -1,0 +1,130 @@
+---
+import Layout from '../../directions/b/Layout.astro';
+import Hero from '../../directions/b/Hero.astro';
+import Section from '../../directions/b/Section.astro';
+import Plate from '../../directions/b/Plate.astro';
+import Qa from '../../directions/b/Qa.astro';
+import Icon from '../../base/Icon.astro';
+import { page } from '../../base/url';
+import { home, faq, fig, shown, figures } from '../../content/site';
+
+const n = (i: number) => String(i + 1).padStart(2, '0');
+const last = (i: number, list: unknown[]) => i === list.length - 1;
+const labels = figures as unknown as Record<string, { label: string }>;
+const lineage = home.lineage.figures.filter((k) => shown(k));
+const questions = home.faq.ids.map((id) => faq.donors.find((q) => q.id === id)).filter(Boolean) as typeof faq.donors;
+---
+<Layout current="">
+  <Hero heading={home.hero.heading} home arc plate={{ name: 'sf2', alt: 'Placeholder image: a marble bust in a graduation cap, holding a scroll.', ratio: '2 / 3' }}>
+    <p class="hero__sub statement" data-reveal style="--i:4">{home.hero.subline}</p>
+    <div class="hero__body" data-reveal style="--i:5">{home.hero.body.map((t) => <p>{t}</p>)}</div>
+    <div class="hero__ctas">
+      <a class="cta cta--cell ruled ruled--strong" style="--i:6" href={page('b', home.hero.primary.slug)}><span>{home.hero.primary.label}</span><Icon name="play" /></a>
+      <a class="cta cta--cell ruled" style="--i:7" href={page('b', home.hero.secondary.slug)}><span>{home.hero.secondary.label}</span><Icon name="play" /></a>
+    </div>
+  </Hero>
+
+  <Section label={home.problem.label} id="problem">
+    <h2 class="h2 sec__h at-2-5 t-wide" data-reveal>{home.problem.heading}</h2>
+    <ol class="rows">
+      {home.problem.items.map((t, i, all) => (
+        <li class:list={['row ruled', last(i, all) && 'ruled--end']} style={`--i:${i}`}>
+          <span class="num row__n" aria-hidden="true">{n(i)}</span>
+          <p class="row__t">{t}</p>
+        </li>
+      ))}
+    </ol>
+  </Section>
+
+  <Section label={home.who.label} id="who">
+    <h2 class="h2 sec__h at-2-5 t-wide" data-reveal>{home.who.heading}</h2>
+    <ol class="cells" slot="wide">
+      {home.who.examples.map((t, i) => (
+        <li class="cell ruled ruled--end" style={`--i:${i}`}>
+          <span class="num" aria-hidden="true">{n(i)}</span>
+          <p>{t}</p>
+        </li>
+      ))}
+    </ol>
+    <div class="under" slot="wide">
+      <p class="statement" data-reveal>{home.who.close}</p>
+      <p class="note" data-reveal style="--i:1">{home.who.note}</p>
+    </div>
+  </Section>
+
+  <Section label={home.get.label} id="get">
+    <h2 class="h2 sec__h at-2-4" data-reveal>{home.get.heading}</h2>
+    <Plate class="sec__plate at-5-6" name="biopunk" alt="Placeholder image: a statue of a figure looking into a microscope." ratio="4 / 5" pos="100% 100%" />
+    <ul class="rows rows--narrow at-2-4">
+      {home.get.items.map((item, i, all) => (
+        <li class:list={['row ruled', last(i, all) && 'ruled--end']} style={`--i:${i}`}>
+          <span class="num row__n" aria-hidden="true">{n(i)}</span>
+          <div class="row__t">
+            <h3 class="label">{item.label}</h3>
+            <p>{item.text}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+    <p class="statement at-2-5 cellpad get__close" data-reveal>{home.get.close}</p>
+  </Section>
+
+  <Section label={home.cost.label} id="cost">
+    <p class="statement statement--xl cost__s cellpad" data-reveal>{home.cost.statement}</p>
+  </Section>
+
+  <Section label={home.lineage.label} id="lineage">
+    <h2 class="h2 sec__h at-2-5 t-wide" data-reveal>{home.lineage.heading}</h2>
+    <ul class="figs" slot="wide">
+      {lineage.map((k, i) => (
+        <li class="fig ruled ruled--end" style={`--i:${i}`}>
+          <span class="fig__n"><span class="visually-hidden">{fig(k)}</span><span aria-hidden="true" data-count={fig(k)}>{fig(k)}</span></span>
+          <span class="label fig__l">{labels[k].label}</span>
+        </li>
+      ))}
+    </ul>
+    <div class="under" slot="wide">
+      <p class="statement at-2-4" data-reveal>{home.lineage.text}</p>
+      <p class="at-2-4" data-reveal style="--i:1">{home.lineage.own}</p>
+    </div>
+  </Section>
+
+  <Section label={home.report.label} id="report">
+    <h2 class="h2 sec__h at-2-5 t-wide" data-reveal>{home.report.heading}</h2>
+    <ol class="rows">
+      {home.report.items.map((t, i, all) => (
+        <li class:list={['row row--big ruled', last(i, all) && 'ruled--end']} style={`--i:${i}`}>
+          <span class="num row__n" aria-hidden="true">{n(i)}</span>
+          <p class="row__t">{t}</p>
+          <span class="row__v" aria-hidden="true"><i class="blank"></i></span>
+        </li>
+      ))}
+    </ol>
+    <p class="note at-3-5 cellpad report__note" data-reveal>{home.report.note}</p>
+  </Section>
+
+  <Section label={home.give.label} id="give" tone="dark" class="band">
+    <div class="band__back" slot="back" aria-hidden="true"><div class="arc band__arc"></div></div>
+    <h2 class="h2 band__h sec__h at-2-5 t-wide" data-reveal>{home.give.heading}</h2>
+    <p class="statement at-2-4 cellpad" data-reveal style="--i:1">{home.give.text}</p>
+    <div class="ruled ruled--strong ruled--end at-2-3 band__cta" style="--i:2">
+      <a class="cta cta--cell cta--row" href={page('b', home.give.button.slug)}><span>{home.give.button.label}</span><Icon name="play" size={22} /></a>
+    </div>
+    <p class="small at-2-3 band__disc" data-reveal style="--i:3">{home.give.disclosure}</p>
+  </Section>
+
+  <Section label={home.faq.label} id="questions">
+    <h2 class="h2 sec__h at-2-5 t-wide" data-reveal>{home.faq.heading}</h2>
+    <Qa items={questions} />
+    <p class="qa__more at-3-5"><a class="cta" href={page('b', home.faq.more.slug)}>{home.faq.more.label}<Icon name="play" /></a></p>
+  </Section>
+</Layout>
+
+<style is:global>
+  .get__close { margin-top: 72px; }
+  .cost__s { padding-top: 24px; }
+  .report__note { margin-top: 28px; }
+  #questions .sec__in { padding-top: 0; }
+  #questions { padding-top: var(--sec-gap); }
+  @media (max-width: 809.98px) { .get__close { margin-top: 44px; } }
+</style>

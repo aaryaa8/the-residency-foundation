@@ -1,0 +1,8 @@
+---
+// The page heading. Its first letter is the one script capital on the page.
+interface Props { text: string; class?: string }
+const { text, class: cls } = Astro.props;
+const first = text.slice(0, 1);
+const rest = text.slice(1);
+---
+<h1 class:list={['h1', cls]} aria-label={text} data-settle><span class="script" aria-hidden="true">{first}</span><span aria-hidden="true">{rest}</span></h1>

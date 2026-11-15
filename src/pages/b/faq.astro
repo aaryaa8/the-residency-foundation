@@ -1,0 +1,35 @@
+---
+import Layout from '../../directions/b/Layout.astro';
+import Hero from '../../directions/b/Hero.astro';
+import Section from '../../directions/b/Section.astro';
+import Qa from '../../directions/b/Qa.astro';
+import Icon from '../../base/Icon.astro';
+import { faq } from '../../content/site';
+
+const groups = [
+  { id: 'donors', label: faq.donorsLabel, items: faq.donors },
+  { id: 'fellows', label: faq.fellowsLabel, items: faq.fellows },
+  { id: 'foundation', label: faq.foundationLabel, items: faq.foundation },
+];
+---
+<Layout title={faq.label} current="faq">
+  <Hero heading={faq.heading} label={faq.label} plate={{ name: 'arcadia', alt: 'Placeholder image: a statue of a seated figure reading a book.', ratio: '4 / 5' }}>
+    <div class="hero__jump">
+      {groups.map((group, i) => (
+        <a class:list={['cta cta--cell ruled', i === 0 && 'ruled--strong']} style={`--i:${i + 4}`} href={`#${group.id}`}><span>{group.label}</span><Icon name="play" /></a>
+      ))}
+    </div>
+  </Hero>
+
+  {groups.map((group) => (
+    <Section label={group.label} labelTag="h2" id={group.id} class="sec--qa">
+      <Qa items={group.items} level="h3" prefix={group.id} />
+    </Section>
+  ))}
+</Layout>
+
+<style is:global>
+  .sec--qa .qa__item:first-child::before { display: none; }
+  .sec--qa .sec__in { padding-bottom: calc(var(--sec-gap) * 0.75); }
+  .sec--qa:last-of-type .sec__in { padding-bottom: var(--sec-gap); }
+</style>
