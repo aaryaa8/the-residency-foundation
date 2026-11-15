@@ -1,0 +1,22 @@
+---
+// The page h1. The first letter is the page's one script capital. Letters are
+// wrapped so they can rise in one by one; the full text stays on the h1 as its
+// accessible name.
+interface Props { text: string; size?: 'hero' | 'xl' | 'lg' | 'md'; class?: string; capL?: string; capR?: string; capY?: string }
+const { text, size = 'xl', class: cls, capL, capR, capY } = Astro.props;
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const letters = [...text].filter((c) => c !== ' ').length;
+// Long headings rise faster, so the whole line always lands in about a second.
+const step = Math.max(8, Math.min(40, Math.round(1000 / letters)));
+let i = 0;
+const html = text
+  .split(' ')
+  .map((word, wi) =>
+    `<span class="w">${[...word]
+      .map((ch, ci) => `<span class="${wi === 0 && ci === 0 ? 'ch cap' : 'ch'}" style="--i:${i++}">${esc(ch)}</span>`)
+      .join('')}</span>`,
+  )
+  .join(' ');
+const style = [`--step:${step}ms`, capL && `--cap-l:${capL}`, capR && `--cap-r:${capR}`, capY && `--cap-y:${capY}`].filter(Boolean).join(';');
+---
+<h1 class:list={['title', `title--${size}`, cls]} aria-label={text} style={style}><span aria-hidden="true" set:html={html} /></h1>

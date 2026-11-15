@@ -1,0 +1,81 @@
+---
+import Layout from '../../directions/a/Layout.astro';
+import PageHero from '../../directions/a/PageHero.astro';
+import Section from '../../directions/a/Section.astro';
+import Cta from '../../directions/a/Cta.astro';
+import { fellowship, ui } from '../../content/site';
+
+type Field = {
+  id: string; label: string; type: string; required: boolean;
+  options?: string[]; hint?: string; maxLength?: number;
+};
+const fields = fellowship.form.fields as Field[];
+const half = new Set(['name', 'email', 'country', 'state', 'city', 'area', 'stage', 'now', 'format']);
+const autocomplete: Record<string, string> = {
+  name: 'name', email: 'email', country: 'country-name', state: 'address-level1', city: 'address-level2', link: 'url',
+};
+---
+<Layout title={fellowship.label} current="fellowship">
+  <PageHero label={fellowship.label} heading={fellowship.heading} size="xl" capL="-0.05em" capR="-0.06em"
+    door={{ statue: 'arcadia', imgW: '178%' }}>
+    <p class="lead measure">{fellowship.intro}</p>
+  </PageHero>
+
+  {fellowship.sections.map((s) => (
+    <Section label={s.label} class="plain">
+      <p data-rise>{s.text}</p>
+    </Section>
+  ))}
+
+  <Section label={fellowship.form.label} heading={fellowship.form.heading} class="interest" id="interest">
+    <p class="lead form__intro" data-rise>{fellowship.form.intro}</p>
+    <form class="form" data-form="interest" data-thanks={fellowship.form.thanks} action="#" method="post">
+      {fields.map((f) => {
+        const opt = !f.required && <span class="field__opt"> {ui.optional}</span>;
+        if (f.type === 'checkboxes') {
+          return (
+            <fieldset class="field" aria-describedby={f.hint ? `${f.id}-hint` : undefined}>
+              <legend>{f.label}{opt}</legend>
+              {f.hint && <p class="small field__hint" id={`${f.id}-hint`}>{f.hint}</p>}
+              <div class="checks">
+                {f.options!.map((o) => (
+                  <label class="check"><input type="checkbox" name={f.id} value={o} /><span>{o}</span></label>
+                ))}
+              </div>
+            </fieldset>
+          );
+        }
+        if (f.type === 'checkbox') {
+          return (
+            <div class="field field--check">
+              <label class="check"><input type="checkbox" name={f.id} id={f.id} required={f.required} /><span>{f.label}{opt}</span></label>
+            </div>
+          );
+        }
+        return (
+          <div class:list={['field', half.has(f.id) && 'field--half']}>
+            <label for={f.id}>{f.label}{opt}</label>
+            {f.type === 'textarea' && (
+              <>
+                <textarea id={f.id} name={f.id} rows="6" maxlength={f.maxLength} required={f.required} aria-describedby={f.maxLength ? `${f.id}-count` : undefined}></textarea>
+                {f.maxLength && <p class="field__count" id={`${f.id}-count`} data-count-for={f.id}><b>{f.maxLength}</b> {ui.charactersLeft}</p>}
+              </>
+            )}
+            {f.type === 'select' && (
+              <select id={f.id} name={f.id} required={f.required}>
+                <option value="" selected disabled={f.required} hidden={f.required}></option>
+                {f.options!.map((o) => <option value={o}>{o}</option>)}
+              </select>
+            )}
+            {['text', 'email', 'url'].includes(f.type) && (
+              <input id={f.id} name={f.id} type={f.type} required={f.required} autocomplete={autocomplete[f.id]} />
+            )}
+          </div>
+        );
+      })}
+      <div class="form__end">
+        <Cta type="submit" label={fellowship.form.submit} size="lg" />
+      </div>
+    </form>
+  </Section>
+</Layout>

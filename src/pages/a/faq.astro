@@ -1,0 +1,21 @@
+---
+import Layout from '../../directions/a/Layout.astro';
+import PageHero from '../../directions/a/PageHero.astro';
+import Section from '../../directions/a/Section.astro';
+import Questions from '../../directions/a/Questions.astro';
+import { faq } from '../../content/site';
+
+const groups = [
+  { label: faq.donorsLabel, items: faq.donors },
+  { label: faq.fellowsLabel, items: faq.fellows },
+  { label: faq.foundationLabel, items: faq.foundation },
+];
+---
+<Layout title={faq.label} current="faq">
+  <PageHero label={faq.label} heading={faq.heading} size="xl" capL="-0.03em" capR="-0.02em" />
+  {groups.map((g) => (
+    <Section label={g.label} class="group">
+      <Questions items={g.items} />
+    </Section>
+  ))}
+</Layout>

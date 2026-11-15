@@ -1,0 +1,23 @@
+---
+// A doorway: a tall hairline frame with corner markers, and a statue standing
+// on its threshold. With data-door="load" it opens on page load; with
+// "scroll" it opens when it comes into view; with "still" it does not move.
+import Icon from '../../base/Icon.astro';
+import { asset } from '../../base/url';
+interface Props { statue: string; alt?: string; mode?: 'load' | 'scroll' | 'still'; imgW?: string; imgX?: string; class?: string; eager?: boolean }
+const { statue, alt = '', mode = 'still', imgW = '150%', imgX = '0%', class: cls, eager = false } = Astro.props;
+---
+<figure class:list={['door', cls]} data-door={mode} style={`--img-w:${imgW};--img-x:${imgX}`}>
+  <span class="door__view">
+    <img class="door__img" src={asset(`img/placeholder/${statue}-gold.webp`)} alt={alt} width="1600" height="1600"
+      data-placeholder="true" loading={eager ? 'eager' : 'lazy'} decoding="async" fetchpriority={eager ? 'high' : undefined} />
+  </span>
+  <span class="door__sill"></span>
+  <span class="door__jamb door__jamb--l"></span>
+  <span class="door__jamb door__jamb--r"></span>
+  <span class="door__lintel"></span>
+  <span class="door__mk door__mk--tl"><Icon name="marker" /></span>
+  <span class="door__mk door__mk--tr"><Icon name="marker" /></span>
+  <span class="door__mk door__mk--bl"><Icon name="marker" /></span>
+  <span class="door__mk door__mk--br"><Icon name="marker" /></span>
+</figure>

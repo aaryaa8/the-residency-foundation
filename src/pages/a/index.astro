@@ -1,0 +1,103 @@
+---
+import Layout from '../../directions/a/Layout.astro';
+import Title from '../../directions/a/Title.astro';
+import Door from '../../directions/a/Door.astro';
+import Section from '../../directions/a/Section.astro';
+import Cta from '../../directions/a/Cta.astro';
+import Questions from '../../directions/a/Questions.astro';
+import Icon from '../../base/Icon.astro';
+import { asset, page } from '../../base/url';
+import { home, faq, figures, fig, shown } from '../../content/site';
+import { nb } from '../../directions/a/text';
+
+const F = figures as unknown as Record<string, { value: string; label: string; show: boolean }>;
+const lineageFigures = home.lineage.figures.filter((k) => shown(k));
+const questions = home.faq.ids.map((id) => faq.donors.find((q) => q.id === id)!).filter(Boolean);
+---
+<Layout current="">
+  <section class="hero">
+    <div class="wrap">
+      <div class="g6 hero__stage">
+        <Title text={home.hero.heading} size="hero" class="hero__title" capL="-0.02em" capR="0.05em" />
+        <Door statue="sf2" mode="load" imgW="140%" eager />
+        <div class="hero__aside">
+          <p class="hero__sub">{home.hero.subline}</p>
+          <div class="hero__body">{home.hero.body.map((p) => <p>{p}</p>)}</div>
+          <div class="cta-row">
+            <Cta href={page('a', home.hero.primary.slug)} label={home.hero.primary.label} />
+            <Cta href={page('a', home.hero.secondary.slug)} label={home.hero.secondary.label} />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Section label={home.problem.label} heading={home.problem.heading} class="sec--flush">
+    <ol class="rows reasons">
+      {home.problem.items.map((t, i) => <li data-rise style={`--d:${i * 80}ms`}><p>{t}</p></li>)}
+    </ol>
+  </Section>
+
+  <Section label={home.who.label} heading={home.who.heading}>
+    <ul class="rows examples">
+      {home.who.examples.map((t, i) => <li data-rise style={`--d:${i * 80}ms`}><p>{t}</p></li>)}
+    </ul>
+    <p class="lead measure who__close" data-rise>{home.who.close}</p>
+    <p class="small who__note" data-rise><Icon name="sparkle" size={10} /><span>{home.who.note}</span></p>
+  </Section>
+
+  <Section label={home.get.label} heading={home.get.heading} class="get">
+    <dl class="rows pairs">
+      {home.get.items.map((it, i) => (
+        <div data-rise style={`--d:${i * 70}ms`}><dt class="label">{it.label}</dt><dd>{it.text}</dd></div>
+      ))}
+    </dl>
+    <p class="lead measure get__close" data-rise>{home.get.close}</p>
+    <figure slot="after" class="plinth" style="--img-w:660px;--img-r:-2px" data-rise>
+      <img src={asset('img/placeholder/biopunk-gold.webp')} alt="" width="1600" height="1600" data-placeholder="true" loading="lazy" decoding="async" />
+    </figure>
+  </Section>
+
+  <Section label={home.cost.label}>
+    <p class="statement" data-rise>{home.cost.statement}</p>
+  </Section>
+
+  <Section label={home.lineage.label} heading={home.lineage.heading}>
+    <dl class="figures" data-rise>
+      {lineageFigures.map((k) => (
+        <div><dt class="label">{F[k].label}</dt><dd>{fig(k)}</dd></div>
+      ))}
+    </dl>
+    <div class="lineage__text measure" data-rise>
+      <p class="lead">{home.lineage.text}</p>
+      <p>{home.lineage.own}</p>
+    </div>
+  </Section>
+
+  <Section label={home.report.label} heading={home.report.heading}>
+    <ol class="report" data-rise>
+      {home.report.items.map((t) => <li><p>{t}</p></li>)}
+    </ol>
+    <p class="small report__note" data-rise>{home.report.note}</p>
+  </Section>
+
+  <section class="sec give">
+    <div class="wrap sec__grid">
+      <p class="label sec__label" data-rise>{home.give.label}</p>
+      <div class="g6 give__stage">
+        <h2 class="h2 give__title" data-rise>{home.give.heading}</h2>
+        <Door statue="odyssey" mode="scroll" imgW="108%" />
+        <div class="give__aside" data-rise>
+          <p class="lead">{home.give.text}</p>
+          <Cta href={page('a', home.give.button.slug)} label={home.give.button.label} size="bar" />
+          <p class="small give__disclosure" set:html={nb(home.give.disclosure)} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Section label={home.faq.label} heading={home.faq.heading} class="sec--flush">
+    <Questions items={questions} />
+    <p class="faq__more" data-rise><Cta href={page('a', home.faq.more.slug)} label={home.faq.more.label} /></p>
+  </Section>
+</Layout>

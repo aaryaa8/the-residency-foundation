@@ -1,0 +1,22 @@
+---
+// The top of an inner page: label in the first column, the h1 and lead in the
+// middle four, and (optionally) a slim doorway in the sixth.
+import Title from './Title.astro';
+import Door from './Door.astro';
+interface Props {
+  label: string; heading: string; size?: 'xl' | 'lg' | 'md';
+  capL?: string; capR?: string; capY?: string;
+  door?: { statue: string; alt?: string; imgW?: string; imgX?: string };
+}
+const { label, heading, size = 'xl', door, capL, capR, capY } = Astro.props;
+---
+<section class:list={['phero', door && 'phero--door']}>
+  <div class="wrap g6 phero__grid">
+    <p class="label phero__label">{label}</p>
+    <div class="phero__main">
+      <Title text={heading} size={size} capL={capL} capR={capR} capY={capY} />
+      <slot />
+    </div>
+    {door && <Door statue={door.statue} alt={door.alt} imgW={door.imgW} imgX={door.imgX} mode="load" eager />}
+  </div>
+</section>
