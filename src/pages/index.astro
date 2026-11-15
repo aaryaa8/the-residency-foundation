@@ -4,9 +4,9 @@ import BaseHead from '../base/BaseHead.astro';
 import { page, asset } from '../base/url';
 
 const directions = [
-  { dir: 'a', name: 'threshold', dark: 'no dark areas', summary: 'White throughout. Near-black headings; gold only on the script capital, icons and hairlines. Gold-toned statues. Centred hero revealed through an opening door. The quietest of the three.' },
-  { dir: 'b', name: 'ledger', dark: 'near-black give band and footer', summary: 'White with one near-black band for the give section and the footer. Left-aligned editorial layout, framed statues in grey, large figures, hairline-ruled rows. Lines draw themselves in and figures count up.' },
-  { dir: 'c', name: 'gilded', dark: 'near-black footer only', summary: 'White with gold display headings and full-colour statues. Circle arcs are prominent and move; headings arrive letter by letter. The most expressive, closest in energy to The Residency.' },
+  { dir: 'a', name: 'threshold', dark: 'white throughout', summary: 'The site is white throughout, with near-black headings and gold kept to the script capital, icons and hairlines. Statues are gold-toned, and the centered hero is revealed through an opening door. This is the quietest of the 3.' },
+  { dir: 'b', name: 'ledger', dark: 'near-black give band and footer', summary: 'The site is white with 1 near-black band for the give section and a near-black footer. The layout is left-aligned and editorial, with framed gray statues, large figures and hairline-ruled rows. Lines draw themselves in and figures count up.' },
+  { dir: 'c', name: 'gilded', dark: 'near-black footer only', summary: 'The site is white with gold display headings and full-color statues. Circle arcs are prominent and move, and headings arrive letter by letter. This is the most expressive of the 3 and the closest in energy to The Residency.' },
 ];
 const pages = [
   { label: 'home', slug: '' },
@@ -23,8 +23,8 @@ const pages = [
     <main>
       <img class="logo" src={asset('img/logo/foundation-ink.png')} alt="The Residency Foundation" width="234" height="80" />
       <p class="label">draft for internal review · 15 november 2026</p>
-      <h1>Three design directions</h1>
-      <p class="lede">The same words, pages and placeholder images, designed three ways. Open each on a laptop and on a phone. The statues are placeholders from The Residency's brand kit; the Foundation's own imagery replaces them.</p>
+      <h1>3 design directions</h1>
+      <p class="lede">Each direction uses the same words, pages and placeholder images. Open each on a laptop and on a phone. The statues are placeholders from The Residency's brand kit, and the Foundation's own imagery will replace them.</p>
       <ul class="dirs">
         {directions.map((d) => (
           <li>

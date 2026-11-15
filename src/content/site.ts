@@ -6,6 +6,12 @@
 // website and still need Aaryaa's sign-off.
 //
 // Numbers are never typed here. They come from figures.json through fig().
+//
+// Writing rules for every line (Aaryaa's): affirmative statements, complete
+// sentences, no contractions, numerals for all numbers, no em dashes, no
+// "rather than", American spelling (the site is US-facing), "they" for anyone
+// whose pronouns are not stated. The filing mission in the FAQ is the one
+// exception: it is quoted verbatim and must not be edited.
 
 import figures from './figures.json';
 
@@ -28,6 +34,19 @@ export const org = {
   emails: ['nef@livetheresidency.com', 'aaryaa@livetheresidency.com'],
   majorGiftsEmail: 'nef@livetheresidency.com',
   draftLabel: 'draft for internal review',
+};
+
+// Small interface words (buttons and screen-reader labels). Use these; do not invent others.
+export const ui = {
+  menu: 'menu',
+  close: 'close',
+  skip: 'Skip to content',
+  home: 'The Residency Foundation, home',
+  newTab: 'opens in a new tab',
+  required: 'required',
+  optional: 'optional',
+  charactersLeft: 'characters left',
+  updatesThanks: 'Thank you. You are on the list.',
 };
 
 export const nav = {
@@ -66,7 +85,7 @@ export const lines = {
     'The Residency Foundation is separate from The Residency. It has its own board, runs its own selection and its own programming, and is forming its own 501(c)(3).',
   firstCohort: `The first cohort begins in ${fig('firstCohortYear')}.`,
   // NEW (the approved sentence names the raise total, which is hidden)
-  programmingMoney: `In year one, ${fig('programming')} is dedicated to programming.`,
+  programmingMoney: `In year 1, ${fig('programming')} is dedicated to programming.`,
 };
 
 // ---------------------------------------------------------------------------
@@ -100,13 +119,13 @@ export const home = {
     label: 'who we serve',
     heading: 'the builders we started this for',
     examples: [
-      'A self-taught developer in a town of 4,000 who built the booking system the clinics on her main street now use.',
-      'A warehouse technician who wired low-cost sensors that warn his neighbours when the river rises.',
-      'A community college student who built the tool her classmates use to find and apply for financial aid.',
+      'A self-taught developer in a town of 4,000 built the booking system the clinics on their main street now use.',
+      'A warehouse technician wired low-cost sensors that warn their neighbors when the river rises.',
+      'A community college student built the tool their classmates use to find and apply for financial aid.',
     ],
     close:
-      'None of them has met a founder, pitched an investor, or had the means to come to San Francisco. The Residency Foundation is for them.',
-    note: `Illustrative examples. The first fellows will be selected in ${fig('firstCohortYear')}.`,
+      'Each of them has built something people use, and has yet to meet a founder or an investor. The Residency Foundation is for builders like them.',
+    note: `These examples are illustrative, and the first fellows will be selected in ${fig('firstCohortYear')}.`,
   },
 
   get: {
@@ -156,10 +175,10 @@ export const home = {
     label: 'what we will report',
     heading: '4 things we will measure and report to every donor',
     items: [
-      'Fellows served.',
-      'Curriculum completed.',
-      'Skills gained.',
-      'What fellows go on to do in the 2 years after the program.',
+      'Fellows served',
+      'Curriculum completed',
+      'Skills gained',
+      'What fellows go on to do in the 2 years after the program',
     ],
     note: 'Reported figures will appear here once cohort 1 is under way.',
   },
@@ -199,24 +218,24 @@ export const donate = {
       key: 'scholarship',
       label: 'full scholarship',
       amount: fig('scholarship'),
-      text: `One fellow for ${fig('programWeeks')} weeks: curriculum, cohort and introductions. It can carry your name.`,
+      text: `A full scholarship funds 1 fellow for ${fig('programWeeks')} weeks: curriculum, cohort and introductions. It can carry your name.`,
     },
     {
       key: 'namedFellowship',
       label: 'named fellowship',
       amount: fig('namedFellowship'),
-      text: 'A fellowship that carries your name.',
+      text: 'A named fellowship carries your name.',
     },
     {
       key: 'cohortSponsorship',
       label: 'cohort sponsorship',
       amount: fig('cohortSponsorship'),
-      text: 'Support for a full cohort.',
+      text: 'A cohort sponsorship supports a full cohort.',
     },
   ],
   button: { label: 'donate', href: org.donateUrl },
   // NEW
-  buttonNote: 'The donation form opens on HCB, in a new tab.',
+  buttonNote: 'The donation form opens in a new tab on HCB, the fiscal sponsorship platform run by Hack Club.',
   // NEW
   larger: 'To talk about a larger gift, write to',
   deductible: lines.deductibleToday,
@@ -236,7 +255,7 @@ export const fellowship = {
   sections: [
     {
       label: 'what fellows get',
-      text: 'The Residency’s hands-on entrepreneurship programming, a cohort of builders, access to compute, tools and mentors, and guided introductions to the investors, researchers and operators in San Francisco. Fellows take part in person, remote or hybrid.',
+      text: 'Fellows get the Residency’s hands-on entrepreneurship programming, a cohort of builders, access to compute, tools and mentors, and guided introductions to the investors, researchers and operators in San Francisco. They take part in person, remote or hybrid.',
     },
     {
       label: 'what it costs',
@@ -261,7 +280,7 @@ export const fellowship = {
     heading: 'tell us what you are building',
     // NEW
     intro:
-      'This is not an application. It tells us who you are and what you are building, and we will write to you when applications open.',
+      `Applications open in ${fig('firstCohortYear')}. Until then, this form tells us who you are and what you are building, and we will write to you when they open.`,
     fields: [
       { id: 'name', label: 'Full name', type: 'text', required: true },
       { id: 'email', label: 'Email', type: 'email', required: true },
@@ -306,7 +325,7 @@ export const fellowship = {
       {
         id: 'barriers',
         label: `What would make it hard for you to take part in a ${fig('programWeeks')}-week program?`,
-        hint: 'Choose any that apply. This helps us design the program and does not affect selection.',
+        hint: 'Choose any that apply. Your answer helps us design the program and plays no part in selection.',
         type: 'checkboxes',
         required: false,
         options: [
@@ -404,25 +423,25 @@ export const faq = {
     {
       id: 'deductible',
       q: 'Is my donation tax-deductible?',
-      a: ['Yes. The Foundation is fiscally sponsored by Hack Club, a 501(c)(3) nonprofit (EIN 81-2908499), so gifts are tax-deductible to the extent allowed by law. The Foundation is forming its own 501(c)(3).'],
+      a: ['Yes, the Foundation is fiscally sponsored by Hack Club, a 501(c)(3) nonprofit (EIN 81-2908499), so gifts are tax-deductible to the extent allowed by law. The Foundation is forming its own 501(c)(3).'],
     },
     {
       id: 'where',
       q: 'Where does my money go?',
       // Edited for the website: the raise total is removed and the gift levels
       // appear on the donate page only.
-      a: [`To programming for fellows: the curriculum, the cohort, resources such as compute, tools and mentors, introductions, and the support fellows need to take part. ${lines.programmingMoney}`],
+      a: [`Your money goes to programming for fellows: the curriculum, the cohort, resources such as compute, tools and mentors, introductions, and the support fellows need to take part. ${lines.programmingMoney}`],
     },
     {
       id: 'residency',
       q: 'Does any of it go to The Residency?',
-      a: ['No. Donations fund the Foundation’s programming. Where the Foundation uses a Residency service, it pays a documented at-cost rate approved by the independent directors and disclosed in its filings.'],
+      a: ['No, donations fund the Foundation’s programming. Where the Foundation uses a Residency service, it pays a documented at-cost rate approved by the independent directors and disclosed in its filings.'],
     },
     {
       id: 'who',
       q: 'Who runs it?',
       // Edited for the website: the President's name appears on the about page only.
-      a: ['A board with an independent majority. The team that built The Residency started the Foundation and supports it; the board, the selection and the programming belong to the Foundation.'],
+      a: ['A board with an independent majority runs it. The team that built The Residency started the Foundation and supports it; the board, the selection and the programming belong to the Foundation.'],
     },
     {
       id: 'worked',
@@ -432,14 +451,14 @@ export const faq = {
     {
       id: 'when',
       q: 'When does the first cohort start?',
-      a: [`In ${fig('firstCohortYear')}. Gifts made now fund that cohort.`],
+      a: [`The first cohort starts in ${fig('firstCohortYear')}, and gifts made now fund it.`],
     },
   ],
   fellows: [
     {
       id: 'get',
       q: 'What do fellows get?',
-      a: ['The Residency’s hands-on entrepreneurship programming, a cohort of builders, access to compute, tools and mentors, and guided introductions to the investors, researchers and operators in San Francisco. Fellows take part in person, remote or hybrid.'],
+      a: ['Fellows get the Residency’s hands-on entrepreneurship programming, a cohort of builders, access to compute, tools and mentors, and guided introductions to the investors, researchers and operators in San Francisco. They take part in person, remote or hybrid.'],
     },
     {
       id: 'cost',
@@ -449,7 +468,7 @@ export const faq = {
     {
       id: 'move',
       q: 'Do I have to move to San Francisco?',
-      a: ['No. Each fellowship runs in person, remote or hybrid, and the format is agreed with each fellow at selection.'],
+      a: ['No, each fellowship runs in person, remote or hybrid, and the format is agreed with each fellow at selection.'],
     },
     {
       id: 'apply',
@@ -501,7 +520,7 @@ export const footer = {
   updates: {
     label: 'stay updated',
     // NEW
-    text: 'News from the Foundation, a few times a year.',
+    text: 'We send news from the Foundation a few times a year.',
     placeholder: 'your email',
     submit: 'sign up',
     // NEW
