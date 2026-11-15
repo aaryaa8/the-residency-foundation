@@ -1,0 +1,68 @@
+---
+// Direction C, "gilded": questions and answers.
+import Layout from '../../directions/c/Layout.astro';
+import Arc from '../../directions/c/Arc.astro';
+import Cap from '../../directions/c/Cap.astro';
+import Faq from '../../directions/c/Faq.astro';
+import Label from '../../directions/c/Label.astro';
+import Statue from '../../directions/c/Statue.astro';
+import { faq } from '../../content/site';
+
+const groups = [
+  { label: faq.donorsLabel, items: faq.donors, tone: 'tone-atlas' },
+  { label: faq.fellowsLabel, items: faq.fellows, tone: 'tone-biopunk' },
+  { label: faq.foundationLabel, items: faq.foundation, tone: 'tone-odyssey' },
+];
+---
+<Layout title={faq.label} current="faq">
+  <!-- hero -->
+  <section class="sec fq-hero tone-vienna">
+    <Arc x={2.2} w={4} top="calc(var(--nav-h) + 10px)" xm={0.4} wm={4.4} topm="34%" orbit />
+    <Arc x={-0.6} w={2} top="52%" xm={-1} wm={2} topm="20%" />
+    <div class="grid plinth fq-hero__grid">
+      <Label text={faq.label} class="fq-hero__label" />
+      <h1 class="h1 fq-hero__h1" data-arrive><Cap text={faq.heading} /></h1>
+      <Statue name="vienna" class="fq-hero__statue" eager />
+    </div>
+  </section>
+
+  {groups.map((group, i) => (
+    <section class:list={['sec fq-group', group.tone, i === 0 && 'fq-group--first']}>
+      {i === 1 && <Arc x={-1.4} w={4} top="-10%" xm={-1.8} wm={4} topm="0" orbit reverse />}
+      {i === 2 && <Arc x={3.6} w={4} top="-30%" xm={1.6} wm={4} topm="-10%" />}
+      <div class="grid">
+        <h2 class="h2 fq-group__h2" data-arrive>{group.label}</h2>
+        <div class="fq-group__list" data-rise>
+          <Faq items={group.items} />
+        </div>
+      </div>
+    </section>
+  ))}
+</Layout>
+
+<style is:global>
+  .fq-hero { padding-top: calc(var(--nav-h) + 92px); padding-bottom: 0; }
+  .fq-hero__grid { padding-bottom: 120px; min-height: 520px; }
+  .fq-hero__label { grid-column: 1 / 5; }
+  .fq-hero__h1 { grid-column: 1 / 5; margin-top: 60px; max-width: 5.4em; }
+  .fq-hero__statue { right: calc(-1 * var(--margin) - 3.5%); bottom: 0; width: calc(3.1 * (100% - 2 * var(--margin)) / 6); }
+
+  .fq-group { padding-top: calc(var(--pad) * 0.5); padding-bottom: calc(var(--pad) * 0.5); }
+  .fq-group--first { padding-top: var(--pad); }
+  .fq-group:last-of-type { padding-bottom: var(--pad); }
+  .fq-group__h2 { grid-column: 1 / 3; position: sticky; top: calc(var(--nav-h) + 28px); padding: 18px 20px 0 0; }
+  .fq-group__list { grid-column: 3 / 7; }
+
+  @media (max-width: 1199.98px) {
+    .fq-hero__statue { width: calc(3.3 * (100% - 2 * var(--margin)) / 6); }
+  }
+  @media (max-width: 809.98px) {
+    .statue { position: relative; inset: auto; }
+    .fq-hero { padding-top: calc(var(--nav-h) + 48px); }
+    .fq-hero__grid { padding-bottom: 0; min-height: 0; }
+    .fq-hero__h1 { margin-top: 22px; }
+    .fq-hero__statue { order: 9; width: 96%; margin: 0 -12% 0 auto; align-self: flex-end; }
+    .fq-group__h2 { position: static; padding: 0; }
+    .fq-group__list { margin-top: 28px; }
+  }
+</style>

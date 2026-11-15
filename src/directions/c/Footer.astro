@@ -1,0 +1,61 @@
+---
+// The only dark area in this direction: near-black, ivory text, the white logo,
+// and an oversized cropped "foundation" in gold along the bottom edge.
+import Icon from '../../base/Icon.astro';
+import { asset, page } from '../../base/url';
+import { footer, ui } from '../../content/site';
+
+// The oversized word is the last word of the organisation's name, taken from the copy file.
+const word = footer.name.split(' ').pop()!.toLowerCase();
+---
+<footer class="foot">
+  <div class="guides guides--dark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="arc arc--foot" style="--x:1;--w:4;--xm:0;--wm:4;--top:-34%;--top-m:-60px" aria-hidden="true" data-arc>
+    <svg><circle cx="50%" cy="50%" r="50%" pathLength="1"></circle></svg>
+  </div>
+
+  <div class="foot__in">
+    <div class="foot__top">
+      <a class="foot__logo" href={page('c')} aria-label={ui.home}>
+        <img src={asset('img/logo/foundation-white.png')} alt="" width="1868" height="642" loading="lazy" />
+      </a>
+
+      <form class="foot__updates" data-form="updates" data-thanks={ui.updatesThanks}>
+        <label class="label label--ivory" for="updates-email"><Icon name="marker" /><span>{footer.updates.label}</span></label>
+        <p class="foot__updates-text" id="updates-text">{footer.updates.text}</p>
+        <div class="foot__field">
+          <input id="updates-email" name="email" type="email" required autocomplete="email" placeholder={footer.updates.placeholder} aria-describedby="updates-text" />
+          <button class="cta cta--ivory" type="submit"><span>{footer.updates.submit}</span><Icon name="play" /></button>
+        </div>
+        <label class="check check--ivory" for="updates-consent">
+          <input id="updates-consent" name="consent" type="checkbox" required />
+          <span>{footer.updates.consent}</span>
+        </label>
+      </form>
+
+      <ul class="foot__links">
+        {footer.links.map((l) => (
+          <li><a class="link" href={page('c', l.slug)}>{l.label}</a></li>
+        ))}
+      </ul>
+
+      <div class="foot__contact">
+        <p class="label label--ivory"><Icon name="marker" /><span>{footer.contactLabel}</span></p>
+        <ul>
+          {footer.emails.map((e) => (
+            <li><a class="link" href={`mailto:${e}`}>{e}</a></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot__legal">
+      <p>{footer.disclosure}</p>
+      <p>{footer.separate}</p>
+    </div>
+
+    <p class="foot__copy">{footer.copyright}</p>
+  </div>
+
+  <div class="foot__word" aria-hidden="true"><span data-fit>{word}</span></div>
+</footer>

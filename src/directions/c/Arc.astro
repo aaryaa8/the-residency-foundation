@@ -1,0 +1,13 @@
+---
+// A thin gold circle behind the content. x and w are in grid columns (6 on desktop);
+// xm and wm are the same for the 4-column phone grid. With "orbit" a small spark
+// travels slowly round the circle.
+import Icon from '../../base/Icon.astro';
+interface Props { x: number; w: number; top: string; xm?: number; wm?: number; topm?: string; orbit?: boolean; reverse?: boolean; class?: string }
+const { x, w, top, xm = 0, wm = 4, topm, orbit = false, reverse = false, class: cls } = Astro.props;
+const style = `--x:${x};--w:${w};--xm:${xm};--wm:${wm};--top:${top};--top-m:${topm ?? top}`;
+---
+<div class:list={['arc', cls]} style={style} aria-hidden="true" data-arc>
+  <svg><circle cx="50%" cy="50%" r="50%" pathLength="1"></circle></svg>
+  {orbit && <span class:list={['arc__orbit', reverse && 'arc__orbit--reverse']}><Icon name="sparkle" size={10} /></span>}
+</div>

@@ -1,0 +1,6 @@
+---
+// Heading text whose first letter is the one script capital on the page.
+interface Props { text: string }
+const { text } = Astro.props;
+---
+<span class="cap" data-letter>{text.charAt(0)}</span>{text.slice(1)}

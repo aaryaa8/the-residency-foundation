@@ -1,0 +1,35 @@
+---
+// Fixed nav. Transparent at the top of the page, a thin bordered box once the page has scrolled.
+import Icon from '../../base/Icon.astro';
+import { asset, page } from '../../base/url';
+import { nav, ui } from '../../content/site';
+
+interface Props { current?: string }
+const { current } = Astro.props;
+---
+<header class="nav" data-nav>
+  <div class="nav__bar">
+    <a class="nav__logo" href={page('c')} aria-label={ui.home}>
+      <img src={asset('img/logo/foundation-ink.png')} alt="" width="1868" height="642" />
+    </a>
+
+    <nav class="nav__links" id="nav-links" data-nav-links>
+      <ul>
+        {nav.links.map((l) => (
+          <li>
+            <a class="nav__link" href={page('c', l.slug)} aria-current={current === l.slug ? 'page' : undefined}>{l.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="nav__end">
+      <a class="cta nav__cta" href={page('c', nav.cta.slug)} aria-current={current === nav.cta.slug ? 'page' : undefined}>
+        <span>{nav.cta.label}</span><Icon name="play" />
+      </a>
+      <button class="nav__menu" type="button" aria-expanded="false" aria-controls="nav-links" data-nav-menu data-open-label={ui.menu} data-close-label={ui.close} aria-label={ui.menu}>
+        <span class="nav__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+    </div>
+  </div>
+</header>

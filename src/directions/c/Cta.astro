@@ -1,0 +1,10 @@
+---
+// Call to action: mono text followed by the play-circle icon. "framed" adds a hairline box.
+import Icon from '../../base/Icon.astro';
+import { ui } from '../../content/site';
+interface Props { label: string; href: string; framed?: boolean; external?: boolean; class?: string }
+const { label, href, framed = false, external = false, class: cls } = Astro.props;
+---
+<a class:list={['cta', framed && 'cta--framed', cls]} href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}>
+  <span>{label}{external && <span class="visually-hidden"> ({ui.newTab})</span>}</span><Icon name="play" />
+</a>

@@ -1,0 +1,8 @@
+---
+// Small mono label that opens a section. The marker takes the section's accent.
+// Pass as="h2" where the label is the section's heading.
+import Icon from '../../base/Icon.astro';
+interface Props { text: string; class?: string; as?: 'p' | 'h2' | 'h3'; id?: string }
+const { text, class: cls, as: Tag = 'p', id } = Astro.props;
+---
+<Tag class:list={['label', cls]} id={id}><Icon name="marker" /><span>{text}</span></Tag>
