@@ -1,0 +1,25 @@
+---
+// Shared <head>. Every page of every direction includes this first.
+// It loads the fonts and tokens, keeps the draft out of search engines, and sets the favicon.
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/geist-mono/500.css';
+import '@fontsource/geist-mono/700.css';
+import '@fontsource/monsieur-la-doulaise/400.css';
+import './tokens.css';
+import { asset } from './url';
+import { org } from '../content/site';
+
+interface Props { title?: string; description?: string }
+const { title, description = 'The Residency Foundation enables human potential by educating people with limited financial means to address problems facing their communities.' } = Astro.props;
+const fullTitle = title ? `${title} | ${org.name}` : org.name;
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- Draft for internal review: keep out of search engines until Nick and Nef approve. -->
+<meta name="robots" content="noindex, nofollow" />
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="icon" type="image/png" href={asset('favicon.png')} />
+<link rel="preconnect" href="https://framerusercontent.com" crossorigin />

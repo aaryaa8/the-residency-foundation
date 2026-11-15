@@ -1,0 +1,59 @@
+---
+// Review index: lists the design directions side by side. Not part of the final site.
+import BaseHead from '../base/BaseHead.astro';
+import { page, asset } from '../base/url';
+
+const directions = [
+  { dir: 'a', name: 'threshold', dark: 'no dark areas', summary: 'White throughout. Near-black headings; gold only on the script capital, icons and hairlines. Gold-toned statues. Centred hero revealed through an opening door. The quietest of the three.' },
+  { dir: 'b', name: 'ledger', dark: 'near-black give band and footer', summary: 'White with one near-black band for the give section and the footer. Left-aligned editorial layout, framed statues in grey, large figures, hairline-ruled rows. Lines draw themselves in and figures count up.' },
+  { dir: 'c', name: 'gilded', dark: 'near-black footer only', summary: 'White with gold display headings and full-colour statues. Circle arcs are prominent and move; headings arrive letter by letter. The most expressive, closest in energy to The Residency.' },
+];
+const pages = [
+  { label: 'home', slug: '' },
+  { label: 'donate', slug: 'donate' },
+  { label: 'fellowship', slug: 'fellowship' },
+  { label: 'about', slug: 'about' },
+  { label: 'faq', slug: 'faq' },
+];
+---
+<!doctype html>
+<html lang="en">
+  <head><BaseHead title="Design directions for review" /></head>
+  <body>
+    <main>
+      <img class="logo" src={asset('img/logo/foundation-ink.png')} alt="The Residency Foundation" width="234" height="80" />
+      <p class="label">draft for internal review · 15 november 2026</p>
+      <h1>Three design directions</h1>
+      <p class="lede">The same words, pages and placeholder images, designed three ways. Open each on a laptop and on a phone. The statues are placeholders from The Residency's brand kit; the Foundation's own imagery replaces them.</p>
+      <ul class="dirs">
+        {directions.map((d) => (
+          <li>
+            <p class="label">direction {d.dir} · {d.dark}</p>
+            <h2><a href={page(d.dir)}>{d.name}</a></h2>
+            <p>{d.summary}</p>
+            <p class="links">{pages.map((p) => <a href={page(d.dir, p.slug)}>{p.label}</a>)}</p>
+          </li>
+        ))}
+      </ul>
+    </main>
+  </body>
+</html>
+<style>
+  main { max-width: 1100px; margin: 0 auto; padding: 64px var(--margin) 96px; }
+  .logo { width: 234px; height: auto; margin-bottom: 56px; }
+  .label { font-family: var(--mono); font-size: var(--label); font-weight: 700; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--gold-deep); margin: 0 0 12px; }
+  h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(44px, 7vw, 80px); line-height: 0.95; letter-spacing: var(--tracking-display); margin: 0 0 24px; }
+  .lede { max-width: 640px; color: var(--ink-70); margin: 0 0 56px; }
+  .dirs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink-15); }
+  .dirs li { padding: 28px 28px 32px 0; border-bottom: 1px solid var(--ink-15); }
+  .dirs li + li { padding-left: 28px; border-left: 1px solid var(--ink-15); }
+  h2 { font-family: var(--serif); font-weight: 300; font-size: 44px; line-height: 1; letter-spacing: var(--tracking-display); margin: 0 0 16px; }
+  h2 a { text-decoration: none; }
+  h2 a:hover { color: var(--gold-deep); }
+  .dirs p { margin: 0 0 20px; font-size: 16px; }
+  .links { display: flex; flex-wrap: wrap; gap: 6px 16px; font-family: var(--mono); font-size: var(--label); font-weight: 700; letter-spacing: var(--tracking-label); text-transform: uppercase; margin: 0 !important; }
+  @media (max-width: 809.98px) {
+    .dirs { grid-template-columns: 1fr; }
+    .dirs li, .dirs li + li { padding: 24px 0; border-left: 0; }
+  }
+</style>
