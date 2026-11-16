@@ -1,0 +1,25 @@
+---
+// The nav is the header row of the grid: logo in columns 1 to 2, one mono link
+// per column after that, DONATE last. It gains a hairline box once the page
+// scrolls and turns ivory while it passes over a near-black area.
+import Donate from './Donate.astro';
+import { asset, link } from '../base/url';
+import { nav, ui } from '../content/site';
+interface Props { current?: string }
+const { current = '' } = Astro.props;
+---
+<header class="nav" data-nav>
+  <nav class="nav__bar" aria-label={ui.menu}>
+    <a class="nav__logo" href={link()} aria-label={ui.home}>
+      <img class="on-light" src={asset('img/logo/foundation-ink.png')} alt="" width="1868" height="642" />
+      <img class="on-dark" src={asset('img/logo/foundation-white.png')} alt="" width="1868" height="642" />
+    </a>
+    <ul class="nav__links" id="nav-links">
+      {nav.links.map((l) => (
+        <li><a href={link(l.slug)} aria-current={current === l.slug ? 'page' : undefined}><span>{l.label}</span></a></li>
+      ))}
+    </ul>
+    <Donate plain class="nav__cta" label={nav.cta.label} href={nav.cta.href} />
+    <button class="nav__menu" type="button" aria-expanded="false" aria-controls="nav-links" aria-label={ui.menu} data-menu data-open={ui.menu} data-close={ui.close}><i></i><i></i></button>
+  </nav>
+</header>

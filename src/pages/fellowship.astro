@@ -1,0 +1,78 @@
+---
+import Layout from '../site/Layout.astro';
+import Hero from '../site/Hero.astro';
+import Section from '../site/Section.astro';
+import Icon from '../base/Icon.astro';
+import { fellowship, ui } from '../content/site';
+
+const form = fellowship.form;
+type Field = { id: string; label: string; type: string; required: boolean; options?: string[]; hint?: string; maxLength?: number };
+const fields = form.fields as Field[];
+const wide = (f: Field) => ['textarea', 'checkboxes', 'checkbox'].includes(f.type);
+const auto: Record<string, string> = { name: 'name', email: 'email', country: 'country-name', state: 'address-level1', city: 'address-level2' };
+---
+<Layout title={fellowship.label} current="fellowship" motion="a">
+  <Hero heading={fellowship.heading} plate={{ name: 'vienna', ratio: '4 / 5', pos: '100% 100%' }}>
+    <p class="hero__sub hero__sub--end statement">{fellowship.intro}</p>
+  </Hero>
+
+  <section class="sec sec--move sec--flush" id="fellowship">
+    <div class="sec__in">
+      <span class="rule rule--strong" data-draw></span>
+      <div class="facts">
+        {fellowship.sections.map((s) => (
+          <div class="facts__row ruled" data-rise>
+            <h2 class="sec__title sec__title--sub">{s.title}</h2>
+            <p class="lead">{s.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Section title={form.title} id="interest" rule>
+    <p class="lead" data-rise>{form.intro}</p>
+    <form class="form full flush" data-form="interest" data-thanks={form.thanks}>
+      {fields.map((f) => {
+        const mark = f.required
+          ? <span class="field__req"><span aria-hidden="true">*</span><span class="visually-hidden"> ({ui.required})</span></span>
+          : <span class="field__opt">({ui.optional})</span>;
+        if (f.type === 'checkboxes') return (
+          <fieldset class="field field--wide" aria-describedby={f.hint ? `${f.id}-hint` : undefined}>
+            <legend>{f.label} {mark}</legend>
+            {f.hint && <p class="field__hint" id={`${f.id}-hint`}>{f.hint}</p>}
+            <div class="checks">
+              {f.options!.map((o) => <label class="check"><input type="checkbox" name={f.id} value={o} /><span>{o}</span></label>)}
+            </div>
+          </fieldset>
+        );
+        if (f.type === 'checkbox') return (
+          <div class="field field--wide field--single">
+            <label class="check"><input type="checkbox" id={f.id} name={f.id} required={f.required} /><span>{f.label} {mark}</span></label>
+          </div>
+        );
+        return (
+          <div class:list={['field', wide(f) && 'field--wide']}>
+            <label class="field__label" for={f.id}>{f.label} {mark}</label>
+            {f.type === 'select' && (
+              <select class="input" id={f.id} name={f.id} required={f.required}>
+                <option value=""></option>
+                {f.options!.map((o) => <option>{o}</option>)}
+              </select>
+            )}
+            {f.type === 'textarea' && (
+              <>
+                <textarea class="input" id={f.id} name={f.id} maxlength={f.maxLength} required={f.required} rows="6" aria-describedby={`${f.id}-count`}></textarea>
+                <p class="small field__count" id={`${f.id}-count`} data-count-for={f.id}><span data-left>{f.maxLength}</span> {ui.charactersLeft}</p>
+              </>
+            )}
+            {['text', 'email', 'url'].includes(f.type) && (
+              <input class="input" type={f.type} id={f.id} name={f.id} required={f.required} autocomplete={auto[f.id] ?? 'off'} />
+            )}
+          </div>
+        );
+      })}
+      <button class="cta cta--cell ruled ruled--end form__send" type="submit"><span>{form.submit}</span><Icon name="play" size={22} /></button>
+    </form>
+  </Section>
+</Layout>

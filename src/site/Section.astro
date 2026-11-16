@@ -1,0 +1,21 @@
+---
+// A section. Its short title is a large lowercase side-head in columns 1 to 2,
+// with the content in columns 3 to 6. `rule` marks a real change of subject:
+// white space, then a strong rule. Without it the section continues the
+// subject above and sits closer. The "wide" slot spans all 6 columns.
+import Guides from './Guides.astro';
+interface Props { title?: string; id?: string; tone?: 'dark'; class?: string; rule?: boolean; flush?: boolean }
+const { title, id, tone, class: cls, rule = false, flush = false } = Astro.props;
+---
+<section class:list={['sec', rule ? 'sec--move' : 'sec--next', flush && 'sec--flush', cls]} id={id} data-tone={tone}>
+  {tone === 'dark' && <Guides />}
+  <slot name="back" />
+  <div class="sec__in">
+    {rule && <span class="rule rule--strong" data-draw></span>}
+    <div class="sec__main">
+      {title && <h2 class="sec__title" data-rise>{title}</h2>}
+      <div class="sec__body"><slot /></div>
+    </div>
+    <slot name="wide" />
+  </div>
+</section>

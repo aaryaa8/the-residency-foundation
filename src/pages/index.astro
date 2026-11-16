@@ -1,59 +1,106 @@
 ---
-// Review index: lists the design directions side by side. Not part of the final site.
-import BaseHead from '../base/BaseHead.astro';
-import { page, asset } from '../base/url';
+import Layout from '../site/Layout.astro';
+import Hero from '../site/Hero.astro';
+import Section from '../site/Section.astro';
+import Plate from '../site/Plate.astro';
+import Donate from '../site/Donate.astro';
+import Qa from '../site/Qa.astro';
+import Icon from '../base/Icon.astro';
+import { link } from '../base/url';
+import { home, faq, fig, shown, figures } from '../content/site';
 
-const directions = [
-  { dir: 'a', name: 'threshold', dark: 'white throughout', summary: 'The site is white throughout, with near-black headings and gold kept to the script capital, icons and hairlines. Statues are gold-toned, and the centered hero is revealed through an opening door. This is the quietest of the 3.' },
-  { dir: 'b', name: 'ledger', dark: 'near-black give band and footer', summary: 'The site is white with 1 near-black band for the give section and a near-black footer. The layout is left-aligned and editorial, with framed gray statues, large figures and hairline-ruled rows. Lines draw themselves in and figures count up.' },
-  { dir: 'c', name: 'gilded', dark: 'near-black footer only', summary: 'The site is white with gold display headings and full-color statues. Circle arcs are prominent and move, and headings arrive letter by letter. This is the most expressive of the 3 and the closest in energy to The Residency.' },
-];
-const pages = [
-  { label: 'home', slug: '' },
-  { label: 'donate', slug: 'donate' },
-  { label: 'fellowship', slug: 'fellowship' },
-  { label: 'about', slug: 'about' },
-  { label: 'faq', slug: 'faq' },
-];
+const captions = figures as unknown as Record<string, { label: string }>;
+const lineage = home.lineage.figures.filter((k) => shown(k));
+const questions = home.faq.ids.map((id) => faq.donors.find((q) => q.id === id)).filter(Boolean) as typeof faq.donors;
+const last = (i: number, list: unknown[]) => i === list.length - 1;
 ---
-<!doctype html>
-<html lang="en">
-  <head><BaseHead title="Design directions for review" /></head>
-  <body>
-    <main>
-      <img class="logo" src={asset('img/logo/foundation-ink.png')} alt="The Residency Foundation" width="234" height="80" />
-      <p class="label">draft for internal review · 15 november 2026</p>
-      <h1>3 design directions</h1>
-      <p class="lede">Each direction uses the same words, pages and placeholder images. Open each on a laptop and on a phone. The statues are placeholders from The Residency's brand kit, and the Foundation's own imagery will replace them.</p>
-      <ul class="dirs">
-        {directions.map((d) => (
-          <li>
-            <p class="label">direction {d.dir} · {d.dark}</p>
-            <h2><a href={page(d.dir)}>{d.name}</a></h2>
-            <p>{d.summary}</p>
-            <p class="links">{pages.map((p) => <a href={page(d.dir, p.slug)}>{p.label}</a>)}</p>
-          </li>
-        ))}
-      </ul>
-    </main>
-  </body>
-</html>
-<style>
-  main { max-width: 1100px; margin: 0 auto; padding: 64px var(--margin) 96px; }
-  .logo { width: 234px; height: auto; margin-bottom: 56px; }
-  .label { font-family: var(--mono); font-size: var(--label); font-weight: 700; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--gold-deep); margin: 0 0 12px; }
-  h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(44px, 7vw, 80px); line-height: 0.95; letter-spacing: var(--tracking-display); margin: 0 0 24px; }
-  .lede { max-width: 640px; color: var(--ink-70); margin: 0 0 56px; }
-  .dirs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink-15); }
-  .dirs li { padding: 28px 28px 32px 0; border-bottom: 1px solid var(--ink-15); }
-  .dirs li + li { padding-left: 28px; border-left: 1px solid var(--ink-15); }
-  h2 { font-family: var(--serif); font-weight: 300; font-size: 44px; line-height: 1; letter-spacing: var(--tracking-display); margin: 0 0 16px; }
-  h2 a { text-decoration: none; }
-  h2 a:hover { color: var(--gold-deep); }
-  .dirs p { margin: 0 0 20px; font-size: 16px; }
-  .links { display: flex; flex-wrap: wrap; gap: 6px 16px; font-family: var(--mono); font-size: var(--label); font-weight: 700; letter-spacing: var(--tracking-label); text-transform: uppercase; margin: 0 !important; }
-  @media (max-width: 809.98px) {
-    .dirs { grid-template-columns: 1fr; }
-    .dirs li, .dirs li + li { padding: 24px 0; border-left: 0; }
-  }
-</style>
+<Layout motion="a+b">
+  <Hero heading={home.hero.heading} home arc plate={{ name: 'sf2', ratio: '2 / 3' }}>
+    <p class="hero__sub statement">{home.hero.subline}</p>
+    <div class="hero__body">{home.hero.body.map((t) => <p>{t}</p>)}</div>
+    <div class="hero__actions">
+      <Donate label={home.hero.primary.label} href={home.hero.primary.href} />
+      <a class="cta cta--cell ruled ruled--end" href={link(home.hero.secondary.slug)}><span>{home.hero.secondary.label}</span><Icon name="play" /></a>
+    </div>
+    <p class="hero__note small">{home.hero.disclosure}</p>
+  </Hero>
+
+  <!-- the problem, then the builders it leaves out -->
+  <Section title={home.problem.title} id="problem" rule flush>
+    <div class="prose lead" data-rise>{home.problem.items.map((t) => <p>{t}</p>)}</div>
+  </Section>
+
+  <Section title={home.who.title} id="builders">
+    <div class="cols3 lead sec__wide" slot="wide">
+      {home.who.examples.map((t, i) => <p data-rise style={`--d:${i * 90}ms`}>{t}</p>)}
+    </div>
+    <div class="under" slot="wide">
+      <p class="statement" data-rise>{home.who.close}</p>
+      <p class="small" data-rise>{home.who.note}</p>
+    </div>
+  </Section>
+
+  <!-- the program, then what it costs -->
+  <section class="sec sec--move" id="program">
+    <div class="sec__in">
+      <span class="rule rule--strong" data-draw></span>
+      <div class="prog">
+        <h2 class="sec__title" data-rise>{home.get.title}</h2>
+        <p class="statement leadin" data-rise>{home.get.leadIn}</p>
+        <dl class="dl">
+          {home.get.items.map((item, i, all) => (
+            <div class:list={['dl__row ruled', last(i, all) && 'ruled--end']} data-rise style={`--d:${i * 70}ms`}>
+              <dt class="key">{item.label}</dt>
+              <dd>{item.text}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="statement prog__close" data-rise>{home.get.close}</p>
+        <Plate name="biopunk" ratio="4 / 5" pos="100% 100%" />
+      </div>
+    </div>
+  </section>
+
+  <Section title={home.cost.title} id="cost">
+    <p class="statement statement--xl full" data-rise>{home.cost.statement}</p>
+  </Section>
+
+  <!-- the team, then how success is measured -->
+  <Section title={home.lineage.title} id="team" rule>
+    <ul class="figs sec__wide" slot="wide">
+      {lineage.map((k, i) => (
+        <li class="fig" data-rise style={`--d:${i * 90}ms`}>
+          <span class="fig__n"><span class="visually-hidden">{fig(k)}</span><span aria-hidden="true" data-count={fig(k)}>{fig(k)}</span></span>
+          <span class="fig__l key">{captions[k].label}</span>
+        </li>
+      ))}
+    </ul>
+    <div class="under" slot="wide">
+      <p class="statement" data-rise>{home.lineage.text}</p>
+      <p class="lead" data-rise>{home.lineage.own}</p>
+    </div>
+  </Section>
+
+  <Section id="report">
+    <p class="statement leadin" data-rise>{home.report.leadIn}</p>
+    <ul class="lines gap-s">
+      {home.report.items.map((t, i) => <li class="statement" data-rise style={`--d:${i * 70}ms`}>{t}</li>)}
+    </ul>
+    <p class="small gap-m" data-rise>{home.report.note}</p>
+  </Section>
+
+  <Section title={home.give.title} id="donate" tone="dark" class="band">
+    <div class="band__back" slot="back" aria-hidden="true"><div class="arc band__arc" data-sweep></div></div>
+    <div class="stack" data-rise>{home.give.text.map((t) => <p class="statement">{t}</p>)}</div>
+    <div class="actions full flush" data-rise>
+      <Donate label={home.give.button.label} href={home.give.button.href} />
+      <a class="cta cta--cell ruled ruled--end" href={link(home.give.more.slug)}><span>{home.give.more.label}</span><Icon name="play" /></a>
+    </div>
+    <p class="small" data-rise>{home.give.disclosure}</p>
+  </Section>
+
+  <Section title={home.faq.title} id="questions" rule>
+    <Qa items={questions} closed />
+    <p class="qa__more"><a class="cta" href={link(home.faq.more.slug)}>{home.faq.more.label}<Icon name="play" /></a></p>
+  </Section>
+</Layout>

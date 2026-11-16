@@ -1,0 +1,29 @@
+---
+// The top of a page: a strong rule, the h1 on the left across columns 1 to 3,
+// column 4 left empty, and a framed statue on the right in columns 5 to 6.
+// The default slot follows the h1 (text, calls to action).
+// `wide` lets a long h1 run across columns 1 to 5, with the statue below it.
+import Title from './Title.astro';
+import Plate from './Plate.astro';
+interface Props {
+  heading: string;
+  size?: '' | 'l' | 'm';
+  home?: boolean;
+  wide?: boolean;
+  arc?: boolean;
+  plate?: { name: string; ratio?: string; pos?: string };
+}
+const { heading, size = '', home = false, wide = false, arc = false, plate } = Astro.props;
+---
+<section class:list={['hero', home && 'hero--home', wide && 'hero--wide']}>
+  <div class="wrap">
+    {arc && <div class="hero__clip" aria-hidden="true"><div class="arc hero__arc"></div></div>}
+    <span class="rule rule--strong"></span>
+    <div class="hero__grid">
+      <div class="hero__h"><Title text={heading} size={size} /></div>
+      <span class="rule hero__rule" style="--i:3"></span>
+      <div class="hero__rest"><slot /></div>
+      {plate && <Plate class="hero__plate" door="load" arc={arc} {...plate} />}
+    </div>
+  </div>
+</section>

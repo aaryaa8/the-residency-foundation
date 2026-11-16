@@ -1,0 +1,42 @@
+---
+import Layout from '../site/Layout.astro';
+import Hero from '../site/Hero.astro';
+import Section from '../site/Section.astro';
+import Donate from '../site/Donate.astro';
+import { donate, org } from '../content/site';
+---
+<Layout title={donate.label} current="donate" motion="a">
+  <Hero heading={donate.heading} size="l" plate={{ name: 'atlas', ratio: '4 / 5' }}>
+    <div class="hero__actions hero__actions--top">
+      <Donate label={donate.button.label} href={donate.button.href} />
+    </div>
+    <div class="hero__note small">
+      <p>{donate.buttonNote}</p>
+      <p>{donate.disclosure}</p>
+    </div>
+    <div class="hero__body hero__body--end">{donate.body.map((t) => <p>{t}</p>)}</div>
+  </Hero>
+
+  <Section title={donate.levelsLabel} id="ways-to-give" rule flush>
+    <p class="statement" data-rise>{donate.money}</p>
+    <ul class="levels full flush">
+      {donate.levels.map((level, i, all) => (
+        <li class:list={['level ruled', i === all.length - 1 && 'ruled--end']} data-rise style={`--d:${i * 70}ms`}>
+          <div class="level__t">
+            <h3>{level.label}</h3>
+            <p>{level.text}</p>
+          </div>
+          <p class="level__a">{level.amount}</p>
+        </li>
+      ))}
+    </ul>
+    <div class="stack gap-l" data-rise>
+      <p class="lead">{donate.deductible}</p>
+      <p class="lead">{donate.larger} <a class="link link--set" href={`mailto:${org.majorGiftsEmail}`}>{org.majorGiftsEmail}</a>.</p>
+    </div>
+    <div class="actions actions--solo full flush" data-rise>
+      <Donate label={donate.button.label} href={donate.button.href} />
+    </div>
+    <p class="small" data-rise>{donate.disclosure}</p>
+  </Section>
+</Layout>

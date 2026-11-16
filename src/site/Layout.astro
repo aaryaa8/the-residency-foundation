@@ -1,0 +1,47 @@
+---
+// The page shell: head, nav, grid lines, footer, draft marker.
+// `motion` chooses the animation set: "a" (door, letters, quiet rise) or
+// "a+b" (the same, plus rules, frames and column lines drawing in and the
+// figures counting up). Add ?motion=a or ?motion=a+b to a page address to
+// compare the two on the same page.
+import BaseHead from '../base/BaseHead.astro';
+import DraftMarker from '../base/DraftMarker.astro';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+import Guides from './Guides.astro';
+import { ui } from '../content/site';
+import './site.css';
+interface Props { title?: string; current?: string; motion?: 'a' | 'a+b' }
+const { title, current, motion = 'a' } = Astro.props;
+---
+<!doctype html>
+<html lang="en" data-motion={motion}>
+  <head>
+    <BaseHead title={title} />
+    <script is:inline>
+      // "js": the phone menu becomes a button. "motion": animations may run.
+      (function (d) {
+        d.classList.add('js');
+        var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!calm) d.classList.add('motion');
+        var m = /[?&]motion=(a(?:\+|%2B| )b|a)(?:&|$)/i.exec(location.search);
+        if (m) d.setAttribute('data-motion', m[1].length > 1 ? 'a+b' : 'a');
+        // if the main script never starts, give the phone menu back as plain links
+        setTimeout(function () { if (!window.__site) d.classList.remove('js'); }, 4000);
+      })(document.documentElement);
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">{ui.skip}</a>
+    <Nav current={current} />
+    <main id="main">
+      <Guides page />
+      <slot />
+    </main>
+    <Footer />
+    <DraftMarker />
+    <script>
+      import './site.js';
+    </script>
+  </body>
+</html>

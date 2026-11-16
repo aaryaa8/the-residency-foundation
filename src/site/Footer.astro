@@ -1,0 +1,47 @@
+---
+import Icon from '../base/Icon.astro';
+import Guides from './Guides.astro';
+import { asset, link } from '../base/url';
+import { footer, ui } from '../content/site';
+const u = footer.updates;
+---
+<footer class="foot" data-tone="dark">
+  <Guides />
+  <div class="foot__in">
+    <div class="foot__top g6">
+      <a class="foot__logo" href={link()} aria-label={ui.home}>
+        <img src={asset('img/logo/foundation-white.png')} alt="" width="1868" height="642" loading="lazy" />
+      </a>
+      <div class="foot__updates">
+        <h2 class="key" id="updates-title">{u.label}</h2>
+        <p class="small">{u.text}</p>
+        <form data-form="updates" data-thanks={ui.updatesThanks} aria-labelledby="updates-title">
+          <div class="foot__field">
+            <label class="visually-hidden" for="updates-email">{u.placeholder}</label>
+            <input id="updates-email" type="email" name="email" placeholder={u.placeholder} autocomplete="email" required />
+            <button class="cta" type="submit">{u.submit}<Icon name="play" /></button>
+          </div>
+          <label class="check"><input type="checkbox" name="consent" required /><span>{u.consent}</span></label>
+        </form>
+      </div>
+    </div>
+    <span class="rule" data-draw></span>
+    <div class="foot__mid g6">
+      <div class="foot__text small">
+        <p>{footer.disclosure}</p>
+        <p>{footer.separate}</p>
+      </div>
+      <div class="foot__contact">
+        <h2 class="key">{footer.contactLabel}</h2>
+        <ul>
+          {footer.emails.map((e) => <li><a href={`mailto:${e}`}><span>{e}</span></a></li>)}
+        </ul>
+      </div>
+      <ul class="foot__links">
+        {footer.links.map((l) => <li><a href={link(l.slug)}><span>{l.label}</span></a></li>)}
+      </ul>
+    </div>
+    <span class="rule" data-draw></span>
+    <p class="foot__base small">{footer.copyright}</p>
+  </div>
+</footer>

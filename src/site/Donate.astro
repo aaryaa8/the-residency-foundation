@@ -1,0 +1,9 @@
+---
+// The DONATE call to action. It opens the HCB form directly, in a new tab, and
+// says so to screen readers. `plain` renders the nav version (text and icon).
+import Icon from '../base/Icon.astro';
+import { ui } from '../content/site';
+interface Props { label: string; href: string; plain?: boolean; class?: string }
+const { label, href, plain = false, class: cls } = Astro.props;
+---
+<a class:list={[plain ? 'cta' : 'btn', cls]} href={href} target="_blank" rel="noopener"><span>{label}<span class="visually-hidden"> ({ui.newTab})</span></span><Icon name="play" size={plain ? 16 : 22} /></a>

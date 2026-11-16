@@ -1,0 +1,27 @@
+---
+import Layout from '../site/Layout.astro';
+import Hero from '../site/Hero.astro';
+import Section from '../site/Section.astro';
+import Qa from '../site/Qa.astro';
+import Icon from '../base/Icon.astro';
+import { faq } from '../content/site';
+
+const groups = [
+  { id: 'donors', label: faq.donorsLabel, items: faq.donors },
+  { id: 'fellows', label: faq.fellowsLabel, items: faq.fellows },
+  { id: 'foundation', label: faq.foundationLabel, items: faq.foundation },
+];
+---
+<Layout title={faq.label} current="faq" motion="a">
+  <Hero heading={faq.heading} plate={{ name: 'arcadia', ratio: '4 / 5' }}>
+    <div class="hero__jump">
+      {groups.map((group) => <a class="cta" href={`#${group.id}`}>{group.label}<Icon name="play" /></a>)}
+    </div>
+  </Hero>
+
+  {groups.map((group, i) => (
+    <Section title={group.label} id={group.id} rule flush={i === 0}>
+      <Qa items={group.items} level="h3" prefix={group.id} />
+    </Section>
+  ))}
+</Layout>

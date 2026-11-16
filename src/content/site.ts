@@ -47,6 +47,9 @@ export const ui = {
   optional: 'optional',
   charactersLeft: 'characters left',
   updatesThanks: 'Thank you. You are on the list.',
+  chooseOne: 'Choose one',
+  requiredNote: 'Fields marked * are required.',
+  linkHint: 'Start the link with https://',
 };
 
 // Descriptions of the placeholder statues, read aloud by screen readers.
@@ -65,7 +68,7 @@ export const nav = {
   links: [
     { label: 'fellowship', slug: 'fellowship' },
     { label: 'about', slug: 'about' },
-    { label: 'faq', slug: 'faq' },
+    { label: 'FAQ', slug: 'faq' },
   ],
   // DONATE opens the HCB form directly, in a new tab.
   cta: { label: 'donate', href: org.donateUrl },
@@ -299,6 +302,7 @@ export const fellowship = {
         id: 'building',
         label:
           'What are you building, or what do you want to build, and what problem in your community does it address?',
+        hint: 'You can write up to 600 characters.',
         type: 'textarea',
         maxLength: 600,
         required: true,
@@ -411,7 +415,7 @@ export const about = {
 // ---------------------------------------------------------------------------
 
 export const faq = {
-  label: 'faq',
+  label: 'FAQ',
   heading: 'Questions and answers',
   donorsLabel: 'donors',
   fellowsLabel: 'fellows',
@@ -520,7 +524,7 @@ export const footer = {
     { label: 'donate', slug: 'donate' },
     { label: 'fellowship', slug: 'fellowship' },
     { label: 'about', slug: 'about' },
-    { label: 'faq', slug: 'faq' },
+    { label: 'FAQ', slug: 'faq' },
   ],
   contactLabel: 'contact',
   emails: org.emails,
