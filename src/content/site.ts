@@ -49,13 +49,26 @@ export const ui = {
   updatesThanks: 'Thank you. You are on the list.',
 };
 
+// Descriptions of the placeholder statues, read aloud by screen readers.
+// They are replaced together with the images when the Foundation's own imagery arrives.
+export const placeholders: Record<string, string> = {
+  sf2: 'This placeholder image shows a statue of a graduate in a cap, holding a scroll.',
+  arcadia: 'This placeholder image shows a statue of a seated figure reading a book.',
+  biopunk: 'This placeholder image shows a statue of a figure looking into a microscope.',
+  inventors: 'This placeholder image shows a bust of a figure wearing goggles.',
+  atlas: 'This placeholder image shows a statue of Atlas holding up a model of an atom.',
+  odyssey: 'This placeholder image shows a statue of a figure in a crested helmet, seen from behind.',
+  vienna: 'This placeholder image shows a bust of a figure wearing headphones.',
+};
+
 export const nav = {
   links: [
     { label: 'fellowship', slug: 'fellowship' },
     { label: 'about', slug: 'about' },
     { label: 'faq', slug: 'faq' },
   ],
-  cta: { label: 'donate', slug: 'donate' },
+  // DONATE opens the HCB form directly, in a new tab.
+  cta: { label: 'donate', href: org.donateUrl },
 };
 
 // ---------------------------------------------------------------------------
@@ -100,13 +113,13 @@ export const home = {
       'The Residency Foundation gives people with limited financial means the entrepreneurial programming and resources to build solutions to problems facing their communities.',
       'The Foundation selects its own fellows and runs its own programs.',
     ],
-    primary: { label: 'donate', slug: 'donate' },
+    primary: { label: 'donate', href: org.donateUrl },
     secondary: { label: 'for fellows', slug: 'fellowship' },
+    disclosure: lines.disclosure,
   },
 
   problem: {
-    label: 'the problem',
-    heading: '3 reasons capable people never get to test an idea',
+    title: 'the problem',
     items: [
       'Higher education teaches theory, so most people finish without ever researching a problem, testing an idea and building what addresses it.',
       'Testing an idea costs years and savings, and most capable people have neither to spare.',
@@ -116,8 +129,7 @@ export const home = {
 
   // NEW. Replaces the single illustrative builder on the website.
   who: {
-    label: 'who we serve',
-    heading: 'the builders we started this for',
+    title: 'the builders',
     examples: [
       'A self-taught developer in a town of 4,000 built the booking system the clinics on their main street now use.',
       'A warehouse technician wired low-cost sensors that warn their neighbors when the river rises.',
@@ -129,8 +141,8 @@ export const home = {
   },
 
   get: {
-    label: 'what fellows get',
-    heading: `${fig('programWeeks')} weeks of entrepreneurial programming and access to resources`,
+    title: 'the program',
+    leadIn: `for ${fig('programWeeks')} weeks, fellows get:`,
     items: [
       {
         label: 'programming',
@@ -157,13 +169,12 @@ export const home = {
   },
 
   cost: {
-    label: 'what it costs fellows',
+    title: 'the cost',
     statement: lines.cost,
   },
 
   lineage: {
-    label: 'where we come from',
-    heading: 'built by the team behind the residency',
+    title: 'the team',
     figures: ['houses', 'alumni', 'acceptance'], // keys in figures.json
     // Approved lineage line with 14 houses. Investor and advisor names appear
     // only in the FAQ answer, never here.
@@ -172,8 +183,8 @@ export const home = {
   },
 
   report: {
-    label: 'what we will report',
-    heading: '4 things we will measure and report to every donor',
+    // No headline here by design: the lead-in introduces the list.
+    leadIn: 'success is measured by:',
     items: [
       'Fellows served',
       'Curriculum completed',
@@ -184,16 +195,15 @@ export const home = {
   },
 
   give: {
-    label: 'give',
-    heading: lines.firstCohort,
-    text: lines.programmingMoney,
-    button: { label: 'donate', slug: 'donate' },
+    title: 'donate',
+    text: [lines.programmingMoney, lines.firstCohort],
+    button: { label: 'donate', href: org.donateUrl },
+    more: { label: 'ways to give', slug: 'donate' },
     disclosure: lines.disclosure,
   },
 
   faq: {
-    label: 'questions',
-    heading: 'questions donors ask',
+    title: 'questions',
     // ids from faq.donors below
     ids: ['what', 'why', 'deductible', 'where', 'residency', 'who', 'worked', 'when'],
     more: { label: 'all questions', slug: 'faq' },
@@ -254,30 +264,28 @@ export const fellowship = {
   intro: lines.cost,
   sections: [
     {
-      label: 'what fellows get',
+      title: 'the program',
       text: 'Fellows get the Residency’s hands-on entrepreneurship programming, a cohort of builders, access to compute, tools and mentors, and guided introductions to the investors, researchers and operators in San Francisco. They take part in person, remote or hybrid.',
     },
     {
-      label: 'what it costs',
+      title: 'the cost',
       text: 'Programs are free or need-based. Fellows keep everything they build, and the Foundation takes no equity.',
     },
     {
-      label: 'where it happens',
+      title: 'the format',
       text: 'Each fellowship runs in person, remote or hybrid, and the format is agreed with each fellow at selection.',
     },
     {
-      label: 'who can apply',
+      title: 'selection',
       text: `Applications open in ${fig('firstCohortYear')}. The selection process is open and need-based, run by the Foundation, with a published rubric.`,
     },
     {
-      label: 'after the program',
+      title: 'after the program',
       text: 'Fellows keep their work, their cohort and their network. The Foundation tracks what they go on to do for 2 years, and that record is how we report to donors.',
     },
   ],
   form: {
-    label: 'register your interest',
-    // NEW
-    heading: 'tell us what you are building',
+    title: 'interest form',
     // NEW
     intro:
       `Applications open in ${fig('firstCohortYear')}. Until then, this form tells us who you are and what you are building, and we will write to you when they open.`,
@@ -375,8 +383,7 @@ export const about = {
   heading: lines.missionFirstSentence,
   body: lines.boilerplate,
   governance: {
-    label: 'how it is run',
-    heading: 'the foundation and the for-profit',
+    title: 'governance',
     items: [
       { label: 'board', text: 'The board has an independent majority.' },
       { label: 'selection and programming', text: lines.ownSelection },
@@ -518,7 +525,7 @@ export const footer = {
   contactLabel: 'contact',
   emails: org.emails,
   updates: {
-    label: 'stay updated',
+    label: 'updates',
     // NEW
     text: 'We send news from the Foundation a few times a year.',
     placeholder: 'your email',

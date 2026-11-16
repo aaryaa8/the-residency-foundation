@@ -8,3 +8,7 @@ export const asset = (path: string) => `${base}/${path.replace(/^\//, '')}`;
 /** Path to a page inside a design direction, e.g. page('a', 'donate') -> /…/a/donate/ ; page('a') -> /…/a/ */
 export const page = (dir: string, slug = '') =>
   `${base}/${dir}/${slug ? slug.replace(/^\/|\/$/g, '') + '/' : ''}`;
+
+/** Path to a page of the site, e.g. link('donate') -> /…/donate/ ; link() -> /…/ (home) */
+export const link = (slug = '') =>
+  `${base}/${slug ? slug.replace(/^\/|\/$/g, '') + '/' : ''}`;
