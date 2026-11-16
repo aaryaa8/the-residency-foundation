@@ -49,7 +49,7 @@ const auto: Record<string, string> = { name: 'name', email: 'email', country: 'c
         );
         if (f.type === 'checkbox') return (
           <div class="field field--wide field--single">
-            <label class="check"><input type="checkbox" id={f.id} name={f.id} required={f.required} /><span>{tidy(f.label)} {mark}</span></label>
+            <label class="check"><input type="checkbox" id={f.id} name={f.id} required={f.required} /><span>{f.label} {mark}</span></label>
           </div>
         );
         // A link is a plain text field with a hint, so "github.com/ada" is not turned away.

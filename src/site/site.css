@@ -56,7 +56,7 @@
   --t-statement-l: clamp(1.9375rem, 1.1rem + 2.7vw, 3.5rem);
   --t-statement: clamp(1.5625rem, 1rem + 1.4vw, 2.25rem);
   --t-row: clamp(1.375rem, 1rem + 0.85vw, 1.75rem);           /* row titles and questions */
-  --t-figure: clamp(5.5rem, 3rem + 8.6vw, 10.75rem);
+  --t-figure: clamp(5rem, 0.25rem + 9.6vw, 9.5rem);          /* sized so the widest figure fits 1 of 3 columns */
   --t-amount: clamp(2.75rem, 1.5rem + 3.6vw, 4.75rem);
   --t-lead: 1.25rem;
   --t-ui: 1rem;
@@ -115,6 +115,8 @@ main:focus { outline: none; }
 p, h1, h2, h3, ul, ol, dl, dt, dd, figure { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 p { text-wrap: pretty; }
+/* a run of words tied together still breaks if it is wider than its column (narrow screens, wide text spacing) */
+p, li, dt, dd, h2, h3, label, legend { overflow-wrap: break-word; }
 
 .skip { position: absolute; left: var(--edge); top: var(--s8); z-index: 60; padding: var(--s16); background: var(--ink); color: var(--ivory); font: 700 var(--t-cta) / 1 var(--mono); letter-spacing: var(--tracking-label); text-transform: uppercase; text-decoration: none; transform: translateY(-200%); }
 .skip:focus { transform: none; }
@@ -277,7 +279,7 @@ p { text-wrap: pretty; }
 .hero__sub { margin-top: var(--s24); }
 .hero__body { margin-top: var(--s16); display: grid; gap: var(--s12); }
 .hero__lead { margin-top: var(--s32); }
-.hero__note { display: grid; gap: var(--s8); max-width: none; }
+.hero__note { display: grid; gap: var(--s8); }
 .hero__note + .hero__body { margin-top: var(--s32); }
 .hero__jump { display: grid; grid-template-columns: var(--g3); margin-top: var(--s24); padding-inline: 0; }
 .hero__jump .cta { justify-self: start; margin-left: var(--pad); }
@@ -419,12 +421,13 @@ p { text-wrap: pretty; }
 }
 
 /* the team: 3 figures, each with its caption directly under it */
-.figs { display: grid; grid-template-columns: var(--g3); }
-.fig { padding-inline: var(--pad); min-width: 0; }
+.figs { display: flex; flex-wrap: wrap; row-gap: var(--s32); }
+/* a third of the row each; a figure too wide for its column (very large text) moves to its own line */
+.fig { flex: 1 0 calc(100% / 3); min-width: min-content; padding-inline: var(--pad); }
 .fig__n { display: block; font-family: var(--serif); font-weight: 300; font-size: var(--t-figure); line-height: 0.92; letter-spacing: var(--tr-num); color: var(--accent); font-variant-numeric: lining-nums; white-space: nowrap; }
 .fig__l { display: block; margin-top: var(--s16); }
 @media (max-width: 809.98px) {
-  .figs { grid-template-columns: 1fr; row-gap: var(--s32); }
+  .fig { flex-basis: 100%; }
   .fig__l { margin-top: var(--s8); }
 }
 
@@ -690,5 +693,6 @@ select.input { padding-right: var(--s40); background-image: url("data:image/svg+
   .check input { -webkit-appearance: auto; appearance: auto; }
   .check input::after { display: none; }
   .btn { border: 1px solid; }
-  .rule, .ruled::before, .ruled--end::after, .plate__f, .guides i { background: CanvasText; }
+  .rule, .ruled::before, .ruled--end::after, .plate__f { background: CanvasText; }
+  .guides { display: none; }
 }
