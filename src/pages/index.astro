@@ -8,6 +8,7 @@ import Qa from '../site/Qa.astro';
 import Icon from '../base/Icon.astro';
 import { link } from '../base/url';
 import { home, faq, fig, shown, figures } from '../content/site';
+import { tidy } from '../site/text';
 
 const captions = figures as unknown as Record<string, { label: string }>;
 const lineage = home.lineage.figures.filter((k) => shown(k));
@@ -15,28 +16,28 @@ const questions = home.faq.ids.map((id) => faq.donors.find((q) => q.id === id)).
 const last = (i: number, list: unknown[]) => i === list.length - 1;
 ---
 <Layout motion="a+b">
-  <Hero heading={home.hero.heading} home arc plate={{ name: 'sf2', ratio: '2 / 3' }}>
+  <Hero heading={home.hero.heading} home arc plate={{ name: 'sf2', fill: true, stacked: '5 / 4' }}>
     <p class="hero__sub statement">{home.hero.subline}</p>
-    <div class="hero__body">{home.hero.body.map((t) => <p>{t}</p>)}</div>
-    <div class="hero__actions">
+    <div class="hero__body text">{home.hero.body.map((t) => <p>{tidy(t)}</p>)}</div>
+    <div class="actions">
       <Donate label={home.hero.primary.label} href={home.hero.primary.href} />
       <a class="cta cta--cell ruled ruled--end" href={link(home.hero.secondary.slug)}><span>{home.hero.secondary.label}</span><Icon name="play" /></a>
     </div>
-    <p class="hero__note small">{home.hero.disclosure}</p>
+    <p class="hero__note small">{tidy(home.hero.disclosure)}</p>
   </Hero>
 
   <!-- the problem, then the builders it leaves out -->
   <Section title={home.problem.title} id="problem" rule flush>
-    <div class="prose lead" data-rise>{home.problem.items.map((t) => <p>{t}</p>)}</div>
+    <div class="prose lead" data-rise>{home.problem.items.map((t) => <p>{tidy(t)}</p>)}</div>
   </Section>
 
   <Section title={home.who.title} id="builders">
     <div class="cols3 lead sec__wide" slot="wide">
-      {home.who.examples.map((t, i) => <p data-rise style={`--d:${i * 90}ms`}>{t}</p>)}
+      {home.who.examples.map((t, i) => <p data-rise style={`--d:${i * 60}ms`}>{tidy(t)}</p>)}
     </div>
     <div class="under" slot="wide">
-      <p class="statement" data-rise>{home.who.close}</p>
-      <p class="small" data-rise>{home.who.note}</p>
+      <p class="statement" data-rise>{tidy(home.who.close)}</p>
+      <p class="small" data-rise>{tidy(home.who.note)}</p>
     </div>
   </Section>
 
@@ -49,54 +50,54 @@ const last = (i: number, list: unknown[]) => i === list.length - 1;
         <p class="statement leadin" data-rise>{home.get.leadIn}</p>
         <dl class="dl">
           {home.get.items.map((item, i, all) => (
-            <div class:list={['dl__row ruled', last(i, all) && 'ruled--end']} data-rise style={`--d:${i * 70}ms`}>
+            <div class:list={['dl__row ruled', last(i, all) && 'ruled--end']} data-rise style={`--d:${i * 40}ms`}>
               <dt class="key">{item.label}</dt>
-              <dd>{item.text}</dd>
+              <dd>{tidy(item.text)}</dd>
             </div>
           ))}
         </dl>
-        <p class="statement prog__close" data-rise>{home.get.close}</p>
-        <Plate name="biopunk" ratio="4 / 5" pos="100% 100%" />
+        <p class="statement prog__close" data-rise>{tidy(home.get.close)}</p>
+        <Plate name="arcadia" fill stacked="6 / 5" />
       </div>
     </div>
   </section>
 
   <Section title={home.cost.title} id="cost">
-    <p class="statement statement--xl full" data-rise>{home.cost.statement}</p>
+    <p class="statement statement--l full" data-rise>{tidy(home.cost.statement)}</p>
   </Section>
 
   <!-- the team, then how success is measured -->
   <Section title={home.lineage.title} id="team" rule>
-    <ul class="figs sec__wide" slot="wide">
+    <ul class="figs sec__wide" slot="wide" role="list">
       {lineage.map((k, i) => (
-        <li class="fig" data-rise style={`--d:${i * 90}ms`}>
+        <li class="fig" data-rise style={`--d:${i * 60}ms`}>
           <span class="fig__n"><span class="visually-hidden">{fig(k)}</span><span aria-hidden="true" data-count={fig(k)}>{fig(k)}</span></span>
           <span class="fig__l key">{captions[k].label}</span>
         </li>
       ))}
     </ul>
     <div class="under" slot="wide">
-      <p class="statement" data-rise>{home.lineage.text}</p>
-      <p class="lead" data-rise>{home.lineage.own}</p>
+      <p class="statement" data-rise>{tidy(home.lineage.text)}</p>
+      <p class="lead" data-rise>{tidy(home.lineage.own)}</p>
     </div>
   </Section>
 
   <Section id="report">
-    <p class="statement leadin" data-rise>{home.report.leadIn}</p>
-    <ul class="lines gap-s">
-      {home.report.items.map((t, i) => <li class="statement" data-rise style={`--d:${i * 70}ms`}>{t}</li>)}
+    <h2 class="statement leadin" data-rise>{home.report.leadIn}</h2>
+    <ul class="lines gap-24" role="list">
+      {home.report.items.map((t, i) => <li class="statement" data-rise style={`--d:${i * 40}ms`}>{t}</li>)}
     </ul>
-    <p class="small gap-m" data-rise>{home.report.note}</p>
+    <p class="small gap-40" data-rise>{tidy(home.report.note)}</p>
   </Section>
 
   <Section title={home.give.title} id="donate" tone="dark" class="band">
     <div class="band__back" slot="back" aria-hidden="true"><div class="arc band__arc" data-sweep></div></div>
-    <div class="stack" data-rise>{home.give.text.map((t) => <p class="statement">{t}</p>)}</div>
-    <div class="actions full flush" data-rise>
+    <div class="stack" data-rise>{home.give.text.map((t) => <p class="statement">{tidy(t)}</p>)}</div>
+    <div class="actions flush" data-rise>
       <Donate label={home.give.button.label} href={home.give.button.href} />
       <a class="cta cta--cell ruled ruled--end" href={link(home.give.more.slug)}><span>{home.give.more.label}</span><Icon name="play" /></a>
     </div>
-    <p class="small" data-rise>{home.give.disclosure}</p>
+    <p class="small" data-rise>{tidy(home.give.disclosure)}</p>
   </Section>
 
   <Section title={home.faq.title} id="questions" rule>

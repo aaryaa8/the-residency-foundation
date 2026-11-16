@@ -1,19 +1,21 @@
 ---
-// Collapsed question rows with hairlines. `level` is the heading level of each question.
+// Collapsed question rows with hairlines. `level` is the heading level of each
+// question. `closed` draws a hairline under the last row; use it when something
+// follows the list.
+import { tidy } from './text';
 interface Item { id: string; q: string; a: string[] }
 interface Props { items: Item[]; level?: 'h2' | 'h3'; prefix?: string; closed?: boolean }
-// `closed` draws a hairline under the last row; use it when something follows the list.
 const { items, level = 'h3', prefix = 'q', closed = false } = Astro.props;
 const H = level;
 ---
-<div class="qa full flush">
+<div class="full flush">
   {items.map((item, i) => (
-    <details class:list={['qa__item ruled', closed && i === items.length - 1 && 'ruled--end']} id={`${prefix}-${item.id}`} data-rise style={`--d:${Math.min(i, 6) * 60}ms`}>
+    <details class:list={['fold ruled', closed && i === items.length - 1 && 'ruled--end']} id={`${prefix}-${item.id}`} data-rise style={`--d:${Math.min(i, 6) * 40}ms`}>
       <summary>
-        <H class="qa__q">{item.q}</H>
-        <span class="qa__x" aria-hidden="true"></span>
+        <H class="fold__q">{item.q}</H>
+        <span class="fold__x" aria-hidden="true"></span>
       </summary>
-      <div class="qa__a">{item.a.map((p) => <p>{p}</p>)}</div>
+      <div class="fold__a">{item.a.map((p) => <p>{tidy(p)}</p>)}</div>
     </details>
   ))}
 </div>

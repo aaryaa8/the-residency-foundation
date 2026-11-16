@@ -1,8 +1,10 @@
 ---
 import Icon from '../base/Icon.astro';
 import Guides from './Guides.astro';
+import Req from './Req.astro';
 import { asset, link } from '../base/url';
 import { footer, ui } from '../content/site';
+import { tidy } from './text';
 const u = footer.updates;
 ---
 <footer class="foot" data-tone="dark">
@@ -16,28 +18,29 @@ const u = footer.updates;
         <h2 class="key" id="updates-title">{u.label}</h2>
         <p class="small">{u.text}</p>
         <form data-form="updates" data-thanks={ui.updatesThanks} aria-labelledby="updates-title">
+          <p class="small">{ui.requiredNote}</p>
+          <label class="foot__label" for="updates-email">{u.placeholder} <Req /></label>
           <div class="foot__field">
-            <label class="visually-hidden" for="updates-email">{u.placeholder}</label>
-            <input id="updates-email" type="email" name="email" placeholder={u.placeholder} autocomplete="email" required />
+            <input id="updates-email" type="email" name="email" autocomplete="email" required />
             <button class="cta" type="submit">{u.submit}<Icon name="play" /></button>
           </div>
-          <label class="check"><input type="checkbox" name="consent" required /><span>{u.consent}</span></label>
+          <label class="check"><input type="checkbox" name="consent" required /><span>{tidy(u.consent)} <Req /></span></label>
         </form>
       </div>
     </div>
     <span class="rule" data-draw></span>
     <div class="foot__mid g6">
       <div class="foot__text small">
-        <p>{footer.disclosure}</p>
-        <p>{footer.separate}</p>
+        <p>{tidy(footer.disclosure)}</p>
+        <p>{tidy(footer.separate)}</p>
       </div>
       <div class="foot__contact">
         <h2 class="key">{footer.contactLabel}</h2>
-        <ul>
+        <ul role="list">
           {footer.emails.map((e) => <li><a href={`mailto:${e}`}><span>{e}</span></a></li>)}
         </ul>
       </div>
-      <ul class="foot__links">
+      <ul class="foot__links" role="list">
         {footer.links.map((l) => <li><a href={link(l.slug)}><span>{l.label}</span></a></li>)}
       </ul>
     </div>

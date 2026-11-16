@@ -3,34 +3,35 @@ import Layout from '../site/Layout.astro';
 import Hero from '../site/Hero.astro';
 import Section from '../site/Section.astro';
 import { about } from '../content/site';
+import { tidy } from '../site/text';
 
 const g = about.governance;
 ---
 <Layout title={about.label} current="about" motion="a">
-  <Hero heading={about.heading} size="m" wide plate={{ name: 'odyssey', ratio: '4 / 5', pos: '72% 100%' }}>
-    <p class="hero__lead lead">{about.body}</p>
+  <Hero heading={about.heading} wide plate={{ name: 'odyssey', pos: '72% 100%' }}>
+    <p class="hero__lead lead">{tidy(about.body)}</p>
   </Hero>
 
   <Section title={g.title} id="governance" rule flush>
     <dl class="dl dl--4 full flush">
       {g.items.map((item, i, all) => (
-        <div class:list={['dl__row ruled', i === all.length - 1 && 'ruled--end']} data-rise style={`--d:${i * 70}ms`}>
+        <div class:list={['dl__row ruled', i === all.length - 1 && 'ruled--end']} data-rise style={`--d:${i * 40}ms`}>
           <dt class="key">{item.label}</dt>
-          <dd>{item.text}</dd>
+          <dd>{tidy(item.text)}</dd>
         </div>
       ))}
     </dl>
-    <p class="statement gap-l" data-rise>{g.status}</p>
-    <details class="board ruled ruled--end full flush gap-l" id="board" data-rise>
+    <p class="statement gap-72" data-rise>{tidy(g.status)}</p>
+    <details class="fold board ruled ruled--end full flush gap-72" id="board" data-rise>
       <summary>
-        <h3 class="key">{about.board.label}</h3>
-        <span class="qa__x" aria-hidden="true"></span>
+        <h3 class="fold__q">{about.board.label}</h3>
+        <span class="fold__x" aria-hidden="true"></span>
       </summary>
-      <ul class="board__list">
+      <ul class="board__list" role="list">
         {about.board.people.map((person) => (
-          <li>
+          <li class="board__row ruled">
             <p class="board__name key">{person.name}</p>
-            <p class="board__role">{person.role}</p>
+            <p class="board__role">{tidy(person.role)}</p>
           </li>
         ))}
       </ul>
@@ -38,7 +39,7 @@ const g = about.governance;
   </Section>
 
   <Section title={about.contact.label} id="contact" rule>
-    <ul class="contact__list" data-rise>
+    <ul class="contact__list" role="list" data-rise>
       {about.contact.emails.map((e) => (
         <li class="statement"><a class="link" href={`mailto:${e}`}>{e}</a></li>
       ))}

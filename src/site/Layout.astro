@@ -34,7 +34,7 @@ const { title, current, motion = 'a' } = Astro.props;
   <body>
     <a class="skip" href="#main">{ui.skip}</a>
     <Nav current={current} />
-    <main id="main">
+    <main id="main" tabindex="-1">
       <Guides page />
       <slot />
     </main>

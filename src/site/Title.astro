@@ -1,17 +1,17 @@
 ---
 // The page h1, in plain Saigon Light. Its letters are wrapped so they can rise
 // in one by one; screen readers get the whole text from a hidden copy, and the
-// letter spans are hidden from them.
-interface Props { text: string; size?: '' | 'l' | 'm' }
+// letter spans are hidden from them. `size="m"` is for sentence-length titles.
+interface Props { text: string; size?: '' | 'm' }
 const { text, size = '' } = Astro.props;
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const letters = [...text].filter((c) => c !== ' ').length;
-// Long headings rise faster, so the whole heading lands in about a second.
-const step = Math.max(8, Math.min(40, Math.round(1000 / letters)));
+// Long headings rise faster, so the whole heading lands in about half a second.
+const step = Math.max(3, Math.min(22, Math.round(450 / letters)));
 let i = 0;
 const html = text
   .split(' ')
-  .map((word) => `<span class="w">${[...word].map((ch) => `<span class="ch" style="--i:${i++}">${esc(ch)}</span>`).join('')}</span>`)
+  .map((word) => [...word].map((ch) => `<span class="ch" style="--i:${i++}">${esc(ch)}</span>`).join(''))
   .join(' ');
 ---
 <h1 class:list={['title', size && `title--${size}`]} style={`--step:${step}ms`}><span class="visually-hidden">{text}</span><span aria-hidden="true" set:html={html} /></h1>

@@ -13,7 +13,7 @@ const groups = [
 ];
 ---
 <Layout title={faq.label} current="faq" motion="a">
-  <Hero heading={faq.heading} plate={{ name: 'arcadia', ratio: '4 / 5' }}>
+  <Hero heading={faq.heading} plate={{ name: 'biopunk', pos: '100% 100%' }}>
     <div class="hero__jump">
       {groups.map((group) => <a class="cta" href={`#${group.id}`}>{group.label}<Icon name="play" /></a>)}
     </div>

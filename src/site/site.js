@@ -13,10 +13,11 @@ if (nav) {
     queued = false;
     nav.classList.toggle('is-scrolled', window.scrollY > 12);
     const box = nav.getBoundingClientRect();
-    const mid = box.top + Math.min(box.height, 80) / 2;
+    // the bar takes the tone of whatever is under its bottom edge
+    const probe = box.top + Math.min(box.height, 80);
     const dark = darks.some((el) => {
       const r = el.getBoundingClientRect();
-      return r.top <= mid && r.bottom >= mid;
+      return r.top <= probe && r.bottom > probe;
     });
     nav.classList.toggle('is-dark', dark);
   };
@@ -25,18 +26,23 @@ if (nav) {
   window.addEventListener('resize', request);
   update();
 
+  // The menu button keeps one label; aria-expanded carries its state.
   const button = nav.querySelector('[data-menu]');
-  if (button) {
+  const links = nav.querySelector('#nav-links');
+  if (button && links) {
     const set = (open) => {
       nav.classList.toggle('is-open', open);
       button.setAttribute('aria-expanded', String(open));
-      button.setAttribute('aria-label', open ? button.dataset.close : button.dataset.open);
     };
-    button.addEventListener('click', () => set(!nav.classList.contains('is-open')));
+    const isOpen = () => nav.classList.contains('is-open');
+    button.addEventListener('click', () => set(!isOpen()));
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && nav.classList.contains('is-open')) { set(false); button.focus(); }
+      if (e.key === 'Escape' && isOpen()) { set(false); button.focus(); }
     });
-    document.addEventListener('click', (e) => { if (!nav.contains(e.target)) set(false); });
+    // close when focus or a click moves on from the button and its links
+    const inside = (node) => node && (button.contains(node) || links.contains(node));
+    nav.addEventListener('focusout', (e) => { if (isOpen() && e.relatedTarget && !inside(e.relatedTarget)) set(false); });
+    document.addEventListener('click', (e) => { if (isOpen() && !inside(e.target)) set(false); });
   }
 }
 
@@ -48,7 +54,7 @@ const countUp = (el) => {
   const [, pre, digits, post] = m;
   const target = parseInt(digits.replace(/,/g, ''), 10);
   const grouped = digits.includes(',');
-  const dur = 1600;
+  const dur = 900;
   let start;
   const step = (t) => {
     if (start === undefined) start = t;
@@ -71,29 +77,41 @@ if (root.classList.contains('motion') && 'IntersectionObserver' in window) {
   const vh = window.innerHeight;
   const below = (el, f = 0.92) => el.getBoundingClientRect().top >= vh * f;
   // `seen` picks the element whose arrival releases `el` (itself, unless it is clipped away while armed)
+  const pending = new Set();
   const watch = (selector, arm, release, options, f, seen = (el) => el) => {
     const owners = new Map();
     const io = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
         io.unobserve(entry.target);
-        release(owners.get(entry.target));
+        const job = owners.get(entry.target);
+        if (pending.delete(job)) job();
       }
     }, options);
     document.querySelectorAll(selector).forEach((el) => {
       const target = seen(el);
       if (!below(target, f)) return;
       arm(el);
-      owners.set(target, el);
+      const job = () => release(el);
+      owners.set(target, job);
+      pending.add(job);
       io.observe(target);
     });
   };
-  const edge = { rootMargin: '0px 0px -8% 0px', threshold: 0.01 };
+  // at the very end of the page, release whatever is still waiting, so every rule ends drawn
+  const atEnd = () => {
+    if (window.scrollY + window.innerHeight < document.documentElement.scrollHeight - 4) return;
+    pending.forEach((job) => job());
+    pending.clear();
+    window.removeEventListener('scroll', atEnd);
+  };
+  window.addEventListener('scroll', atEnd, { passive: true });
+  const edge = { rootMargin: '0px', threshold: 0 };
 
   // a: blocks fade and rise once
   watch('[data-rise]', (el) => el.classList.add('rise'), (el) => {
     el.classList.add('is-in');
-    window.setTimeout(() => el.classList.remove('rise', 'is-in'), 2200);
+    window.setTimeout(() => el.classList.remove('rise', 'is-in'), 1200);
   }, edge);
 
   // a: statues further down the page open their door when well into view
@@ -105,17 +123,19 @@ if (root.classList.contains('motion') && 'IntersectionObserver' in window) {
     watch('.plate[data-door="scroll"]', (el) => el.classList.add('untraced'), (el) => el.classList.remove('untraced'), { threshold: 0.15 }, 0.6);
     watch('.arc[data-sweep]', (el) => el.classList.add('unswept'), (el) => el.classList.remove('unswept'), { threshold: 0.2 }, 0.6, (el) => el.closest('section'));
     // b: the 3 figures count up once
-    watch('[data-count]', () => {}, countUp, { rootMargin: '0px 0px -12% 0px', threshold: 0.01 });
+    watch('[data-count]', () => {}, countUp, { rootMargin: '0px 0px -10% 0px', threshold: 0.01 });
   }
 }
 
 /* ---- forms: no backend yet ---- */
-const thank = (form, text, cls) => {
+const thank = (form, text, cls, keepHeight) => {
   const p = document.createElement('p');
   p.className = cls;
   p.setAttribute('role', 'status');
   p.setAttribute('tabindex', '-1');
   p.textContent = text;
+  // the footer block keeps its height, so nothing below it jumps
+  if (keepHeight) p.style.minHeight = `${form.getBoundingClientRect().height}px`;
   form.replaceWith(p);
   p.focus({ preventScroll: true });
   const top = p.getBoundingClientRect().top;
@@ -126,14 +146,26 @@ document.querySelectorAll('form[data-form]').forEach((form) => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const interest = form.dataset.form === 'interest';
-    thank(form, form.dataset.thanks, interest ? 'thanks statement ruled ruled--end full' : 'thanks-small');
+    thank(form, form.dataset.thanks, interest ? 'thanks statement ruled ruled--end full' : 'foot__thanks gap-24', !interest);
   });
 });
+
+// the visible counter updates quietly; a hidden status speaks only at 100, 50, 20 and 0 left
 document.querySelectorAll('[data-count-for]').forEach((out) => {
   const field = document.getElementById(out.dataset.countFor);
   if (!field) return;
   const max = Number(field.getAttribute('maxlength'));
-  const update = () => { out.querySelector('[data-left]').textContent = String(max - field.value.length); };
+  const status = document.querySelector(`[data-count-status="${out.dataset.countFor}"]`);
+  const marks = [100, 50, 20, 0];
+  let said = null;
+  const update = () => {
+    const left = max - field.value.length;
+    out.querySelector('[data-left]').textContent = String(left);
+    if (!status) return;
+    const mark = marks.includes(left) ? left : null;
+    if (mark !== null && mark !== said) status.textContent = `${left} ${out.dataset.unit}`;
+    said = mark;
+  };
   field.addEventListener('input', update);
   update();
 });

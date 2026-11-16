@@ -2,18 +2,20 @@
 import Layout from '../site/Layout.astro';
 import Hero from '../site/Hero.astro';
 import Section from '../site/Section.astro';
+import Req from '../site/Req.astro';
 import Icon from '../base/Icon.astro';
 import { fellowship, ui } from '../content/site';
+import { tidy } from '../site/text';
 
 const form = fellowship.form;
 type Field = { id: string; label: string; type: string; required: boolean; options?: string[]; hint?: string; maxLength?: number };
 const fields = form.fields as Field[];
 const wide = (f: Field) => ['textarea', 'checkboxes', 'checkbox'].includes(f.type);
-const auto: Record<string, string> = { name: 'name', email: 'email', country: 'country-name', state: 'address-level1', city: 'address-level2' };
+const auto: Record<string, string> = { name: 'name', email: 'email', country: 'country-name', state: 'address-level1', city: 'address-level2', link: 'url' };
 ---
 <Layout title={fellowship.label} current="fellowship" motion="a">
-  <Hero heading={fellowship.heading} plate={{ name: 'vienna', ratio: '4 / 5', pos: '100% 100%' }}>
-    <p class="hero__sub hero__sub--end statement">{fellowship.intro}</p>
+  <Hero heading={fellowship.heading} plate={{ name: 'vienna', pos: '100% 100%' }}>
+    <p class="hero__sub statement">{tidy(fellowship.intro)}</p>
   </Hero>
 
   <section class="sec sec--move sec--flush" id="fellowship">
@@ -22,8 +24,8 @@ const auto: Record<string, string> = { name: 'name', email: 'email', country: 'c
       <div class="facts">
         {fellowship.sections.map((s) => (
           <div class="facts__row ruled" data-rise>
-            <h2 class="sec__title sec__title--sub">{s.title}</h2>
-            <p class="lead">{s.text}</p>
+            <h2 class="sec__title sec__title--s">{s.title}</h2>
+            <p class="lead">{tidy(s.text)}</p>
           </div>
         ))}
       </div>
@@ -31,12 +33,11 @@ const auto: Record<string, string> = { name: 'name', email: 'email', country: 'c
   </section>
 
   <Section title={form.title} id="interest" rule>
-    <p class="lead" data-rise>{form.intro}</p>
+    <p class="lead" data-rise>{tidy(form.intro)}</p>
     <form class="form full flush" data-form="interest" data-thanks={form.thanks}>
+      <p class="small form__note">{ui.requiredNote}</p>
       {fields.map((f) => {
-        const mark = f.required
-          ? <span class="field__req"><span aria-hidden="true">*</span><span class="visually-hidden"> ({ui.required})</span></span>
-          : <span class="field__opt">({ui.optional})</span>;
+        const mark = f.required ? <Req /> : <span class="field__opt">({ui.optional})</span>;
         if (f.type === 'checkboxes') return (
           <fieldset class="field field--wide" aria-describedby={f.hint ? `${f.id}-hint` : undefined}>
             <legend>{f.label} {mark}</legend>
@@ -48,31 +49,39 @@ const auto: Record<string, string> = { name: 'name', email: 'email', country: 'c
         );
         if (f.type === 'checkbox') return (
           <div class="field field--wide field--single">
-            <label class="check"><input type="checkbox" id={f.id} name={f.id} required={f.required} /><span>{f.label} {mark}</span></label>
+            <label class="check"><input type="checkbox" id={f.id} name={f.id} required={f.required} /><span>{tidy(f.label)} {mark}</span></label>
           </div>
         );
+        // A link is a plain text field with a hint, so "github.com/ada" is not turned away.
+        const hint = f.type === 'url' ? ui.linkHint : f.hint;
+        const described = hint ? `${f.id}-hint` : undefined;
         return (
           <div class:list={['field', wide(f) && 'field--wide']}>
             <label class="field__label" for={f.id}>{f.label} {mark}</label>
+            {hint && <p class="field__hint" id={`${f.id}-hint`}>{hint}</p>}
             {f.type === 'select' && (
               <select class="input" id={f.id} name={f.id} required={f.required}>
-                <option value=""></option>
+                <option value="">{ui.chooseOne}</option>
                 {f.options!.map((o) => <option>{o}</option>)}
               </select>
             )}
             {f.type === 'textarea' && (
               <>
-                <textarea class="input" id={f.id} name={f.id} maxlength={f.maxLength} required={f.required} rows="6" aria-describedby={`${f.id}-count`}></textarea>
-                <p class="small field__count" id={`${f.id}-count`} data-count-for={f.id}><span data-left>{f.maxLength}</span> {ui.charactersLeft}</p>
+                <textarea class="input" id={f.id} name={f.id} maxlength={f.maxLength} required={f.required} rows="6" aria-describedby={described}></textarea>
+                <p class="small field__count" data-count-for={f.id} data-unit={ui.charactersLeft}><span data-left>{f.maxLength}</span> {ui.charactersLeft}</p>
+                <p class="visually-hidden" role="status" data-count-status={f.id}></p>
               </>
             )}
-            {['text', 'email', 'url'].includes(f.type) && (
-              <input class="input" type={f.type} id={f.id} name={f.id} required={f.required} autocomplete={auto[f.id] ?? 'off'} />
+            {f.type === 'url' && (
+              <input class="input" type="text" inputmode="url" id={f.id} name={f.id} required={f.required} autocomplete={auto[f.id] ?? 'off'} aria-describedby={described} />
+            )}
+            {['text', 'email'].includes(f.type) && (
+              <input class="input" type={f.type} id={f.id} name={f.id} required={f.required} autocomplete={auto[f.id] ?? 'off'} aria-describedby={described} />
             )}
           </div>
         );
       })}
-      <button class="cta cta--cell ruled ruled--end form__send" type="submit"><span>{form.submit}</span><Icon name="play" size={22} /></button>
+      <button class="cta cta--cell ruled ruled--end form__send" type="submit"><span>{form.submit}</span><Icon name="play" /></button>
     </form>
   </Section>
 </Layout>

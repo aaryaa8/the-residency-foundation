@@ -1,17 +1,18 @@
 ---
-// A placeholder statue in a hairline frame, with the 4 corner markers just
-// outside its corners. The frame sits on grid lines and the statue stands on
-// its bottom edge. The image is seen through a doorway: with door="load" it
-// opens on page load, with "scroll" when it comes into view, with "still" never.
+// A placeholder statue in a hairline frame, with the 4 corner markers beside
+// its corners. The frame sits on grid lines and the statue stands on its bottom
+// edge. The image is seen through a doorway: with door="load" it opens on page
+// load, with "scroll" when it comes into view. `fill` lets the statue fill a
+// frame whose height is set by the text beside it.
 import Icon from '../base/Icon.astro';
 import { asset } from '../base/url';
 import { placeholders } from '../content/site';
-interface Props { name: string; ratio?: string; pos?: string; class?: string; door?: 'load' | 'scroll' | 'still'; arc?: boolean }
-const { name, ratio = '4 / 5', pos = '50% 100%', class: cls, door = 'scroll', arc = false } = Astro.props;
+interface Props { name: string; ratio?: string; stacked?: string; pos?: string; class?: string; door?: 'load' | 'scroll'; fill?: boolean }
+// `stacked` is the frame's shape on tablets and phones, where it is sized to the statue.
+const { name, ratio = '4 / 5', stacked = '1 / 1', pos = '50% 100%', class: cls, door = 'scroll', fill = false } = Astro.props;
 const eager = door === 'load';
 ---
-<figure class:list={['plate', arc && 'plate--arc', cls]} data-door={door} style={`--ratio:${ratio};--pos:${pos}`}>
-  {arc && <div class="plate__bg" aria-hidden="true"><div class="arc plate__arc"></div></div>}
+<figure class:list={['plate', fill && 'plate--fill', cls]} data-door={door} style={`--ratio:${ratio};--ratio-stacked:${stacked};--pos:${pos}`}>
   <span class="door__view">
     <img src={asset(`img/placeholder/${name}-mono.webp`)} alt={placeholders[name]} width="1600" height="1600" data-placeholder="true"
       loading={eager ? 'eager' : 'lazy'} decoding="async" fetchpriority={eager ? 'high' : undefined} />
