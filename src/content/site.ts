@@ -124,9 +124,9 @@ export const home = {
   problem: {
     title: 'the problem',
     items: [
-      'Higher education teaches theory, and most people graduate before they have researched a problem, tested an idea and built what addresses it.',
+      'Higher education teaches theory, so most people finish without ever researching a problem, testing an idea and building what addresses it.',
       'Testing an idea costs years and savings, and most capable people have neither to spare.',
-      `The founders, investors and operators who could help are in San Francisco, and a month there costs ${fig('monthInSF')} that most people cannot spare.`,
+      `The founders, investors and operators who could help are in San Francisco, and a month there costs ${fig('monthInSF')} that most people do not have.`,
     ],
   },
 
@@ -149,7 +149,7 @@ export const home = {
     items: [
       {
         label: 'programming',
-        text: 'A hands-on entrepreneurship curriculum built on project-based learning, peer teaching and AI-personalized learning.',
+        text: 'Hands-on entrepreneurship programming built on project-based learning, peer teaching and AI-personalized learning.',
       },
       {
         label: 'cohort',
@@ -182,7 +182,7 @@ export const home = {
     // Approved lineage line with 14 houses. Investor and advisor names appear
     // only in the FAQ answer, never here.
     text: `The Foundation was started by the team behind The Residency, whose ${fig('houses')} houses worldwide have hosted ${said('alumni')} founders and researchers.`,
-    own: 'The Foundation has its own board, chooses its own fellows and runs its own programming.',
+    own: 'The Foundation chooses its own fellows and runs its own programming.',
   },
 
   report: {
@@ -222,7 +222,7 @@ export const donate = {
   heading: lines.subline,
   body: [
     'The Residency Foundation gives people with limited financial means the entrepreneurial programming and resources to build solutions to problems facing their communities.',
-    'The Foundation selects its fellows on need and runs its own programs, and fellows keep everything they build.',
+    'Fellows are selected on need, get the Residency’s programming, community and network, and keep everything they build.',
   ],
   money: lines.programmingMoney,
   levelsLabel: 'ways to give',
@@ -231,19 +231,19 @@ export const donate = {
       key: 'scholarship',
       label: 'full scholarship',
       amount: fig('scholarship'),
-      text: `It funds 1 fellow for the full ${fig('programWeeks')} weeks of curriculum, cohort and introductions, and it can carry your name.`,
+      text: `A full scholarship funds 1 fellow for ${fig('programWeeks')} weeks: curriculum, cohort and introductions. It can carry your name.`,
     },
     {
       key: 'namedFellowship',
       label: 'named fellowship',
       amount: fig('namedFellowship'),
-      text: 'This fellowship carries your name.',
+      text: 'A named fellowship carries your name.',
     },
     {
       key: 'cohortSponsorship',
       label: 'cohort sponsorship',
       amount: fig('cohortSponsorship'),
-      text: 'It supports a full cohort of fellows.',
+      text: 'A cohort sponsorship supports a full cohort of fellows.',
     },
   ],
   button: { label: 'donate', href: org.donateUrl },
@@ -268,7 +268,7 @@ export const fellowship = {
   sections: [
     {
       title: 'the program',
-      text: `Fellows spend ${fig('programWeeks')} weeks in the Residency’s hands-on entrepreneurship programming, working alongside a cohort of builders. They get compute, tools and mentors, and guided introductions to investors, researchers and operators in San Francisco.`,
+      text: 'Fellows get the Residency’s hands-on entrepreneurship programming, a cohort of builders, access to compute, tools and mentors, and guided introductions to the investors, researchers and operators in San Francisco.',
     },
     {
       title: 'the cost',
@@ -280,11 +280,11 @@ export const fellowship = {
     },
     {
       title: 'selection',
-      text: `Applications open in ${fig('firstCohortYear')}. Selection is open and based on need, and the Foundation runs it against a rubric it publishes.`,
+      text: `Applications open in ${fig('firstCohortYear')}. The selection process is open and need-based, run by the Foundation, with a published rubric.`,
     },
     {
       title: 'after the program',
-      text: 'Fellows keep what they built and the people they met. The Foundation follows what they go on to do for 2 years and reports it to donors.',
+      text: 'Fellows keep their work, their cohort and their network. The Foundation tracks what they go on to do for 2 years, and that record is how we report to donors.',
     },
   ],
   form: {
@@ -385,7 +385,7 @@ export const fellowship = {
 export const about = {
   label: 'about',
   heading: lines.missionFirstSentence,
-  body: `Fellows are selected on need, get the Residency’s programming, community and network, and keep everything they build. Programs are free or need-based, and the Foundation takes no equity. ${lines.firstCohort}`,
+  body: lines.boilerplate,
   governance: {
     title: 'governance',
     items: [
@@ -393,7 +393,7 @@ export const about = {
       { label: 'selection and programming', text: 'The Foundation chooses its own fellows and runs its own programming.' },
       {
         label: 'dealings',
-        text: 'When the Foundation uses a Residency service, it pays the documented cost. The independent directors approve each arrangement, and the Foundation discloses it in its filings.',
+        text: 'Dealings with The Residency are priced at cost, approved by the independent directors and disclosed.',
       },
     ],
     status: lines.status,
@@ -429,7 +429,7 @@ export const faq = {
     {
       id: 'why',
       q: 'Why is a for-profit residency starting a nonprofit?',
-      a: [`${said('acceptance').charAt(0).toUpperCase() + said('acceptance').slice(1)} of the people who apply to The Residency get in, and every one of them had the means to come to San Francisco. The Foundation is for capable builders who lack those means. It offers the same programming, selects on need and is funded by donations. It has its own board with an independent majority, and every dealing with The Residency is priced at cost and disclosed.`],
+      a: ['The most capable builders are often the ones who cannot afford the programming, community and resources that turn an idea into a company. The Residency serves people who can come to San Francisco. The Foundation reaches the ones who cannot, with the same programming, selected on need and funded by donations. It has its own board with an independent majority, its own selection and its own programming, and every dealing with The Residency is priced at cost and disclosed.'],
     },
     {
       id: 'deductible',
@@ -469,7 +469,7 @@ export const faq = {
     {
       id: 'get',
       q: 'What do fellows get?',
-      a: [`Fellows spend ${fig('programWeeks')} weeks in the Residency’s hands-on entrepreneurship programming, working alongside a cohort of builders. They get compute, tools and mentors, and guided introductions to investors, researchers and operators in San Francisco. They take part in person, remote or hybrid.`],
+      a: ['Fellows get the Residency’s hands-on entrepreneurship programming, a cohort of builders, access to compute, tools and mentors, and guided introductions to the investors, researchers and operators in San Francisco. They take part in person, remote or hybrid.'],
     },
     {
       id: 'cost',
@@ -484,12 +484,12 @@ export const faq = {
     {
       id: 'apply',
       q: 'Who can apply?',
-      a: [`Applications open in ${fig('firstCohortYear')}. Selection is open and based on need, and the Foundation runs it against a rubric it publishes.`],
+      a: [`Applications open in ${fig('firstCohortYear')}. The selection process is open and need-based, run by the Foundation, with a published rubric.`],
     },
     {
       id: 'after',
       q: 'What happens after the program?',
-      a: ['Fellows keep what they built and the people they met. The Foundation follows what they go on to do for 2 years and reports it to donors.'],
+      a: ['Fellows keep their work, their cohort and their network. The Foundation tracks what they go on to do for 2 years, and that record is how we report to donors.'],
     },
   ],
   // FAQ page only. Never on the home page.
