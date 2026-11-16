@@ -1,8 +1,0 @@
----
-// The 7 vertical hairlines of the 6-column grid.
-interface Props { page?: boolean }
-const { page = false } = Astro.props;
----
-<div class:list={['guides', page && 'guides--page']} aria-hidden="true">
-  {[0, 1, 2, 3, 4, 5, 6].map((i) => <i style={`--i:${i}`} />)}
-</div>
