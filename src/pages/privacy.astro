@@ -10,7 +10,7 @@ import { tidy } from '../site/text';
   <Hero heading={privacy.heading} />
 
   {privacy.sections.map((section, i) => (
-    <Section title={section.title} id={`privacy-${i + 1}`}>
+    <Section title={section.title} id={`privacy-${i + 1}`} rule flush={i === 0}>
       <div class="prose lead" data-rise>
         {section.text.map((t, n, all) => (
           <p>{tidy(t)}{section.email && n === all.length - 1 && <> <a class="link link--set" href={`mailto:${section.email}`}>{section.email}</a>.</>}</p>
@@ -18,4 +18,5 @@ import { tidy } from '../site/text';
       </div>
     </Section>
   ))}
+  <Section id="privacy-updated"><p class="small">{privacy.updated}</p></Section>
 </Layout>

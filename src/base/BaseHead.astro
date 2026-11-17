@@ -11,7 +11,7 @@ import { asset } from './url';
 import { org } from '../content/site';
 
 interface Props { title?: string; description?: string }
-const { title, description = 'The Residency Foundation enables human potential by educating people with limited financial means to address problems facing their communities.' } = Astro.props;
+const { title, description = org.description } = Astro.props;
 const fullTitle = title ? `${title} | ${org.name}` : org.name;
 ---
 <meta charset="utf-8" />

@@ -34,6 +34,8 @@ export const org = {
   emails: ['nef@livetheresidency.com', 'aaryaa@livetheresidency.com'],
   majorGiftsEmail: 'nef@livetheresidency.com',
   draftLabel: 'draft for internal review',
+  // The short description search engines and link previews show.
+  description: 'The Residency Foundation enables human potential by educating people with limited financial means to address problems facing their communities.',
 };
 
 // Small interface words (buttons and screen-reader labels). Use these; do not invent others.
@@ -59,7 +61,8 @@ export const ui = {
 export const forms = {
   endpoint: '',
   sending: 'Sending',
-  failed: 'Your response was not saved. Please try again, or write to aaryaa@livetheresidency.com.',
+  failed: 'Your response was not saved. Please try again, or write to',
+  failedEmail: 'aaryaa@livetheresidency.com',
   privacyNote: 'How the Foundation handles this information is set out on the',
   privacyLink: { label: 'privacy page', slug: 'privacy' },
 };
@@ -72,20 +75,20 @@ export const privacy = {
     {
       title: 'the information',
       text: [
-        'The interest form asks for your name, your email, where you are, what you are building, and the other answers you choose to give. The updates form asks for your email.',
+        'The interest form asks for your name, your email, where you are, what you are building, and the other answers you choose to give. The updates form asks for your email. Each response is saved with the time it was sent, the page it was sent from, and the boxes you ticked.',
         `The interest form is for people aged ${fig('minimumAge')} or over.`,
       ],
     },
     {
       title: 'its use',
       text: [
-        'The Residency Foundation uses answers from the interest form to plan its programs and to write to you when applications open. It uses the updates list to send news from the Foundation a few times a year.',
+        'The Residency Foundation plans to use answers from the interest form to shape its programs and to write to you when applications open. It plans to use the updates list to send news a few times a year.',
       ],
     },
     {
       title: 'storage',
       text: [
-        'Responses are stored in a Google Sheet, with access limited to the people working on the Foundation. The Foundation does not sell this information.',
+        'Responses are stored in a Google Sheet, a service provided by Google. The Foundation plans to limit access to the people working on the Foundation, and it does not sell this information.',
       ],
     },
     {
@@ -96,6 +99,7 @@ export const privacy = {
       email: 'aaryaa@livetheresidency.com',
     },
   ],
+  updated: 'This page is a draft and was last updated in November 2026.',
 };
 
 // Descriptions of the placeholder statues, read aloud by screen readers.
@@ -391,7 +395,7 @@ export const fellowship = {
     title: 'interest form',
     // NEW
     intro:
-      'Until applications open, this form tells us who you are and what you are building, and we will write to you when they do.',
+      'Until applications open, this form tells us who you are and what you are building, and we plan to write to you when they do.',
     fields: [
       { id: 'name', label: 'Full name', type: 'text', required: true },
       { id: 'email', label: 'Email', type: 'email', required: true },
@@ -474,7 +478,7 @@ export const fellowship = {
     ],
     submit: 'send',
     // NEW
-    thanks: 'Thank you. We will write to you when applications open.',
+    thanks: 'Thank you. We plan to write to you when applications open.',
   },
 };
 
@@ -632,7 +636,7 @@ export const footer = {
   updates: {
     label: 'updates',
     // NEW
-    text: 'We send news from the Foundation a few times a year.',
+    text: 'The Foundation plans to send news a few times a year.',
     placeholder: 'your email',
     submit: 'sign up',
     // NEW

@@ -18,7 +18,7 @@ const u = footer.updates;
         <h2 class="key" id="updates-title">{u.label}</h2>
         <p class="small">{u.text}</p>
         <form data-form="updates" data-thanks={ui.updatesThanks} data-endpoint={forms.endpoint} data-sending={forms.sending} aria-labelledby="updates-title">
-          <div class="hp" aria-hidden="true"><label>website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+          <div class="hp" aria-hidden="true"><input type="text" name="confirm_field" tabindex="-1" autocomplete="off" aria-hidden="true" /></div>
           <p class="small">{ui.requiredNote}</p>
           <label class="foot__label" for="updates-email">{u.placeholder} <Req /></label>
           <div class="foot__field">
@@ -26,7 +26,7 @@ const u = footer.updates;
             <button class="cta" type="submit">{u.submit}<Icon name="play" /></button>
           </div>
           <label class="check"><input type="checkbox" name="consent" required /><span>{u.consent} <Req /></span></label>
-          <p class="form__error small" role="alert" tabindex="-1" data-form-error hidden>{forms.failed}</p>
+          <p class="form__error small" role="alert" tabindex="-1" data-form-error hidden>{forms.failed} <a class="link link--set" href={`mailto:${forms.failedEmail}`}>{forms.failedEmail}</a>.</p>
         </form>
       </div>
     </div>

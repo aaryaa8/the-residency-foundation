@@ -14,7 +14,7 @@ const rows = (value: unknown, path: string, out: Row[] = []): Row[] => {
   return out;
 };
 // internal addresses and settings are left out; only words a visitor can read are listed
-const skip = (r: Row) => /(\.href|\.slug|\.id|\.type|\.key|Url|\.endpoint|\.figures\[|\.ids\[)$|\.href$|\.slug$/.test(r.key) || /^https?:\/\//.test(r.text);
+const skip = (r: Row) => /(\.href|\.slug|\.id|\.type|\.key|Url|\.endpoint|\.(figures|ids)\[\d+\])$/.test(r.key) || /^https?:\/\//.test(r.text);
 const groups = [
   { title: 'Home', page: '', data: site.home, name: 'home' },
   { title: 'Donate', page: 'donate', data: site.donate, name: 'donate' },
@@ -23,9 +23,10 @@ const groups = [
   { title: 'FAQ', page: 'faq', data: site.faq, name: 'faq' },
   { title: 'Privacy', page: 'privacy', data: site.privacy, name: 'privacy' },
   { title: 'Navigation and footer', page: '', data: { nav: site.nav, footer: site.footer }, name: '' },
-  { title: 'Forms and small interface words', page: 'fellowship', data: { forms: site.forms, ui: site.ui }, name: '' },
+  { title: 'Forms and small interface words', page: 'fellowship', data: { forms: site.forms, ui: site.ui, org: { draftLabel: site.org.draftLabel, description: site.org.description } }, name: '' },
   { title: 'Lines used in more than 1 place', page: '', data: site.lines, name: 'lines' },
   { title: 'Image descriptions (read aloud by screen readers)', page: '', data: site.placeholders, name: 'placeholders' },
+  { title: 'Figures and their captions', page: '', data: Object.fromEntries(Object.entries(site.figures as Record<string, any>).filter(([k]) => !k.startsWith('_')).map(([k, v]) => [k, `${v.value}  ·  ${v.label}  ·  ${v.show ? 'shown' : 'hidden'}`])), name: 'figures' },
 ].map((g) => ({ ...g, rows: rows(g.data, g.name).filter((r) => !skip(r)) }));
 const total = groups.reduce((n, g) => n + g.rows.length, 0);
 ---
@@ -36,7 +37,7 @@ const total = groups.reduce((n, g) => n + g.rows.length, 0);
     <main>
       <p class="tag">draft for internal review</p>
       <h1>All site copy</h1>
-      <p class="lede">Every line of text on the site, grouped by page. The name beside each line is how to refer to it when asking for a change, for example "home.cost.statement". Numbers shown here come from the figures file, so a figure is changed there once. This page is built from the same file as the site, so it always matches what is live. {total} lines.</p>
+      <p class="lede">The text of the site, grouped by page. The name beside each line is how to refer to it when asking for a change, for example "home.cost.statement". Numbers shown here come from the figures file, so a figure is changed there once. This page is built from the same file as the site, so it always matches what is live. {total} lines.</p>
       <nav aria-label="Pages"><ul>{groups.map((g, i) => <li><a href={`#g${i}`}>{g.title}</a></li>)}</ul></nav>
       {groups.map((g, i) => (
         <section id={`g${i}`}>
@@ -60,7 +61,7 @@ const total = groups.reduce((n, g) => n + g.rows.length, 0);
   nav ul { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0 0 40px; padding: 0; list-style: none; font-size: 16px; }
   section { margin-top: 56px; }
   h2 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; margin: 0 0 12px; font: 300 32px/1.1 var(--serif); letter-spacing: -0.02em; }
-  .open { font: 400 14px/1.4 var(--sans); letter-spacing: 0; }
+  .open { display: inline-block; padding: 12px 0; font: 400 14px/1.4 var(--sans); letter-spacing: 0; }
   table { width: 100%; border-collapse: collapse; font-size: 16px; line-height: 1.5; }
   th { text-align: left; padding: 8px 12px 8px 0; font-weight: 500; border-bottom: 1px solid var(--ink); }
   td { padding: 10px 12px 10px 0; vertical-align: top; border-bottom: 1px solid var(--ink-15); }

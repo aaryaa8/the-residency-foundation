@@ -157,7 +157,11 @@ const send = async (endpoint, body) => {
   if (!endpoint) return false;
   try {
     // sent as plain text so the browser makes 1 simple request; the script reads it as JSON
-    const res = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) });
+    // give up after 20 seconds, so the form never stays on "Sending"
+    const stop = new AbortController();
+    const timer = setTimeout(() => stop.abort(), 20000);
+    const res = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body), signal: stop.signal });
+    clearTimeout(timer);
     if (!res.ok) return false;
     const reply = await res.json();
     return reply && reply.ok === true;
