@@ -121,10 +121,36 @@ export const home = {
 
   problem: {
     title: 'the problem',
+    // Each paragraph carries 1 outside figure. Every figure was read on the publisher's own
+    // page on 17 November 2026; re-check the source before changing a number.
     items: [
-      'Higher education tends to focus on theory, so many graduates have had limited practice in researching a problem, testing an idea and building something that addresses it.',
-      'Testing an idea can take years and can be capital-intensive, and not everyone has the savings to do it.',
-      'The entrepreneurial community, including founders, investors and operators, is largely concentrated in hubs like San Francisco and New York, where there is greater access to resources. These places also have some of the highest costs of living in the country, which puts them out of reach for a lot of people.',
+      {
+        text: 'Higher education tends to focus on theory, so many graduates have had limited practice in researching a problem, testing an idea and building something that addresses it.',
+        stat: {
+          before: 'An estimated 4.6 million US learners who wanted an internship in 2023 could not get one (',
+          source: 'Business-Higher Education Forum, 2024',
+          href: 'https://www.bhef.com/sites/default/files/BHEF_Expanding_Internships.pdf',
+          after: ').',
+        },
+      },
+      {
+        text: 'Testing an idea can take years and can be capital-intensive, and not everyone has the savings to do it.',
+        stat: {
+          before: 'In 2025, 63% of US adults said they would cover an unexpected $400 expense with cash or its equivalent (',
+          source: 'Federal Reserve, 2026',
+          href: 'https://www.federalreserve.gov/publications/2026-economic-well-being-of-us-households-in-2025-executive-summary.htm',
+          after: ').',
+        },
+      },
+      {
+        text: 'The entrepreneurial community, including founders, investors and operators, is largely concentrated in hubs like San Francisco and New York, where there is greater access to resources. These places also have some of the highest costs of living in the country, which puts them out of reach for a lot of people.',
+        stat: {
+          before: 'In 2025, companies in California, New York and Massachusetts received nearly 75% of US venture capital dollars (',
+          source: 'National Venture Capital Association, 2026',
+          href: 'https://nvca.org/wp-content/uploads/2026/04/NVCA-2026-Yearbook-4.9.26.pdf',
+          after: ').',
+        },
+      },
     ],
   },
 

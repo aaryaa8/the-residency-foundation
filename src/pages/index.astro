@@ -7,7 +7,7 @@ import Donate from '../site/Donate.astro';
 import Qa from '../site/Qa.astro';
 import Icon from '../base/Icon.astro';
 import { link } from '../base/url';
-import { home, faq, fig, shown, figures } from '../content/site';
+import { home, faq, fig, shown, figures, ui } from '../content/site';
 import { tidy } from '../site/text';
 
 const captions = figures as unknown as Record<string, { label: string }>;
@@ -28,7 +28,14 @@ const last = (i: number, list: unknown[]) => i === list.length - 1;
 
   <!-- the problem, then the tracks that answer it -->
   <Section title={home.problem.title} id="problem" rule flush>
-    <div class="prose lead" data-rise>{home.problem.items.map((t) => <p>{tidy(t)}</p>)}</div>
+    <div class="prose lead" data-rise>
+      {home.problem.items.map((item) => (
+        <div class="claim">
+          <p>{tidy(item.text)}</p>
+          <p class="claim__stat">{item.stat.before}<a class="link link--set" href={item.stat.href} target="_blank" rel="noopener">{item.stat.source}<span class="visually-hidden"> ({ui.newTab})</span></a>{item.stat.after}</p>
+        </div>
+      ))}
+    </div>
   </Section>
 
   <Section title={home.tracks.title} id="tracks">

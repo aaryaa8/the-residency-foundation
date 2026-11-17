@@ -377,6 +377,9 @@ p, li, dt, dd, h2, h3, label, legend { overflow-wrap: break-word; }
 
 /* the problem: prose */
 .prose { display: grid; gap: var(--s24); }
+/* each claim is followed by 1 sourced figure, set a little quieter than the claim */
+.claim { display: grid; gap: var(--s8); }
+.claim__stat { color: var(--fg-soft); }
 
 /* the builders: 3 plain columns across the grid */
 .cols3 { display: grid; grid-template-columns: var(--g3); max-width: none; }
