@@ -59,7 +59,7 @@ export const ui = {
 // empty, the forms tell the visitor that the response was not saved.
 // Set-up steps and the script: tools/google-sheet/Code.gs
 export const forms = {
-  endpoint: '',
+  endpoint: 'https://script.google.com/macros/s/AKfycbwVQlVGzFtibgv3Q27bK9w5xEBqOtT4XOesCnuF9FiqVi7L0I9qF59RorszsIsFELS_/exec',
   sending: 'Sending',
   failed: 'Your response was not saved. Please try again, or write to',
   failedEmail: 'aaryaa@livetheresidency.com',
