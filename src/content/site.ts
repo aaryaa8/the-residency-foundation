@@ -86,7 +86,7 @@ export const lines = {
     'The Residency Foundation enables human potential by educating people with limited financial means to address problems facing their communities.',
   ownSelection:
     'The Residency Foundation runs its own selection and its own programming.',
-  cost: 'Programs are offered free or at a need-based rate.',
+  cost: 'Programs are free or need-based.',
   // Approved disclosure line. Wording is unverified against HCB's requirements.
   disclosure:
     'The Residency Foundation is fiscally sponsored by Hack Club, a 501(c)(3) nonprofit (EIN 81-2908499). Donations are tax-deductible to the extent allowed by law.',
@@ -128,15 +128,16 @@ export const home = {
     ],
   },
 
-  // The fellowships are ideas, not a fixed list. Source: Aaryaa, 17 November 2026.
-  fellowships: {
-    title: 'the fellowships',
+  // "The fellowship" is the 12-week program. A "track" is 1 of the sample groupings below.
+  // The tracks are ideas, not a fixed list. Source: Aaryaa, 17 November 2026.
+  tracks: {
+    title: 'the tracks',
     intro: [
-      'Each fellowship pairs a problem with the community that lives with it.',
-      'The Foundation plans to choose 2 or 3 for each cohort, based on where the need is greatest. These are ideas, and the list may change.',
+      'Within the fellowship, each track pairs a problem with the community that lives with it.',
+      'The tracks below are ideas, and the list may change.',
     ],
     names: [
-      'Care-Experienced',
+      'Former Foster Youth',
       'Returning Citizens',
       'First-Generation Builders',
       'Caregivers',
@@ -149,18 +150,18 @@ export const home = {
       'Tribal Nations',
       'Veterans Re-entering',
     ],
-    // NEW. Illustrative builders, 1 for each of 3 fellowships.
+    // NEW. Illustrative builders, 1 for each of 3 tracks.
     examples: [
       {
-        fellowship: 'Rural Clinicians',
+        track: 'Rural Clinicians',
         text: 'A nurse at a rural clinic might build a scheduling tool for the 3 clinics that share 1 specialist.',
       },
       {
-        fellowship: 'Displaced Workers',
+        track: 'Displaced Workers',
         text: 'A warehouse worker whose job was automated might build a training tool for people changing trades.',
       },
       {
-        fellowship: 'First-Generation Builders',
+        track: 'First-Generation Builders',
         text: 'A community college student who is the first in their family to attend might build a tool that helps classmates find and apply for financial aid.',
       },
     ],
@@ -247,7 +248,7 @@ export const donate = {
   heading: lines.subline,
   body: [
     'The Residency Foundation gives people with limited financial means the entrepreneurial programming and resources to build solutions to problems facing their communities.',
-    'Fellows are selected on need and receive the Residency’s programming, community and network.',
+    'Fellows are selected on need and receive the Foundation’s programming, community and network.',
   ],
   money: lines.programmingMoney,
   levelsLabel: 'ways to give',
@@ -274,6 +275,8 @@ export const donate = {
   button: { label: 'donate', href: org.donateUrl },
   // NEW
   buttonNote: 'The donation form opens in a new tab on HCB, the fiscal sponsorship platform run by Hack Club.',
+  // NEW. Uses the optional message field on the HCB donation form.
+  designate: 'A gift can support the Foundation in general, or it can be directed to a specific track. To direct a gift, name the track in the message field of the donation form.',
   // NEW
   larger: 'To talk about a larger gift, write to',
   deductible: lines.deductibleToday,
@@ -293,7 +296,7 @@ export const fellowship = {
   sections: [
     {
       title: 'the program',
-      text: 'Fellows get the Residency’s hands-on entrepreneurship programming, a cohort of builders, access to compute, tools and mentors, and guided introductions to the investors, researchers and operators in San Francisco.',
+      text: 'Fellows get the Foundation’s hands-on entrepreneurship programming, a cohort of builders, access to compute, tools and mentors, and guided introductions to the investors, researchers and operators in San Francisco.',
     },
     {
       title: 'the cost',
@@ -410,7 +413,7 @@ export const fellowship = {
 export const about = {
   label: 'about',
   heading: lines.missionFirstSentence,
-  body: `The Foundation gives people with limited financial means the entrepreneurial programming and resources to build solutions to problems facing their communities. Fellows are selected on need and receive the Residency’s programming, community and network. Programs are offered free or at a need-based rate, and the first cohort is planned for ${fig('firstCohortYear')}.`,
+  body: `The Foundation gives people with limited financial means the entrepreneurial programming and resources to build solutions to problems facing their communities. Fellows are selected on need and receive the Foundation’s programming, community and network. Programs are free or need-based, and the first cohort is planned for ${fig('firstCohortYear')}.`,
   governance: {
     title: 'governance',
     items: [
@@ -449,7 +452,7 @@ export const faq = {
     {
       id: 'what',
       q: 'What does The Residency Foundation do?',
-      a: ['It gives people with limited financial means the entrepreneurial programming and resources to build solutions to problems facing their communities. Fellows are selected on need and receive the Residency’s programming, community and network.'],
+      a: ['It gives people with limited financial means the entrepreneurial programming and resources to build solutions to problems facing their communities. Fellows are selected on need and receive the Foundation’s programming, community and network.'],
     },
     {
       id: 'why',
@@ -494,12 +497,12 @@ export const faq = {
     {
       id: 'get',
       q: 'What do fellows get?',
-      a: ['Fellows get the Residency’s hands-on entrepreneurship programming, a cohort of builders, access to compute, tools and mentors, and guided introductions to the investors, researchers and operators in San Francisco. Fellows can take part in person, remote or hybrid.'],
+      a: ['Fellows get the Foundation’s hands-on entrepreneurship programming, a cohort of builders, access to compute, tools and mentors, and guided introductions to the investors, researchers and operators in San Francisco. Fellows can take part in person, remote or hybrid.'],
     },
     {
       id: 'cost',
       q: 'What does it cost?',
-      a: ['Programs are offered free or at a need-based rate. The Foundation takes no equity, and fellows retain ownership of what they build.'],
+      a: ['Programs are free or need-based. The Foundation takes no equity, and fellows retain ownership of what they build.'],
     },
     {
       id: 'move',

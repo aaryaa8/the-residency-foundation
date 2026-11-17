@@ -26,27 +26,27 @@ const last = (i: number, list: unknown[]) => i === list.length - 1;
     <p class="hero__note small">{tidy(home.hero.disclosure)}</p>
   </Hero>
 
-  <!-- the problem, then the fellowships that answer it -->
+  <!-- the problem, then the tracks that answer it -->
   <Section title={home.problem.title} id="problem" rule flush>
     <div class="prose lead" data-rise>{home.problem.items.map((t) => <p>{tidy(t)}</p>)}</div>
   </Section>
 
-  <Section title={home.fellowships.title} id="fellowships">
-    <div class="prose lead" data-rise>{home.fellowships.intro.map((t) => <p>{tidy(t)}</p>)}</div>
+  <Section title={home.tracks.title} id="tracks">
+    <div class="prose lead" data-rise>{home.tracks.intro.map((t) => <p>{tidy(t)}</p>)}</div>
     <ul class="names sec__wide" slot="wide" role="list">
-      {home.fellowships.names.map((n, i) => <li class="key" data-rise style={`--d:${i * 30}ms`}>{n}</li>)}
+      {home.tracks.names.map((n, i) => <li class="key" data-rise style={`--d:${i * 30}ms`}>{n}</li>)}
     </ul>
     <div class="cols3 lead sec__wide" slot="wide">
-      {home.fellowships.examples.map((e, i) => (
+      {home.tracks.examples.map((e, i) => (
         <div class="eg" data-rise style={`--d:${i * 60}ms`}>
-          <h3>{e.fellowship}</h3>
+          <h3>{e.track}</h3>
           <p>{tidy(e.text)}</p>
         </div>
       ))}
     </div>
-    <p class="small eg__note" slot="wide" data-rise>{tidy(home.fellowships.note)}</p>
+    <p class="small eg__note" slot="wide" data-rise>{tidy(home.tracks.note)}</p>
     <div class="callout" slot="wide" data-rise>
-      <p class="statement">{tidy(home.fellowships.close)}</p>
+      <p class="statement">{tidy(home.tracks.close)}</p>
     </div>
   </Section>
 

@@ -383,7 +383,7 @@ p, li, dt, dd, h2, h3, label, legend { overflow-wrap: break-word; }
 .cols3 > * { padding-inline: var(--pad); max-width: none; }
 @media (max-width: 1199.98px) { .cols3 { grid-template-columns: 1fr; row-gap: var(--s24); } .cols3 > * { max-width: var(--measure); } }
 
-/* the fellowships: the names as a plain 3-column list, an example under 3 of them,
+/* the tracks: the names as a plain 3-column list, an example under 3 of them,
    and the closing line in a frame on the middle 4 columns */
 .names { display: grid; grid-template-columns: var(--g3); row-gap: var(--s16); }
 .names > li { padding-inline: var(--pad); }

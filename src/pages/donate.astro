@@ -32,6 +32,7 @@ import { tidy } from '../site/text';
       ))}
     </ul>
     <div class="stack gap-40 lead" data-rise>
+      <p>{tidy(donate.designate)}</p>
       <p>{tidy(donate.deductible)}</p>
       <p>{donate.larger} <a class="link link--set" href={`mailto:${org.majorGiftsEmail}`}>{org.majorGiftsEmail}</a>.</p>
     </div>
