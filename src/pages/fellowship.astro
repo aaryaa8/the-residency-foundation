@@ -4,7 +4,7 @@ import Hero from '../site/Hero.astro';
 import Section from '../site/Section.astro';
 import Req from '../site/Req.astro';
 import Icon from '../base/Icon.astro';
-import { fellowship, ui } from '../content/site';
+import { fellowship, home, ui } from '../content/site';
 import { tidy } from '../site/text';
 
 const form = fellowship.form;
@@ -31,6 +31,13 @@ const auto: Record<string, string> = { name: 'name', email: 'email', country: 'c
       </div>
     </div>
   </section>
+
+  <Section title={home.fellowships.title} id="fellowships" rule>
+    <div class="prose lead" data-rise>{home.fellowships.intro.map((t) => <p>{tidy(t)}</p>)}</div>
+    <ul class="names sec__wide" slot="wide" role="list">
+      {home.fellowships.names.map((n, i) => <li class="key" data-rise style={`--d:${i * 30}ms`}>{n}</li>)}
+    </ul>
+  </Section>
 
   <Section title={form.title} id="interest" rule>
     <p class="lead" data-rise>{tidy(form.intro)}</p>

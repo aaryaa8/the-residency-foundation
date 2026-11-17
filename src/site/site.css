@@ -383,6 +383,24 @@ p, li, dt, dd, h2, h3, label, legend { overflow-wrap: break-word; }
 .cols3 > * { padding-inline: var(--pad); max-width: none; }
 @media (max-width: 809.98px) { .cols3 { grid-template-columns: 1fr; row-gap: var(--s24); } }
 
+/* the fellowships: the names as a plain 3-column list, an example under 3 of them,
+   and the closing line in a frame on the middle 4 columns */
+.names { display: grid; grid-template-columns: var(--g3); row-gap: var(--s16); }
+.names > li { padding-inline: var(--pad); }
+.eg > .key { margin-bottom: var(--s12); }
+.eg__note { margin-top: var(--s24); padding-inline: var(--pad); }
+.callout { display: grid; grid-template-columns: var(--g6); margin-top: var(--s72); }
+.callout > p { grid-column: 2 / 6; padding: var(--s40); border: var(--hairline) solid var(--frame); text-align: center; }
+@media (max-width: 1199.98px) {
+  .names { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .callout > p { grid-column: 1 / -1; }
+}
+@media (max-width: 809.98px) {
+  .names { grid-template-columns: 1fr; row-gap: var(--s12); }
+  .callout { margin-top: var(--s40); }
+  .callout > p { padding: var(--s24) var(--pad); }
+}
+
 /* the program: head, lead-in and definition rows on the left; the statue's frame runs
    from the section rule down to the last row's rule, in columns 5 to 6 */
 .prog { display: grid; grid-template-columns: var(--g6); }

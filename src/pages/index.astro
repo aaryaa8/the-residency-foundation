@@ -26,18 +26,27 @@ const last = (i: number, list: unknown[]) => i === list.length - 1;
     <p class="hero__note small">{tidy(home.hero.disclosure)}</p>
   </Hero>
 
-  <!-- the problem, then the builders it leaves out -->
+  <!-- the problem, then the fellowships that answer it -->
   <Section title={home.problem.title} id="problem" rule flush>
     <div class="prose lead" data-rise>{home.problem.items.map((t) => <p>{tidy(t)}</p>)}</div>
   </Section>
 
-  <Section title={home.who.title} id="builders">
+  <Section title={home.fellowships.title} id="fellowships">
+    <div class="prose lead" data-rise>{home.fellowships.intro.map((t) => <p>{tidy(t)}</p>)}</div>
+    <ul class="names sec__wide" slot="wide" role="list">
+      {home.fellowships.names.map((n, i) => <li class="key" data-rise style={`--d:${i * 30}ms`}>{n}</li>)}
+    </ul>
     <div class="cols3 lead sec__wide" slot="wide">
-      {home.who.examples.map((t, i) => <p data-rise style={`--d:${i * 60}ms`}>{tidy(t)}</p>)}
+      {home.fellowships.examples.map((e, i) => (
+        <div class="eg" data-rise style={`--d:${i * 60}ms`}>
+          <h3 class="key">{e.fellowship}</h3>
+          <p>{tidy(e.text)}</p>
+        </div>
+      ))}
     </div>
-    <div class="under" slot="wide">
-      <p class="statement" data-rise>{tidy(home.who.close)}</p>
-      <p class="small" data-rise>{tidy(home.who.note)}</p>
+    <p class="small eg__note" slot="wide" data-rise>{tidy(home.fellowships.note)}</p>
+    <div class="callout" slot="wide" data-rise>
+      <p class="statement">{tidy(home.fellowships.close)}</p>
     </div>
   </Section>
 
@@ -78,7 +87,6 @@ const last = (i: number, list: unknown[]) => i === list.length - 1;
     </ul>
     <div class="under" slot="wide">
       <p class="statement" data-rise>{tidy(home.lineage.text)}</p>
-      <p class="lead" data-rise>{tidy(home.lineage.own)}</p>
     </div>
   </Section>
 

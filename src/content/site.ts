@@ -88,7 +88,7 @@ export const lines = {
     'The Residency Foundation enables human potential by giving people with limited financial means the entrepreneurial programming and resources to build solutions to problems facing their communities. Fellows are selected on need, get the Residency’s programming, community and network, and keep everything they build. Programs are free or need-based, and the Foundation takes no equity. The first cohort begins in 2027.',
   ownSelection:
     'The Residency Foundation runs its own selection and its own programming.',
-  cost: 'Programs are free or need-based, and the Foundation takes no equity. Fellows keep everything they build.',
+  cost: 'Programs are offered free or at a need-based rate.',
   // Approved disclosure line. Wording is unverified against HCB's requirements.
   disclosure:
     'The Residency Foundation is fiscally sponsored by Hack Club, a 501(c)(3) nonprofit (EIN 81-2908499). Donations are tax-deductible to the extent allowed by law.',
@@ -99,9 +99,9 @@ export const lines = {
   // NEW
   separate:
     'The Residency Foundation is separate from The Residency. It has its own board, runs its own selection and its own programming, and is forming its own 501(c)(3).',
-  firstCohort: `The first cohort begins in ${fig('firstCohortYear')}.`,
+  firstCohort: `The first cohort is planned for ${fig('firstCohortYear')}.`,
   // NEW (the approved sentence names the raise total, which is hidden)
-  programmingMoney: `In year 1, ${fig('programming')} goes to programming.`,
+  programmingMoney: `In the first year, the Foundation plans to direct ${fig('programming')} toward programming.`,
 };
 
 // ---------------------------------------------------------------------------
@@ -114,7 +114,7 @@ export const home = {
     subline: lines.subline,
     body: [
       'The Residency Foundation gives people with limited financial means the entrepreneurial programming and resources to build solutions to problems facing their communities.',
-      'The Foundation selects its own fellows and runs its own programs.',
+      'Selection of fellows and the programming are both run by the Foundation itself.',
     ],
     primary: { label: 'donate', href: org.donateUrl },
     secondary: { label: 'for fellows', slug: 'fellowship' },
@@ -124,23 +124,51 @@ export const home = {
   problem: {
     title: 'the problem',
     items: [
-      'Higher education teaches theory, so most people finish without ever researching a problem, testing an idea and building what addresses it.',
-      'Testing an idea costs years and savings, and most capable people have neither to spare.',
-      `The founders, investors and operators who could help are in San Francisco, and a month there costs ${fig('monthInSF')} that most people do not have.`,
+      'Higher education tends to focus on theory, so many graduates have had limited practice in researching a problem, testing an idea and building something that addresses it.',
+      'Testing an idea can take years and can be capital-intensive, and not everyone has the savings to do it.',
+      'The entrepreneurial community, including founders, investors and operators, is largely concentrated in hubs like San Francisco and New York, where there is greater access to resources. These places also have some of the highest costs of living in the country, which puts them out of reach for a lot of people.',
     ],
   },
 
-  // NEW. Replaces the single illustrative builder on the website.
-  who: {
-    title: 'the builders',
-    examples: [
-      'A self-taught developer in a town of 4,000 built the booking system the clinics on their main street now use.',
-      'A warehouse technician wired low-cost sensors that warn their neighbors when the river rises.',
-      'A community college student built the tool their classmates use to find and apply for financial aid.',
+  // The fellowships are ideas, not a fixed list. Source: Aaryaa, 17 November 2026.
+  fellowships: {
+    title: 'the fellowships',
+    intro: [
+      'Each fellowship pairs a problem with the community that lives with it.',
+      'The Foundation plans to choose 2 or 3 for each cohort, based on where the need is greatest. These are ideas, and the list may change.',
     ],
+    names: [
+      'Care-Experienced',
+      'Returning Citizens',
+      'First-Generation Builders',
+      'Caregivers',
+      'Disaster-Struck Communities',
+      'Rural Clinicians',
+      'Displaced Workers',
+      'Climate-Frontline',
+      'Deaf and Disabled Builders',
+      'Language Access',
+      'Tribal Nations',
+      'Veterans Re-entering',
+    ],
+    // NEW. Illustrative builders, 1 for each of 3 fellowships.
+    examples: [
+      {
+        fellowship: 'Rural Clinicians',
+        text: 'A nurse at a rural clinic might build a scheduling tool for the 3 clinics that share 1 specialist.',
+      },
+      {
+        fellowship: 'Displaced Workers',
+        text: 'A warehouse worker whose job was automated might build a training tool for people changing trades.',
+      },
+      {
+        fellowship: 'First-Generation Builders',
+        text: 'A community college student who is the first in their family to attend might build a tool that helps classmates find and apply for financial aid.',
+      },
+    ],
+    note: `These examples are illustrative, and the first fellows are expected to be selected in ${fig('firstCohortYear')}.`,
     close:
-      'Each of them has built something people use, and has yet to meet a founder or an investor. The Residency Foundation is for builders like them.',
-    note: `These examples are illustrative, and the first fellows will be selected in ${fig('firstCohortYear')}.`,
+      'The Foundation would like to create pathways for builders like these to find a community and receive guided introductions to investors, researchers and operators.',
   },
 
   get: {
@@ -162,7 +190,7 @@ export const home = {
       },
     ],
     close:
-      'Fellows take part in person, remote or hybrid. They work on health, climate and the environment, basic services, and education and economic mobility.',
+      'Fellows can take part in person, remote or hybrid, and they work on areas such as health, climate and the environment, basic services, and education and economic mobility.',
     areas: [
       'health',
       'climate and the environment',
@@ -182,7 +210,6 @@ export const home = {
     // Approved lineage line with 14 houses. Investor and advisor names appear
     // only in the FAQ answer, never here.
     text: `The Foundation was started by the team behind The Residency, whose ${fig('houses')} houses worldwide have hosted ${said('alumni')} founders and researchers.`,
-    own: 'The Foundation chooses its own fellows and runs its own programming.',
   },
 
   report: {
@@ -194,7 +221,7 @@ export const home = {
       'Skills gained',
       'What fellows go on to do in the 2 years after the program',
     ],
-    note: 'Reported figures will appear here once cohort 1 is under way.',
+    note: 'The Foundation plans to publish these figures here once the first cohort is under way.',
   },
 
   give: {
@@ -222,7 +249,7 @@ export const donate = {
   heading: lines.subline,
   body: [
     'The Residency Foundation gives people with limited financial means the entrepreneurial programming and resources to build solutions to problems facing their communities.',
-    'Fellows are selected on need, get the Residency’s programming, community and network, and keep everything they build.',
+    'Fellows are selected on need and receive the Residency’s programming, community and network.',
   ],
   money: lines.programmingMoney,
   levelsLabel: 'ways to give',
@@ -263,7 +290,7 @@ export const donate = {
 export const fellowship = {
   label: 'fellowship',
   // NEW
-  heading: `Applications open in ${fig('firstCohortYear')}.`,
+  heading: `Applications are expected to open in ${fig('firstCohortYear')}.`,
   intro: `The fellowship is ${fig('programWeeks')} weeks of entrepreneurial programming for people selected on need.`,
   sections: [
     {
@@ -272,7 +299,7 @@ export const fellowship = {
     },
     {
       title: 'the cost',
-      text: 'Programs are free or need-based. Fellows keep everything they build, and the Foundation takes no equity.',
+      text: lines.cost,
     },
     {
       title: 'the format',
@@ -280,18 +307,18 @@ export const fellowship = {
     },
     {
       title: 'selection',
-      text: `Applications open in ${fig('firstCohortYear')}. The selection process is open and need-based, run by the Foundation, with a published rubric.`,
+      text: 'The selection process is open and need-based, run by the Foundation, with a published rubric.',
     },
     {
       title: 'after the program',
-      text: 'Fellows keep their work, their cohort and their network. The Foundation tracks what they go on to do for 2 years, and that record is how we report to donors.',
+      text: 'After the program, fellows continue to own their work and can stay connected to their cohort and the wider network. The Foundation plans to follow what they go on to do for 2 years, and that record is how it reports to donors.',
     },
   ],
   form: {
     title: 'interest form',
     // NEW
     intro:
-      `Applications open in ${fig('firstCohortYear')}. Until then, this form tells us who you are and what you are building, and we will write to you when they open.`,
+      'Until applications open, this form tells us who you are and what you are building, and we will write to you when they do.',
     fields: [
       { id: 'name', label: 'Full name', type: 'text', required: true },
       { id: 'email', label: 'Email', type: 'email', required: true },
@@ -385,11 +412,11 @@ export const fellowship = {
 export const about = {
   label: 'about',
   heading: lines.missionFirstSentence,
-  body: lines.boilerplate,
+  body: `The Residency Foundation enables human potential by giving people with limited financial means the entrepreneurial programming and resources to build solutions to problems facing their communities. Fellows are selected on need and receive the Residency’s programming, community and network. Programs are offered free or at a need-based rate, and the first cohort is planned for ${fig('firstCohortYear')}.`,
   governance: {
     title: 'governance',
     items: [
-      { label: 'board', text: 'The board has an independent majority.' },
+      { label: 'board', text: 'The board is structured so that independent directors hold the majority of seats.' },
       { label: 'selection and programming', text: 'The Foundation chooses its own fellows and runs its own programming.' },
       {
         label: 'dealings',
@@ -424,7 +451,7 @@ export const faq = {
     {
       id: 'what',
       q: 'What does The Residency Foundation do?',
-      a: ['It gives people with limited financial means the entrepreneurial programming and resources to build solutions to problems facing their communities. Fellows are selected on need, get the Residency’s programming, community and network, and keep everything they build.'],
+      a: ['It gives people with limited financial means the entrepreneurial programming and resources to build solutions to problems facing their communities. Fellows are selected on need and receive the Residency’s programming, community and network.'],
     },
     {
       id: 'why',
@@ -457,12 +484,12 @@ export const faq = {
     {
       id: 'worked',
       q: 'How will I know it worked?',
-      a: ['We measure 4 things: fellows served, curriculum completed, skills gained, and what fellows go on to do in the 2 years after the program. Donors receive a report on each.'],
+      a: ['The Foundation plans to measure 4 things: fellows served, curriculum completed, skills gained, and what fellows go on to do in the 2 years after the program. It plans to report on each to donors.'],
     },
     {
       id: 'when',
       q: 'When does the first cohort start?',
-      a: [`The first cohort starts in ${fig('firstCohortYear')}, and gifts made now fund it.`],
+      a: [`The first cohort is planned for ${fig('firstCohortYear')}, and gifts made now go toward funding it.`],
     },
   ],
   fellows: [
@@ -474,7 +501,7 @@ export const faq = {
     {
       id: 'cost',
       q: 'What does it cost?',
-      a: ['Programs are free or need-based. Fellows keep everything they build, and the Foundation takes no equity.'],
+      a: ['Programs are offered free or at a need-based rate. The Foundation takes no equity, and fellows retain ownership of what they build.'],
     },
     {
       id: 'move',
@@ -484,12 +511,12 @@ export const faq = {
     {
       id: 'apply',
       q: 'Who can apply?',
-      a: [`Applications open in ${fig('firstCohortYear')}. The selection process is open and need-based, run by the Foundation, with a published rubric.`],
+      a: [`Applications are expected to open in ${fig('firstCohortYear')}. The selection process is open and need-based, run by the Foundation, with a published rubric.`],
     },
     {
       id: 'after',
       q: 'What happens after the program?',
-      a: ['Fellows keep their work, their cohort and their network. The Foundation tracks what they go on to do for 2 years, and that record is how we report to donors.'],
+      a: ['After the program, fellows continue to own their work and can stay connected to their cohort and the wider network. The Foundation plans to follow what they go on to do for 2 years, and that record is how it reports to donors.'],
     },
   ],
   // FAQ page only. Never on the home page.
