@@ -381,24 +381,26 @@ p, li, dt, dd, h2, h3, label, legend { overflow-wrap: break-word; }
 /* the builders: 3 plain columns across the grid */
 .cols3 { display: grid; grid-template-columns: var(--g3); max-width: none; }
 .cols3 > * { padding-inline: var(--pad); max-width: none; }
-@media (max-width: 809.98px) { .cols3 { grid-template-columns: 1fr; row-gap: var(--s24); } }
+@media (max-width: 1199.98px) { .cols3 { grid-template-columns: 1fr; row-gap: var(--s24); } .cols3 > * { max-width: var(--measure); } }
 
 /* the fellowships: the names as a plain 3-column list, an example under 3 of them,
    and the closing line in a frame on the middle 4 columns */
 .names { display: grid; grid-template-columns: var(--g3); row-gap: var(--s16); }
 .names > li { padding-inline: var(--pad); }
-.eg > .key { margin-bottom: var(--s12); }
-.eg__note { margin-top: var(--s24); padding-inline: var(--pad); }
+/* example heads are sans, so they do not read as more rows of the serif list above */
+.eg > h3 { margin: 0 0 var(--s8); font: 500 var(--t-lead) / 1.5 var(--sans); letter-spacing: 0; }
+.eg__note { margin-top: var(--s24); padding-inline: var(--pad); max-width: calc(100% / 3); }
 .callout { display: grid; grid-template-columns: var(--g6); margin-top: var(--s72); }
-.callout > p { grid-column: 2 / 6; padding: var(--s40); border: var(--hairline) solid var(--frame); text-align: center; }
+.callout > p { grid-column: 2 / 6; padding: var(--s40); border: var(--hairline) solid var(--frame); background: var(--white); text-align: center; }
 @media (max-width: 1199.98px) {
   .names { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .callout > p { grid-column: 1 / -1; }
+  .eg__note { max-width: var(--measure); }
+  .callout { display: block; padding-inline: var(--pad); }
 }
 @media (max-width: 809.98px) {
   .names { grid-template-columns: 1fr; row-gap: var(--s12); }
   .callout { margin-top: var(--s40); }
-  .callout > p { padding: var(--s24) var(--pad); }
+  .callout > p { padding: var(--s24) var(--s16); }
 }
 
 /* the program: head, lead-in and definition rows on the left; the statue's frame runs

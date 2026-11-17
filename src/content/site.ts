@@ -84,8 +84,6 @@ export const lines = {
     "Opening the Residency's door to people with limited means and the will to build.",
   missionFirstSentence:
     'The Residency Foundation enables human potential by educating people with limited financial means to address problems facing their communities.',
-  boilerplate:
-    'The Residency Foundation enables human potential by giving people with limited financial means the entrepreneurial programming and resources to build solutions to problems facing their communities. Fellows are selected on need, get the Residency’s programming, community and network, and keep everything they build. Programs are free or need-based, and the Foundation takes no equity. The first cohort begins in 2027.',
   ownSelection:
     'The Residency Foundation runs its own selection and its own programming.',
   cost: 'Programs are offered free or at a need-based rate.',
@@ -258,19 +256,19 @@ export const donate = {
       key: 'scholarship',
       label: 'full scholarship',
       amount: fig('scholarship'),
-      text: `A full scholarship funds 1 fellow for ${fig('programWeeks')} weeks: curriculum, cohort and introductions. It can carry your name.`,
+      text: `A full scholarship is expected to fund 1 fellow for ${fig('programWeeks')} weeks, covering curriculum, cohort and introductions, and it can carry your name.`,
     },
     {
       key: 'namedFellowship',
       label: 'named fellowship',
       amount: fig('namedFellowship'),
-      text: 'A named fellowship carries your name.',
+      text: 'A gift at this level is expected to fund a fellowship that can carry your name.',
     },
     {
       key: 'cohortSponsorship',
       label: 'cohort sponsorship',
       amount: fig('cohortSponsorship'),
-      text: 'A cohort sponsorship supports a full cohort of fellows.',
+      text: 'A cohort sponsorship is expected to support a full cohort of fellows.',
     },
   ],
   button: { label: 'donate', href: org.donateUrl },
@@ -303,15 +301,15 @@ export const fellowship = {
     },
     {
       title: 'the format',
-      text: 'Each fellowship runs in person, remote or hybrid, and the format is agreed with each fellow at selection.',
+      text: 'A fellowship can run in person, remote or hybrid, and the Foundation plans to agree the format with each fellow at selection.',
     },
     {
       title: 'selection',
-      text: 'The selection process is open and need-based, run by the Foundation, with a published rubric.',
+      text: 'The Foundation runs the selection process, which is open and need-based, and it plans to publish the rubric.',
     },
     {
       title: 'after the program',
-      text: 'After the program, fellows continue to own their work and can stay connected to their cohort and the wider network. The Foundation plans to follow what they go on to do for 2 years, and that record is how it reports to donors.',
+      text: 'After the program, fellows continue to own their work and can stay connected to their cohort and the wider network. The Foundation plans to follow what they go on to do for 2 years and to include that record in its reports to donors.',
     },
   ],
   form: {
@@ -412,7 +410,7 @@ export const fellowship = {
 export const about = {
   label: 'about',
   heading: lines.missionFirstSentence,
-  body: `The Residency Foundation enables human potential by giving people with limited financial means the entrepreneurial programming and resources to build solutions to problems facing their communities. Fellows are selected on need and receive the Residency’s programming, community and network. Programs are offered free or at a need-based rate, and the first cohort is planned for ${fig('firstCohortYear')}.`,
+  body: `The Foundation gives people with limited financial means the entrepreneurial programming and resources to build solutions to problems facing their communities. Fellows are selected on need and receive the Residency’s programming, community and network. Programs are offered free or at a need-based rate, and the first cohort is planned for ${fig('firstCohortYear')}.`,
   governance: {
     title: 'governance',
     items: [
@@ -456,7 +454,7 @@ export const faq = {
     {
       id: 'why',
       q: 'Why is a for-profit residency starting a nonprofit?',
-      a: ['The most capable builders are often the ones who cannot afford the programming, community and resources that turn an idea into a company. The Residency serves people who can come to San Francisco. The Foundation reaches the ones who cannot, with the same programming, selected on need and funded by donations. It has its own board with an independent majority, its own selection and its own programming, and every dealing with The Residency is priced at cost and disclosed.'],
+      a: ['A lot of capable builders cannot afford the programming, community and resources that can help turn an idea into a company. The Residency serves people who are able to come to San Francisco, and the Foundation is being set up to reach people who are not, with fellows selected on need and programs funded by donations. The Foundation has its own board with an independent majority and runs its own selection and its own programming, and its dealings with The Residency are priced at cost and disclosed.'],
     },
     {
       id: 'deductible',
@@ -468,7 +466,7 @@ export const faq = {
       q: 'Where does my money go?',
       // Edited for the website: the raise total is removed and the gift levels
       // appear on the donate page only.
-      a: [`Your money goes to programming for fellows: the curriculum, the cohort, resources such as compute, tools and mentors, introductions, and the support fellows need to take part. ${lines.programmingMoney}`],
+      a: [`Your gift is expected to go to programming for fellows, which covers the curriculum, the cohort, resources such as compute, tools and mentors, introductions, and the support fellows need to take part. ${lines.programmingMoney}`],
     },
     {
       id: 'residency',
@@ -479,7 +477,7 @@ export const faq = {
       id: 'who',
       q: 'Who runs it?',
       // Edited for the website: the President's name appears on the about page only.
-      a: ['A board with an independent majority runs it. The team that built The Residency started the Foundation and supports it; the board, the selection and the programming belong to the Foundation.'],
+      a: ['The Foundation is run by a board on which independent directors hold the majority of seats. The team that built The Residency started the Foundation and supports it, and the Foundation runs its own selection and its own programming.'],
     },
     {
       id: 'worked',
@@ -496,7 +494,7 @@ export const faq = {
     {
       id: 'get',
       q: 'What do fellows get?',
-      a: ['Fellows get the Residency’s hands-on entrepreneurship programming, a cohort of builders, access to compute, tools and mentors, and guided introductions to the investors, researchers and operators in San Francisco. They take part in person, remote or hybrid.'],
+      a: ['Fellows get the Residency’s hands-on entrepreneurship programming, a cohort of builders, access to compute, tools and mentors, and guided introductions to the investors, researchers and operators in San Francisco. Fellows can take part in person, remote or hybrid.'],
     },
     {
       id: 'cost',
@@ -506,17 +504,17 @@ export const faq = {
     {
       id: 'move',
       q: 'Do I have to move to San Francisco?',
-      a: ['No, each fellowship runs in person, remote or hybrid, and the format is agreed with each fellow at selection.'],
+      a: ['No, a fellowship can run in person, remote or hybrid, and the Foundation plans to agree the format with each fellow at selection.'],
     },
     {
       id: 'apply',
       q: 'Who can apply?',
-      a: [`Applications are expected to open in ${fig('firstCohortYear')}. The selection process is open and need-based, run by the Foundation, with a published rubric.`],
+      a: [`Applications are expected to open in ${fig('firstCohortYear')}. The Foundation runs the selection process, which is open and need-based, and it plans to publish the rubric.`],
     },
     {
       id: 'after',
       q: 'What happens after the program?',
-      a: ['After the program, fellows continue to own their work and can stay connected to their cohort and the wider network. The Foundation plans to follow what they go on to do for 2 years, and that record is how it reports to donors.'],
+      a: ['After the program, fellows continue to own their work and can stay connected to their cohort and the wider network. The Foundation plans to follow what they go on to do for 2 years and to include that record in its reports to donors.'],
     },
   ],
   // FAQ page only. Never on the home page.

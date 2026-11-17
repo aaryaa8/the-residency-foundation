@@ -39,7 +39,7 @@ const last = (i: number, list: unknown[]) => i === list.length - 1;
     <div class="cols3 lead sec__wide" slot="wide">
       {home.fellowships.examples.map((e, i) => (
         <div class="eg" data-rise style={`--d:${i * 60}ms`}>
-          <h3 class="key">{e.fellowship}</h3>
+          <h3>{e.fellowship}</h3>
           <p>{tidy(e.text)}</p>
         </div>
       ))}
