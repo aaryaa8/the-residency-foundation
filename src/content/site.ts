@@ -276,7 +276,7 @@ export const donate = {
   // NEW
   buttonNote: 'The donation form opens in a new tab on HCB, the fiscal sponsorship platform run by Hack Club.',
   // NEW. Uses the optional message field on the HCB donation form.
-  designate: 'A gift can support the Foundation in general, or it can be directed to a specific track. To direct a gift, name the track in the message field of the donation form.',
+  designate: 'A gift can support the Foundation in general, or it can be directed to a specific track. To direct a gift, name the track in the message field of the donation form. If a track does not run, the gift supports the Foundation’s programs in general.',
   // NEW
   larger: 'To talk about a larger gift, write to',
   deductible: lines.deductibleToday,
