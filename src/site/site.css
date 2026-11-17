@@ -540,6 +540,12 @@ p, li, dt, dd, h2, h3, label, legend { overflow-wrap: break-word; }
 
 .form { display: grid; grid-template-columns: var(--g4); row-gap: var(--s32); align-items: end; margin-top: var(--s40); }
 .form__note { grid-column: 1 / -1; padding-inline: var(--pad); }
+/* the hidden field that only automated senders fill in */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form__error { grid-column: 1 / -1; margin: 0; padding: var(--s16) var(--pad); border: var(--hairline) solid currentColor; }
+.form__error[hidden] { display: none; }
+.foot .form__error { margin-top: var(--s16); padding: var(--s12); }
+[type="submit"][aria-disabled="true"] { opacity: 0.6; pointer-events: none; }
 .field { grid-column: span 2; display: grid; gap: var(--s8); padding-inline: var(--pad); min-width: 0; border: 0; margin: 0; }
 .field--wide { grid-column: 1 / -1; }
 .field__label, .field legend { padding: 0; font: 500 var(--t-ui) / 1.5 var(--sans); color: var(--fg); }

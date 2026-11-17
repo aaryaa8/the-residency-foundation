@@ -1,0 +1,21 @@
+---
+// Draft privacy page. It has had no legal review.
+import Layout from '../site/Layout.astro';
+import Hero from '../site/Hero.astro';
+import Section from '../site/Section.astro';
+import { privacy } from '../content/site';
+import { tidy } from '../site/text';
+---
+<Layout title={privacy.label} current="privacy" motion="a">
+  <Hero heading={privacy.heading} />
+
+  {privacy.sections.map((section, i) => (
+    <Section title={section.title} id={`privacy-${i + 1}`}>
+      <div class="prose lead" data-rise>
+        {section.text.map((t, n, all) => (
+          <p>{tidy(t)}{section.email && n === all.length - 1 && <> <a class="link link--set" href={`mailto:${section.email}`}>{section.email}</a>.</>}</p>
+        ))}
+      </div>
+    </Section>
+  ))}
+</Layout>

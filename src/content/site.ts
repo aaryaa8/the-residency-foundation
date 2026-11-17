@@ -52,6 +52,52 @@ export const ui = {
   linkHint: 'Start the link with https://',
 };
 
+// The 2 forms (fellow interest, updates list) save to a Google Sheet through a small
+// Google script. Paste the script's "Web app URL" between the quotes below. While it is
+// empty, the forms tell the visitor that the response was not saved.
+// Set-up steps and the script: tools/google-sheet/Code.gs
+export const forms = {
+  endpoint: '',
+  sending: 'Sending',
+  failed: 'Your response was not saved. Please try again, or write to aaryaa@livetheresidency.com.',
+  privacyNote: 'How the Foundation handles this information is set out on the',
+  privacyLink: { label: 'privacy page', slug: 'privacy' },
+};
+
+// NEW. Draft privacy page. It has had no legal review.
+export const privacy = {
+  label: 'privacy',
+  heading: 'Privacy',
+  sections: [
+    {
+      title: 'the information',
+      text: [
+        'The interest form asks for your name, your email, where you are, what you are building, and the other answers you choose to give. The updates form asks for your email.',
+        `The interest form is for people aged ${fig('minimumAge')} or over.`,
+      ],
+    },
+    {
+      title: 'its use',
+      text: [
+        'The Residency Foundation uses answers from the interest form to plan its programs and to write to you when applications open. It uses the updates list to send news from the Foundation a few times a year.',
+      ],
+    },
+    {
+      title: 'storage',
+      text: [
+        'Responses are stored in a Google Sheet, with access limited to the people working on the Foundation. The Foundation does not sell this information.',
+      ],
+    },
+    {
+      title: 'your choices',
+      text: [
+        'To see, correct or delete your information, or to leave the updates list, write to',
+      ],
+      email: 'aaryaa@livetheresidency.com',
+    },
+  ],
+};
+
 // Descriptions of the placeholder statues, read aloud by screen readers.
 // They are replaced together with the images when the Foundation's own imagery arrives.
 export const placeholders: Record<string, string> = {
@@ -579,6 +625,7 @@ export const footer = {
     { label: 'fellowship', slug: 'fellowship' },
     { label: 'about', slug: 'about' },
     { label: 'FAQ', slug: 'faq' },
+    { label: 'privacy', slug: 'privacy' },
   ],
   contactLabel: 'contact',
   emails: org.emails,

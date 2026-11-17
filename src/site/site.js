@@ -127,7 +127,7 @@ if (root.classList.contains('motion') && 'IntersectionObserver' in window) {
   }
 }
 
-/* ---- forms: no backend yet ---- */
+/* ---- forms: each response is sent to the Google Sheet ---- */
 const thank = (form, text, cls, keepHeight) => {
   const p = document.createElement('p');
   p.className = cls;
@@ -141,12 +141,52 @@ const thank = (form, text, cls, keepHeight) => {
   const top = p.getBoundingClientRect().top;
   if (top < 96 || top > window.innerHeight - 96) p.scrollIntoView({ block: 'center' });
 };
+// every field by name; a group of ticked boxes becomes a list, a single box becomes true or false
+const answers = (form) => {
+  const out = { form: form.dataset.form, page: location.pathname };
+  form.querySelectorAll('input[name], select[name], textarea[name]').forEach((el) => {
+    if (el.type === 'checkbox') {
+      const group = form.querySelectorAll(`input[type="checkbox"][name="${el.name}"]`).length > 1;
+      if (group) { if (el.checked) (out[el.name] = out[el.name] || []).push(el.value); }
+      else out[el.name] = el.checked;
+    } else out[el.name] = el.value.trim();
+  });
+  return out;
+};
+const send = async (endpoint, body) => {
+  if (!endpoint) return false;
+  try {
+    // sent as plain text so the browser makes 1 simple request; the script reads it as JSON
+    const res = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) });
+    if (!res.ok) return false;
+    const reply = await res.json();
+    return reply && reply.ok === true;
+  } catch { return false; }
+};
 document.querySelectorAll('form[data-form]').forEach((form) => {
+  const button = form.querySelector('[type="submit"]');
+  const label = button && button.querySelector('span') ? button.querySelector('span') : button;
+  const idle = label ? label.textContent : '';
+  const alertBox = form.querySelector('[data-form-error]');
   // the submit event only fires once the browser's own validation has passed
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const interest = form.dataset.form === 'interest';
-    thank(form, form.dataset.thanks, interest ? 'thanks statement ruled ruled--end full' : 'foot__thanks gap-24', !interest);
+    if (form.dataset.busy) return;
+    form.dataset.busy = '1';
+    if (alertBox) alertBox.hidden = true;
+    if (button) button.setAttribute('aria-disabled', 'true');
+    if (label && form.dataset.sending) label.textContent = form.dataset.sending;
+    const ok = await send(form.dataset.endpoint, answers(form));
+    delete form.dataset.busy;
+    if (button) button.removeAttribute('aria-disabled');
+    if (label) label.textContent = idle;
+    if (ok) {
+      const interest = form.dataset.form === 'interest';
+      thank(form, form.dataset.thanks, interest ? 'thanks statement ruled ruled--end full' : 'foot__thanks gap-24', !interest);
+    } else if (alertBox) {
+      alertBox.hidden = false;
+      alertBox.focus({ preventScroll: true });
+    }
   });
 });
 

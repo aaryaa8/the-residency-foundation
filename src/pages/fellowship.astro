@@ -4,7 +4,8 @@ import Hero from '../site/Hero.astro';
 import Section from '../site/Section.astro';
 import Req from '../site/Req.astro';
 import Icon from '../base/Icon.astro';
-import { fellowship, home, ui } from '../content/site';
+import { fellowship, home, ui, forms } from '../content/site';
+import { link } from '../base/url';
 import { tidy } from '../site/text';
 
 const form = fellowship.form;
@@ -41,8 +42,9 @@ const auto: Record<string, string> = { name: 'name', email: 'email', country: 'c
 
   <Section title={form.title} id="interest" rule>
     <p class="lead" data-rise>{tidy(form.intro)}</p>
-    <form class="form full flush" data-form="interest" data-thanks={form.thanks}>
-      <p class="small form__note">{ui.requiredNote}</p>
+    <form class="form full flush" data-form="interest" data-thanks={form.thanks} data-endpoint={forms.endpoint} data-sending={forms.sending}>
+      <p class="small form__note">{ui.requiredNote} {forms.privacyNote} <a class="link link--set" href={link(forms.privacyLink.slug)}>{forms.privacyLink.label}</a>.</p>
+      <div class="hp" aria-hidden="true"><label>website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
       {fields.map((f) => {
         const mark = f.required ? <Req /> : <span class="field__opt">({ui.optional})</span>;
         if (f.type === 'checkboxes') return (
@@ -88,6 +90,7 @@ const auto: Record<string, string> = { name: 'name', email: 'email', country: 'c
           </div>
         );
       })}
+      <p class="form__error" role="alert" tabindex="-1" data-form-error hidden>{forms.failed}</p>
       <button class="cta cta--cell ruled ruled--end form__send" type="submit"><span>{form.submit}</span><Icon name="play" /></button>
     </form>
   </Section>

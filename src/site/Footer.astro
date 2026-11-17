@@ -3,7 +3,7 @@ import Icon from '../base/Icon.astro';
 import Guides from './Guides.astro';
 import Req from './Req.astro';
 import { asset, link } from '../base/url';
-import { footer, ui } from '../content/site';
+import { footer, ui, forms } from '../content/site';
 import { tidy } from './text';
 const u = footer.updates;
 ---
@@ -17,7 +17,8 @@ const u = footer.updates;
       <div class="foot__updates">
         <h2 class="key" id="updates-title">{u.label}</h2>
         <p class="small">{u.text}</p>
-        <form data-form="updates" data-thanks={ui.updatesThanks} aria-labelledby="updates-title">
+        <form data-form="updates" data-thanks={ui.updatesThanks} data-endpoint={forms.endpoint} data-sending={forms.sending} aria-labelledby="updates-title">
+          <div class="hp" aria-hidden="true"><label>website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
           <p class="small">{ui.requiredNote}</p>
           <label class="foot__label" for="updates-email">{u.placeholder} <Req /></label>
           <div class="foot__field">
@@ -25,6 +26,7 @@ const u = footer.updates;
             <button class="cta" type="submit">{u.submit}<Icon name="play" /></button>
           </div>
           <label class="check"><input type="checkbox" name="consent" required /><span>{u.consent} <Req /></span></label>
+          <p class="form__error small" role="alert" tabindex="-1" data-form-error hidden>{forms.failed}</p>
         </form>
       </div>
     </div>
