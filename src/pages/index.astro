@@ -40,18 +40,16 @@ const last = (i: number, list: unknown[]) => i === list.length - 1;
 
   <Section title={home.tracks.title} id="tracks">
     <div class="prose lead" data-rise>{home.tracks.intro.map((t) => <p>{tidy(t)}</p>)}</div>
-    <ul class="names sec__wide" slot="wide" role="list">
-      {home.tracks.names.map((n, i) => <li class="key" data-rise style={`--d:${i * 30}ms`}>{n}</li>)}
-    </ul>
-    <div class="cols3 lead sec__wide" slot="wide">
-      {home.tracks.examples.map((e, i) => (
-        <div class="eg" data-rise style={`--d:${i * 60}ms`}>
-          <h3>{e.track}</h3>
-          <p>{tidy(e.text)}</p>
+    <div class="tq sec__wide" slot="wide">
+      {home.tracks.groups.map((g, i, all) => (
+        <div class:list={['tq__cell ruled', i >= all.length - 2 && 'ruled--end']}>
+          <h3 class="sec__title sec__title--s" data-rise style={`--d:${(i % 2) * 120}ms`}>{g.name}</h3>
+          <ul class="tq__list" role="list">
+            {g.tracks.map((n, k) => <li class="key" data-rise style={`--d:${(i % 2) * 120 + 60 + k * 60}ms`}>{n}</li>)}
+          </ul>
         </div>
       ))}
     </div>
-    <p class="small eg__note" slot="wide" data-rise>{tidy(home.tracks.note)}</p>
     <div class="callout" slot="wide" data-rise>
       <p class="statement">{tidy(home.tracks.close)}</p>
     </div>

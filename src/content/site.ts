@@ -204,46 +204,24 @@ export const home = {
     ],
   },
 
-  // "The fellowship" is the 12-week program. A "track" is 1 of the sample groupings below.
-  // The tracks are ideas, not a fixed list. Source: Aaryaa, 17 November 2026.
+  // "The fellowship" is the 12-week program. A "track" is 1 of the sample groupings below,
+  // and the tracks sit in 4 categories. The tracks are ideas, not a fixed list.
+  // Source: Aaryaa, 17 and 19 November 2026.
   tracks: {
     title: 'the tracks',
-    intro: [
-      'Within the fellowship, each track pairs a problem with the community that lives with it.',
-      'The tracks below are ideas, and the list may change.',
-    ],
-    names: [
-      'Former Foster Youth',
-      'Returning Citizens',
-      'First-Generation Builders',
-      'Caregivers',
-      'Disaster-Struck Communities',
-      'Rural Clinicians',
-      'Displaced Workers',
-      'Climate-Frontline',
-      'Deaf and Disabled Builders',
-      'Language Access',
-      'Tribal Nations',
-      'Veterans Re-entering',
-    ],
-    // NEW. Illustrative builders, 1 for each of 3 tracks.
-    examples: [
+    intro: ['The tracks below are ideas, and the list may change.'],
+    groups: [
+      { name: 're-entry', tracks: ['Returning Citizens', 'Veterans Re-entering', 'Displaced Workers'] },
       {
-        track: 'Rural Clinicians',
-        text: 'A nurse at a rural clinic might build a scheduling tool for the 3 clinics that share 1 specialist.',
+        name: 'overlooked builders',
+        tracks: ['Former Foster Youth', 'First-Generation Builders', 'Caregivers', 'Deaf and Disabled Builders'],
       },
-      {
-        track: 'Displaced Workers',
-        text: 'A warehouse worker whose job was automated might build a training tool for people changing trades.',
-      },
-      {
-        track: 'First-Generation Builders',
-        text: 'A community college student who is the first in their family to attend might build a tool that helps classmates find and apply for financial aid.',
-      },
+      { name: 'communities', tracks: ['Tribal Nations', 'Disaster-Struck Communities', 'Climate-Frontline'] },
+      { name: 'open problems', tracks: ['Language Access', 'Rural Clinicians', 'Public-Interest AI'] },
     ],
-    note: `These examples are illustrative, and the first fellows are expected to be selected in ${fig('firstCohortYear')}.`,
+    // NEW wording, 19 November 2026: the educational programming added at Aaryaa's request. Needs her sign-off.
     close:
-      'The Foundation would like to create pathways for builders like these to find a community and receive guided introductions to investors, researchers and operators.',
+      'The Foundation would like to create pathways for builders in these tracks to learn to become entrepreneurs through its educational programming, find a community and receive guided introductions to investors, researchers and operators.',
   },
 
   get: {
