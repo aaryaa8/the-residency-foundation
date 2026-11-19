@@ -3,8 +3,8 @@
   "houses": { "value": "14", "label": "houses worldwide", "show": true },
   "alumni": { "value": "400+", "spoken": "over 400", "label": "alumni", "show": true },
   "acceptance": { "value": "<3%", "spoken": "under 3%", "label": "of applicants accepted", "show": true },
-  "programming": { "value": "$350,000", "label": "dedicated to programming in year one", "show": true },
-  "raise": { "value": "$500,000", "label": "year one raise", "show": false },
+  "programming": { "value": "$455,000", "label": "dedicated to programming in year one", "show": true },
+  "raise": { "value": "$650,000", "label": "year one raise", "show": false },
   "residentsPerChapter": { "value": "125+", "label": "residents a chapter", "show": false },
   "chaptersPerYear": { "value": "3", "label": "chapters a year", "show": false },
   "scholarship": { "value": "$35,000", "label": "full scholarship", "show": true, "donatePageOnly": true },
@@ -12,6 +12,7 @@
   "cohortSponsorship": { "value": "$150,000", "label": "cohort sponsorship", "show": true, "donatePageOnly": true },
   "monthInSF": { "value": "$2,000", "label": "a month in San Francisco (illustrative)", "show": false },
   "programWeeks": { "value": "12", "label": "weeks", "show": true },
-  "firstCohortYear": { "value": "2027", "label": "first cohort", "show": true },
+  "firstCohort": { "value": "April 2027", "label": "first cohort", "show": true },
+  "firstCohortYear": { "value": "2027", "label": "year of the first cohort, used for applications and selection", "show": true },
   "minimumAge": { "value": "13", "label": "minimum age for the interest form", "show": true }
 }
