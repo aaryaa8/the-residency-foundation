@@ -56,7 +56,7 @@
   --t-title-s: clamp(1.875rem, 1.2rem + 2vw, 3rem);
   --t-statement-l: clamp(1.9375rem, 1.1rem + 2.7vw, 3.5rem);
   --t-statement: clamp(1.5625rem, 1rem + 1.4vw, 2.25rem);
-  --t-row: clamp(1.375rem, 1rem + 0.85vw, 1.75rem);           /* row titles and questions */
+  --t-row: clamp(1.5rem, 1rem + 0.85vw, 1.75rem);             /* row titles and questions */
   --t-figure: clamp(5rem, 0.25rem + 9.6vw, 9.5rem);          /* sized so the widest figure fits 1 of 3 columns */
   --t-amount: clamp(2.75rem, 1.5rem + 3.6vw, 4.75rem);
   --t-lead: 1.375rem;
@@ -550,7 +550,7 @@ p, li, dt, dd, h2, h3, label, legend { overflow-wrap: break-word; }
 [type="submit"][aria-disabled="true"] { opacity: 0.6; pointer-events: none; }
 .field { grid-column: span 2; display: grid; gap: var(--s8); padding-inline: var(--pad); min-width: 0; border: 0; margin: 0; }
 .field--wide { grid-column: 1 / -1; }
-.field__label, .field legend { padding: 0; font: 500 var(--t-ui) / 1.5 var(--serif); color: var(--fg); }
+.field__label, .field legend { padding: 0; font: 400 var(--t-ui) / 1.5 var(--serif); color: var(--fg); }
 .field__req { color: var(--accent-small); }
 .field__opt { font-weight: 400; font-size: var(--t-small); color: var(--fg-soft); white-space: nowrap; }
 .field__hint { font-size: var(--t-small); line-height: var(--lh-small); color: var(--fg-soft); }
