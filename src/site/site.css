@@ -1,6 +1,7 @@
 /* The Residency Foundation: site styles.
    White ground, a visible 6-column hairline grid, large lowercase side-heads,
    one near-black band (home, donate) and a near-black footer.
+   All text is Saigon: Light for headings and statements, Regular for body text.
    Geist Mono is used for calls to action and nav links only.
 
    Breakpoints: phone up to 809.98px, tablet up to 1199.98px, desktop above.
@@ -58,9 +59,9 @@
   --t-row: clamp(1.375rem, 1rem + 0.85vw, 1.75rem);           /* row titles and questions */
   --t-figure: clamp(5rem, 0.25rem + 9.6vw, 9.5rem);          /* sized so the widest figure fits 1 of 3 columns */
   --t-amount: clamp(2.75rem, 1.5rem + 3.6vw, 4.75rem);
-  --t-lead: 1.25rem;
-  --t-ui: 1rem;
-  --t-small: 0.875rem;
+  --t-lead: 1.375rem;
+  --t-ui: 1.125rem;
+  --t-small: 1rem;
   --t-cta: 0.75rem;
   --lh-small: 1.5;
   --tr-display: -0.04em;
@@ -82,7 +83,7 @@
   :root { --pad: var(--s16); }
 }
 @media (max-width: 809.98px) {
-  :root { --pad: var(--s12); --nav-h: 64px; --gap-l: var(--s96); --gap-m: var(--s72); --gap-s: var(--s56); --row-m: var(--s24); --row-l: var(--s32); --t-lead: 1.125rem; }
+  :root { --pad: var(--s12); --nav-h: 64px; --gap-l: var(--s96); --gap-m: var(--s72); --gap-s: var(--s56); --row-m: var(--s24); --row-l: var(--s32); --t-lead: 1.25rem; }
 }
 
 [data-tone='dark'] {
@@ -429,7 +430,7 @@ p, li, dt, dd, h2, h3, label, legend { overflow-wrap: break-word; }
   .prog > .plate { width: 100%; margin-top: var(--s56); }
 }
 
-/* definition rows: term in the serif, description in Inter, hairline between */
+/* definition rows: term in the light serif, description in body text, hairline between */
 .dl__row { display: grid; grid-template-columns: var(--g3); align-items: baseline; padding-block: var(--row-m); }
 .dl dt { grid-column: 1; padding-inline: var(--pad); }
 .dl dd { grid-column: 2 / 4; padding-inline: var(--pad); }
@@ -549,12 +550,12 @@ p, li, dt, dd, h2, h3, label, legend { overflow-wrap: break-word; }
 [type="submit"][aria-disabled="true"] { opacity: 0.6; pointer-events: none; }
 .field { grid-column: span 2; display: grid; gap: var(--s8); padding-inline: var(--pad); min-width: 0; border: 0; margin: 0; }
 .field--wide { grid-column: 1 / -1; }
-.field__label, .field legend { padding: 0; font: 500 var(--t-ui) / 1.5 var(--sans); color: var(--fg); }
+.field__label, .field legend { padding: 0; font: 500 var(--t-ui) / 1.5 var(--serif); color: var(--fg); }
 .field__req { color: var(--accent-small); }
 .field__opt { font-weight: 400; font-size: var(--t-small); color: var(--fg-soft); white-space: nowrap; }
 .field__hint { font-size: var(--t-small); line-height: var(--lh-small); color: var(--fg-soft); }
 .field__count { justify-self: end; }
-.input { width: 100%; height: var(--s56); padding: 0 var(--s16); border: 1px solid var(--control); border-radius: 0; background: var(--white); color: var(--ink); font: 400 var(--body) / 1.5 var(--sans); -webkit-appearance: none; appearance: none; }
+.input { width: 100%; height: var(--s56); padding: 0 var(--s16); border: 1px solid var(--control); border-radius: 0; background: var(--white); color: var(--ink); font: 400 var(--body) / 1.5 var(--serif); -webkit-appearance: none; appearance: none; }
 .input:hover, .input:focus-visible { border-color: var(--ink); }
 textarea.input { height: auto; min-height: var(--s168); padding: var(--s12) var(--s16); resize: vertical; }
 select.input { padding-right: var(--s40); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%230c0e11' stroke-width='1.2'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right var(--s16) center; }
@@ -596,7 +597,7 @@ select.input { padding-right: var(--s40); background-image: url("data:image/svg+
 .foot__label { display: block; margin-top: var(--s16); font-size: var(--t-small); line-height: var(--lh-small); }
 .foot .field__req { color: var(--accent); }
 .foot__field { display: flex; align-items: stretch; border-bottom: 1px solid var(--control); }
-.foot__field input { flex: 1; min-width: 0; height: 48px; padding: 0; border: 0; background: none; color: var(--ivory); font: 400 var(--body) / 1 var(--sans); border-radius: 0; }
+.foot__field input { flex: 1; min-width: 0; height: 48px; padding: 0; border: 0; background: none; color: var(--ivory); font: 400 var(--body) / 1 var(--serif); border-radius: 0; }
 .foot__field .cta { color: var(--ivory); padding-left: var(--s16); }
 .foot .check { margin-top: var(--s8); font-size: var(--t-small); color: var(--fg-soft); }
 .foot .check input { background: transparent; }
