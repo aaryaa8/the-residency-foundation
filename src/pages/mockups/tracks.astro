@@ -1,0 +1,211 @@
+---
+// Review page: 3 mock-ups of the tracks section, built with the site's own
+// pieces and values. It is for internal review and is not linked from the site.
+// Words marked DRAFT below are not approved copy. When a direction is chosen,
+// its words move to src/content/site.ts and its styles to src/site/site.css.
+import Layout from '../../site/Layout.astro';
+import Section from '../../site/Section.astro';
+import { home } from '../../content/site';
+import { tidy } from '../../site/text';
+
+const t = home.tracks;
+const intro = t.intro[1];
+const said = Object.fromEntries(t.examples.map((e) => [e.track, e.text]));
+// DRAFT: a 4th example, so that each category has 1. Not approved.
+const drafts: Record<string, string> = {
+  'Disaster-Struck Communities': 'A resident of a town hit by a wildfire might build a tool that helps neighbours follow their insurance claims.',
+};
+// DRAFT: the lead-in above the examples when they sit in a row of their own.
+const leadIn = 'for example:';
+
+// Categories and tracks as agreed with Aaryaa, 19 November 2026.
+const groups = [
+  { name: 're-entry', tracks: ['Returning Citizens', 'Veterans Re-entering', 'Displaced Workers'], eg: 'Displaced Workers' },
+  { name: 'overlooked builders', tracks: ['Former Foster Youth', 'First-Generation Builders', 'Caregivers', 'Deaf and Disabled Builders'], eg: 'First-Generation Builders' },
+  { name: 'communities', tracks: ['Tribal Nations', 'Disaster-Struck Communities', 'Climate-Frontline'], eg: 'Disaster-Struck Communities' },
+  { name: 'open problems', tracks: ['Language Access', 'Rural Clinicians', 'Public-Interest AI'], eg: 'Rural Clinicians' },
+].map((g) => ({ ...g, text: said[g.eg] ?? drafts[g.eg], draft: !said[g.eg] }));
+const approved = groups.filter((g) => !g.draft);
+const last = (i: number, list: unknown[]) => i === list.length - 1;
+
+const mocks = [
+  { id: 'rows', name: 'Rows', text: 'Each category is a ruled row: its name on the left, its tracks in the middle, its example on the right.' },
+  { id: 'columns', name: 'Columns', text: 'The 4 categories stand side by side as a table on the page’s own column lines. The examples follow in a row of their own.' },
+  { id: 'quadrants', name: 'Quadrants', text: 'A 2 by 2 grid divided by hairlines. Each category holds its tracks and its example.' },
+];
+---
+<Layout title="Track mock-ups" motion="a+b">
+  <div class="top wrap">
+    <h1 class="sec__title sec__title--s top__h">track mock-ups</h1>
+    <p class="lead top__p">Three ways to show the 13 tracks in their 4 categories. Each is built with the site's own type, grid and animation, so what is here is what the page would look like. Scroll slowly to see the animation.</p>
+    <p class="small top__p">Draft words on this page: the example under communities, and the lead-in "{leadIn}" in the second mock-up.</p>
+  </div>
+
+  <!-- 1. rows -->
+  <div class="mock" data-tone="dark" id={mocks[0].id}><div class="wrap mock__in"><p class="mock__n">Mock-up 1 of 3: {mocks[0].name}</p><p class="mock__t">{mocks[0].text}</p></div></div>
+  <div class="stage">
+    <Section title={t.title} rule flush>
+      <div class="prose lead" data-rise><p>{tidy(intro)}</p></div>
+      <div class="tr sec__wide" slot="wide">
+        {groups.map((g, i, all) => (
+          <div class:list={['tr__row ruled', last(i, all) && 'ruled--end']}>
+            <h3 class="sec__title sec__title--s" data-rise>{g.name}</h3>
+            <ul class="tr__list" role="list">
+              {g.tracks.map((n, k) => <li class="key" data-rise style={`--d:${60 + k * 60}ms`}>{n}</li>)}
+            </ul>
+            <div class="eg2 tr__eg" data-rise style="--d:300ms">
+              <p class="eg2__t">{g.eg}</p>
+              <p class="eg2__p">{tidy(g.text)}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="after" slot="wide"><p class="small" data-rise>{tidy(t.note)}</p></div>
+      <div class="close" slot="wide" data-rise><p class="statement">{tidy(t.close)}</p></div>
+    </Section>
+  </div>
+
+  <!-- 2. columns -->
+  <div class="mock" data-tone="dark" id={mocks[1].id}><div class="wrap mock__in"><p class="mock__n">Mock-up 2 of 3: {mocks[1].name}</p><p class="mock__t">{mocks[1].text}</p></div></div>
+  <div class="stage">
+    <Section title={t.title} rule flush>
+      <div class="prose lead" data-rise><p>{tidy(intro)}</p></div>
+      <div class="tc full flush ruled ruled--end">
+        {groups.map((g, i) => (
+          <div class="tc__col">
+            <h3 class="key tc__h" data-rise style={`--d:${i * 120}ms`}>{g.name}</h3>
+            <ul class="tc__list" role="list" data-n={g.tracks.length}>
+              {g.tracks.map((n, k) => <li class="ruled" data-rise style={`--d:${i * 120 + 60 + k * 50}ms`}>{n}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <div class="egb sec__wide" slot="wide">
+        <p class="statement leadin egb__lead" data-rise>{leadIn}</p>
+        <div class="egb__rows">
+          {approved.map((g, i, all) => (
+            <div class:list={['egb__i ruled', last(i, all) && 'ruled--end']} data-rise style={`--d:${i * 60}ms`}>
+              <p class="eg2__t">{g.eg}</p>
+              <p class="eg2__p">{tidy(g.text)}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="after" slot="wide"><p class="small" data-rise>{tidy(t.note)}</p></div>
+      <div class="close" slot="wide" data-rise><p class="statement">{tidy(t.close)}</p></div>
+    </Section>
+  </div>
+
+  <!-- 3. quadrants -->
+  <div class="mock" data-tone="dark" id={mocks[2].id}><div class="wrap mock__in"><p class="mock__n">Mock-up 3 of 3: {mocks[2].name}</p><p class="mock__t">{mocks[2].text}</p></div></div>
+  <div class="stage">
+    <Section title={t.title} rule flush>
+      <div class="prose lead" data-rise><p>{tidy(intro)}</p></div>
+      <div class="tq sec__wide" slot="wide">
+        {groups.map((g, i, all) => (
+          <div class:list={['tq__cell ruled', i >= all.length - 2 && 'ruled--end']}>
+            <h3 class="sec__title sec__title--s tq__h" data-rise style={`--d:${(i % 2) * 120}ms`}>{g.name}</h3>
+            <ul class="tq__list" role="list">
+              {g.tracks.map((n, k) => <li class="key" data-rise style={`--d:${(i % 2) * 120 + 60 + k * 60}ms`}>{n}</li>)}
+            </ul>
+            <div class="eg2 tq__eg" data-rise style={`--d:${(i % 2) * 120 + 300}ms`}>
+              <p class="eg2__t">{g.eg}</p>
+              <p class="eg2__p">{tidy(g.text)}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="after" slot="wide"><p class="small" data-rise>{tidy(t.note)}</p></div>
+      <div class="close" slot="wide" data-rise><p class="statement">{tidy(t.close)}</p></div>
+    </Section>
+  </div>
+</Layout>
+
+<style>
+  /* ---- review furniture: not part of the design ---- */
+  .top { padding-top: calc(var(--nav-h) + var(--s72)); display: grid; grid-template-columns: var(--g6); row-gap: var(--s16); }
+  .top__h { grid-column: 1 / 7; }
+  .top__p { grid-column: 1 / 5; padding-inline: var(--pad); max-width: none; }
+  .mock { position: relative; z-index: 1; margin-top: var(--gap-m); padding-block: var(--s24); }
+  .mock__in { display: grid; grid-template-columns: var(--g6); align-items: baseline; }
+  .mock__n { grid-column: 1 / 3; padding-inline: var(--pad); font: 700 var(--t-cta) / 1.5 var(--mono); letter-spacing: var(--tracking-label); text-transform: uppercase; }
+  .mock__t { grid-column: 3 / 7; padding-inline: var(--pad); font-size: var(--t-small); line-height: var(--lh-small); color: var(--fg-soft); }
+  .stage { padding-top: var(--s96); }
+
+  /* ---- shared by the 3 mock-ups ---- */
+  /* an example: the track's name, then 1 sentence, both at the interface size */
+  .eg2 { display: grid; align-content: start; gap: var(--s4); }
+  .eg2__t, .eg2__p { font-size: var(--t-ui); line-height: 1.5; }
+  .eg2__t { font-weight: 500; }
+  .eg2__p { color: var(--fg-soft); }
+  /* the note and the closing line start on the same column line as the intro */
+  .after { display: grid; grid-template-columns: var(--g6); margin-top: var(--s24); }
+  .after > p { grid-column: 3 / 6; padding-inline: var(--pad); }
+  .close { display: grid; grid-template-columns: var(--g6); margin-top: var(--s72); }
+  .close > p { grid-column: 3 / 7; padding: var(--s40) var(--pad); border: var(--hairline) solid var(--frame); background: var(--white); }
+
+  /* ---- 1. rows ---- */
+  .tr__row .sec__title { color: var(--accent); }
+  .tr__row { display: grid; grid-template-columns: var(--g6); align-items: baseline; padding-block: var(--row-l); }
+  .tr__list { grid-column: 3 / 5; display: grid; gap: var(--s12); padding-inline: var(--pad); }
+  .tr__eg { grid-column: 5 / 7; padding-inline: var(--pad); }
+
+  /* ---- 2. columns: 1 category to a page column, rows shared so the hairlines meet ---- */
+  .tc { display: grid; grid-template-columns: var(--g4); grid-template-rows: repeat(5, auto); margin-top: var(--s56); }
+  .tc__col { display: grid; grid-row: 1 / span 5; grid-template-rows: subgrid; }
+  .tc__h { align-self: end; padding: var(--s24) var(--pad) var(--s16); color: var(--accent); }
+  .tc__list { display: grid; grid-row: 2 / span 4; grid-template-rows: subgrid; }
+  .tc__list > li { padding: var(--s12) var(--pad); font-size: var(--t-ui); font-weight: 500; line-height: 1.5; }
+  /* a column with 3 tracks keeps the 4th row's hairline */
+  .tc__list[data-n='3']::after { content: ''; background: linear-gradient(var(--rule), var(--rule)) 0 0 / 100% 1px no-repeat; }
+  /* the examples: a lead-in as the side-head, then 1 ruled row for each, name left and sentence right */
+  .egb { display: grid; grid-template-columns: var(--g6); align-items: baseline; }
+  .egb__lead { grid-column: 1 / 3; padding-inline: var(--pad); }
+  .egb__rows { grid-column: 3 / 7; }
+  .egb__i { display: grid; grid-template-columns: var(--g4); align-items: baseline; padding-block: var(--row-s); }
+  .egb__i > .eg2__t { grid-column: 1; padding-inline: var(--pad); }
+  .egb__i > .eg2__p { grid-column: 2 / 5; padding-inline: var(--pad); }
+
+  /* ---- 3. quadrants ---- */
+  .tq { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tq::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--rule); }
+  .tq__cell { display: grid; grid-template-columns: var(--g3); align-items: baseline; align-content: start; row-gap: var(--s32); padding-block: var(--row-l) var(--s56); }
+  .tq__h { grid-column: 1 / -1; color: var(--accent); }
+  .tq__list { grid-column: 1 / 3; display: grid; gap: var(--s12); padding-inline: var(--pad); }
+  .tq__eg { grid-column: 1 / 3; padding-inline: var(--pad); }
+
+  @media (max-width: 1199.98px) {
+    .top__p { grid-column: 1 / 6; }
+    .mock__in { display: block; }
+    .mock__t { margin-top: var(--s8); }
+    .after > p { grid-column: 1 / 6; }
+    .close { display: block; }
+    .tr__row { display: block; }
+    .tr__row .sec__title { margin-bottom: var(--s24); }
+    .tr__eg { margin-top: var(--s24); max-width: var(--measure); }
+    .tc { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; row-gap: var(--s24); }
+    .tc__col, .tc__list { display: block; grid-row: auto; }
+    .tc__list[data-n='3']::after { display: none; }
+    .egb { display: block; }
+    .egb__rows { margin-top: var(--s24); }
+    .egb__i { grid-template-columns: var(--g6); }
+    .egb__i > .eg2__t { grid-column: 1 / 3; }
+    .egb__i > .eg2__p { grid-column: 3 / 6; }
+    .tq__cell { display: block; }
+    .tq__list { margin-top: var(--s24); }
+    .tq__eg { margin-top: var(--s24); }
+  }
+  @media (max-width: 809.98px) {
+    .top { display: block; }
+    .top__p { margin-top: var(--s16); }
+    .stage { padding-top: var(--s56); }
+    .close { margin-top: var(--s40); }
+    .close > p { padding-block: var(--s24); }
+    .tc { grid-template-columns: 1fr; margin-top: var(--s40); }
+    .egb__i { display: block; }
+    .egb__i > .eg2__p { margin-top: var(--s4); }
+    .tq { grid-template-columns: 1fr; }
+    .tq::before { display: none; }
+    .tq__cell:not(:last-child)::after { display: none; }
+  }
+</style>
