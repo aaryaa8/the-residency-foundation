@@ -13,6 +13,6 @@
   "monthInSF": { "value": "$2,000", "label": "a month in San Francisco (illustrative)", "show": false },
   "programWeeks": { "value": "12", "label": "weeks", "show": true },
   "firstCohort": { "value": "April 2027", "label": "first cohort", "show": true },
-  "firstCohortYear": { "value": "2027", "label": "year of the first cohort, used for applications and selection", "show": true },
+  "firstCohortYear": { "value": "2027", "label": "year applications are expected to open", "show": true },
   "minimumAge": { "value": "13", "label": "minimum age for the interest form", "show": true }
 }
