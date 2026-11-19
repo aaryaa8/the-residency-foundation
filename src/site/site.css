@@ -383,7 +383,7 @@ p, li, dt, dd, h2, h3, label, legend { overflow-wrap: break-word; }
 
 /* the tracks: 4 categories in a 2 by 2 grid divided by hairlines. Each category name is
    gold, with its tracks listed under it. The 2 cells of a row share their rows. The closing
-   line sits in a frame under the right-hand column. */
+   line sits in a frame on the content columns, on the same text edge as the intro. */
 .tq { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .tq::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--rule); }
 .tq__cell { display: grid; grid-template-columns: var(--g3); grid-row: span 2; grid-template-rows: subgrid; align-items: start; row-gap: var(--s32); padding-block: var(--row-l) var(--s56); }
@@ -391,16 +391,17 @@ p, li, dt, dd, h2, h3, label, legend { overflow-wrap: break-word; }
 .tq__list { grid-column: 1 / -1; display: grid; gap: var(--s12); padding-inline: var(--pad); }
 .callout { display: grid; grid-template-columns: var(--g6); margin-top: var(--s72); }
 /* the words keep the column's text edge inside the frame */
-.callout > p { grid-column: 4 / 7; padding: var(--s40) calc(var(--pad) - var(--hairline)); border: var(--hairline) solid var(--frame); background: var(--white); }
+.callout > p { grid-column: 3 / 7; padding: var(--s40) calc(var(--pad) - var(--hairline)); border: var(--hairline) solid var(--frame); background: var(--white); }
 @media (max-width: 1199.98px) {
   .tq__cell { display: block; }
-  .tq__list { margin-top: var(--s24); }
+  .tq__cell > .sec__title { margin-bottom: var(--s32); }
   .callout { display: block; }
 }
 @media (max-width: 809.98px) {
   .tq { grid-template-columns: 1fr; }
   .tq::before { display: none; }
   .tq__cell { padding-bottom: var(--row-l); }
+  .tq__cell > .sec__title { margin-bottom: var(--s24); }
   .tq__cell:not(:last-child)::after { display: none; }
   .callout { margin-top: var(--s40); }
   .callout > p { padding-block: var(--s24); }
