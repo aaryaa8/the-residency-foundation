@@ -219,9 +219,9 @@ export const home = {
       { name: 'communities', tracks: ['Tribal Nations', 'Disaster-Struck Communities', 'Climate-Frontline'] },
       { name: 'open problems', tracks: ['Language Access', 'Rural Clinicians', 'Public-Interest AI'] },
     ],
-    // NEW wording, 19 November 2026: the educational programming added at Aaryaa's request. Needs her sign-off.
+    // Wording approved by Aaryaa, 19 November 2026.
     close:
-      'The Foundation would like to create pathways for builders in these tracks to learn to become entrepreneurs through its educational programming, find a community and receive guided introductions to investors, researchers and operators.',
+      'The Foundation would like to create pathways for builders in these tracks to learn entrepreneurship, find a community and receive guided introductions to investors, researchers and operators.',
   },
 
   get: {
