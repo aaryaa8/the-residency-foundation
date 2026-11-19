@@ -381,29 +381,29 @@ p, li, dt, dd, h2, h3, label, legend { overflow-wrap: break-word; }
 .claim { display: grid; gap: var(--s8); }
 .claim__stat { color: var(--fg-soft); }
 
-/* the builders: 3 plain columns across the grid */
-.cols3 { display: grid; grid-template-columns: var(--g3); max-width: none; }
-.cols3 > * { padding-inline: var(--pad); max-width: none; }
-@media (max-width: 1199.98px) { .cols3 { grid-template-columns: 1fr; row-gap: var(--s24); } .cols3 > * { max-width: var(--measure); } }
-
-/* the tracks: the names as a plain 3-column list, an example under 3 of them,
-   and the closing line in a frame on the middle 4 columns */
-.names { display: grid; grid-template-columns: var(--g3); row-gap: var(--s16); }
-.names > li { padding-inline: var(--pad); }
-/* example heads are sans, so they do not read as more rows of the serif list above */
-.eg > h3 { margin: 0 0 var(--s8); font: 500 var(--t-lead) / 1.5 var(--sans); letter-spacing: 0; }
-.eg__note { margin-top: var(--s24); padding-inline: var(--pad); max-width: calc(100% / 3); }
+/* the tracks: 4 categories in a 2 by 2 grid divided by hairlines. Each category name is
+   gold, with its tracks listed under it. The 2 cells of a row share their rows. The closing
+   line sits in a frame under the right-hand column. */
+.tq { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tq::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--rule); }
+.tq__cell { display: grid; grid-template-columns: var(--g3); grid-row: span 2; grid-template-rows: subgrid; align-items: start; row-gap: var(--s32); padding-block: var(--row-l) var(--s56); }
+.tq__cell > .sec__title { grid-column: 1 / -1; color: var(--accent); }
+.tq__list { grid-column: 1 / -1; display: grid; gap: var(--s12); padding-inline: var(--pad); }
 .callout { display: grid; grid-template-columns: var(--g6); margin-top: var(--s72); }
-.callout > p { grid-column: 2 / 6; padding: var(--s40); border: var(--hairline) solid var(--frame); background: var(--white); text-align: center; }
+/* the words keep the column's text edge inside the frame */
+.callout > p { grid-column: 4 / 7; padding: var(--s40) calc(var(--pad) - var(--hairline)); border: var(--hairline) solid var(--frame); background: var(--white); }
 @media (max-width: 1199.98px) {
-  .names { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .eg__note { max-width: var(--measure); }
-  .callout { display: block; padding-inline: var(--pad); }
+  .tq__cell { display: block; }
+  .tq__list { margin-top: var(--s24); }
+  .callout { display: block; }
 }
 @media (max-width: 809.98px) {
-  .names { grid-template-columns: 1fr; row-gap: var(--s12); }
+  .tq { grid-template-columns: 1fr; }
+  .tq::before { display: none; }
+  .tq__cell { padding-bottom: var(--row-l); }
+  .tq__cell:not(:last-child)::after { display: none; }
   .callout { margin-top: var(--s40); }
-  .callout > p { padding: var(--s24) var(--s16); }
+  .callout > p { padding-block: var(--s24); }
 }
 
 /* the program: head, lead-in and definition rows on the left; the statue's frame runs
