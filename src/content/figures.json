@@ -12,7 +12,7 @@
   "cohortSponsorship": { "value": "$150,000", "label": "cohort sponsorship", "show": true, "donatePageOnly": true },
   "monthInSF": { "value": "$2,000", "label": "a month in San Francisco (illustrative)", "show": false },
   "programWeeks": { "value": "12", "label": "weeks", "show": true },
-  "stipend": { "value": "$6,000", "label": "stipend for the 12-week program, up to", "show": true },
+  "stipend": { "value": "$6,000", "label": "stipend for the program, up to", "show": true },
   "cohortSize": { "value": "10", "spoken": "about 10", "label": "fellows in a cohort", "show": true },
   "firstCohort": { "value": "April 2027", "label": "first cohort", "show": true },
   "firstCohortYear": { "value": "2027", "label": "year applications are expected to open", "show": true },
