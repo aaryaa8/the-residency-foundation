@@ -12,6 +12,7 @@
   "cohortSponsorship": { "value": "$150,000", "label": "cohort sponsorship", "show": true, "donatePageOnly": true },
   "monthInSF": { "value": "$2,000", "label": "a month in San Francisco (illustrative)", "show": false },
   "programWeeks": { "value": "12", "label": "weeks", "show": true },
-  "firstCohortYear": { "value": "2027", "label": "first cohort", "show": true },
+  "firstCohortYear": { "value": "2027", "label": "year applications are expected to open", "show": true },
+  "firstCohortDate": { "value": "April 2027", "label": "first cohort planned for", "show": true },
   "minimumAge": { "value": "13", "label": "minimum age for the interest form", "show": true }
 }
