@@ -238,7 +238,8 @@ export const home = {
       },
       {
         label: 'cohort',
-        text: `A group of ${said('cohortSize')} builders who work alongside each other for the full ${fig('programWeeks')} weeks.`,
+        // The cohort size is not stated on the website while the budget is being re-evaluated (Aaryaa, 24 November 2026).
+        text: `Other builders to work alongside for the full ${fig('programWeeks')} weeks.`,
       },
       { label: 'stipend and resources', text: `A stipend of up to ${fig('stipend')}, plus access to compute, tools and mentors.` },
       {
@@ -367,7 +368,7 @@ export const fellowship = {
     },
     {
       title: 'selection',
-      text: `The Foundation runs the selection process, which is open and need-based, and it plans to publish the rubric. Each cohort is expected to have ${said('cohortSize')} fellows.`,
+      text: `The Foundation runs the selection process, which is open and need-based, and it plans to publish the rubric.`,
     },
     {
       title: 'after the program',
