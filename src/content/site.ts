@@ -137,9 +137,10 @@ export const lines = {
   ownSelection:
     'The Residency Foundation runs its own selection and its own programming.',
   cost: 'Programs are free or need-based.',
-  // NEW, 24 November 2026. How to route an employer match through the fiscal sponsor.
+  // How to route an employer match through the fiscal sponsor. Wording as in the donor deck
+  // and one-pager, 24 November 2026.
   employerMatch:
-    'Many employers match gifts. In your company’s giving portal, search for The Hack Foundation, EIN 81-2908499. Choose The Residency Foundation project if it is listed, or name The Residency Foundation in the comment field.',
+    'Many employers match gifts. In your company’s giving portal, search for The Hack Foundation, EIN 81-2908499, and name The Residency Foundation.',
   // Approved disclosure line. Wording is unverified against HCB's requirements.
   disclosure:
     'The Residency Foundation is fiscally sponsored by The Hack Foundation (d.b.a. Hack Club), a 501(c)(3) nonprofit (EIN 81-2908499). Donations are tax-deductible to the extent allowed by law.',
