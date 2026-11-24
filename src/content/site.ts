@@ -150,7 +150,7 @@ export const lines = {
   // NEW
   separate:
     'The Residency Foundation is separate from The Residency. It has its own board, runs its own selection and its own programming, and is forming its own 501(c)(3).',
-  firstCohort: `The first cohort is planned for ${fig('firstCohort')}.`,
+  firstCohort: `The first cohort is planned for ${fig('firstCohortDate')}.`,
   // NEW (the approved sentence names the raise total, which is hidden)
   programmingMoney: `In the first year, the Foundation plans to direct ${fig('programming')} toward programming.`,
 };
@@ -471,7 +471,7 @@ export const fellowship = {
 export const about = {
   label: 'about',
   heading: lines.missionFirstSentence,
-  body: `The Foundation gives people with limited financial means the entrepreneurial programming and resources to build solutions to problems facing their communities. Fellows are selected on need and receive the Foundation’s programming, community and network. Programs are free or need-based, and the first cohort is planned for ${fig('firstCohort')}.`,
+  body: `The Foundation gives people with limited financial means the entrepreneurial programming and resources to build solutions to problems facing their communities. Fellows are selected on need and receive the Foundation’s programming, community and network. Programs are free or need-based, and the first cohort is planned for ${fig('firstCohortDate')}.`,
   governance: {
     title: 'governance',
     items: [
@@ -553,7 +553,7 @@ export const faq = {
     {
       id: 'when',
       q: 'When does the first cohort start?',
-      a: [`The first cohort is planned for ${fig('firstCohort')}, and gifts made now go toward funding it.`],
+      a: [`The first cohort is planned for ${fig('firstCohortDate')}, and gifts made now go toward funding it.`],
     },
   ],
   fellows: [

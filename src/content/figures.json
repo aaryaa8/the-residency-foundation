@@ -14,7 +14,7 @@
   "programWeeks": { "value": "12", "label": "weeks", "show": true },
   "stipend": { "value": "$6,000", "label": "stipend for the program, up to", "show": true },
   "cohortSize": { "value": "10", "spoken": "about 10", "label": "fellows in a cohort", "show": true },
-  "firstCohort": { "value": "April 2027", "label": "first cohort", "show": true },
   "firstCohortYear": { "value": "2027", "label": "year applications are expected to open", "show": true },
+  "firstCohortDate": { "value": "April 2027", "label": "first cohort planned for", "show": true },
   "minimumAge": { "value": "13", "label": "minimum age for the interest form", "show": true }
 }
