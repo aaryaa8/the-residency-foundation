@@ -1,6 +1,7 @@
 /* The Residency Foundation: site styles.
    White ground, a visible 6-column hairline grid, large lowercase side-heads,
    one near-black band (home, donate) and a near-black footer.
+   All text is Saigon: Light for headings and statements, Regular for body text.
    Geist Mono is used for calls to action and nav links only.
 
    Breakpoints: phone up to 809.98px, tablet up to 1199.98px, desktop above.
@@ -55,12 +56,12 @@
   --t-title-s: clamp(1.875rem, 1.2rem + 2vw, 3rem);
   --t-statement-l: clamp(1.9375rem, 1.1rem + 2.7vw, 3.5rem);
   --t-statement: clamp(1.5625rem, 1rem + 1.4vw, 2.25rem);
-  --t-row: clamp(1.375rem, 1rem + 0.85vw, 1.75rem);           /* row titles and questions */
+  --t-row: clamp(1.5rem, 1rem + 0.85vw, 1.75rem);             /* row titles and questions */
   --t-figure: clamp(5rem, 0.25rem + 9.6vw, 9.5rem);          /* sized so the widest figure fits 1 of 3 columns */
   --t-amount: clamp(2.75rem, 1.5rem + 3.6vw, 4.75rem);
-  --t-lead: 1.25rem;
-  --t-ui: 1rem;
-  --t-small: 0.875rem;
+  --t-lead: 1.375rem;
+  --t-ui: 1.125rem;
+  --t-small: 1rem;
   --t-cta: 0.75rem;
   --lh-small: 1.5;
   --tr-display: -0.04em;
@@ -82,7 +83,7 @@
   :root { --pad: var(--s16); }
 }
 @media (max-width: 809.98px) {
-  :root { --pad: var(--s12); --nav-h: 64px; --gap-l: var(--s96); --gap-m: var(--s72); --gap-s: var(--s56); --row-m: var(--s24); --row-l: var(--s32); --t-lead: 1.125rem; }
+  :root { --pad: var(--s12); --nav-h: 64px; --gap-l: var(--s96); --gap-m: var(--s72); --gap-s: var(--s56); --row-m: var(--s24); --row-l: var(--s32); --t-lead: 1.25rem; }
 }
 
 [data-tone='dark'] {
@@ -212,7 +213,7 @@ p, li, dt, dd, h2, h3, label, legend { overflow-wrap: break-word; }
 .nav.is-dark { color: var(--ivory); }
 .nav.is-dark.is-scrolled .nav__bar { box-shadow: inset 0 0 0 1px var(--ivory-15); background: rgba(12, 14, 17, 0.72); }
 
-.nav__logo { grid-column: 1 / 3; justify-self: start; position: relative; display: block; margin-left: var(--pad); height: 48px; aspect-ratio: 1868 / 642; }
+.nav__logo { grid-column: 1 / 3; justify-self: start; position: relative; display: block; margin-left: var(--pad); height: 48px; aspect-ratio: 1866 / 671; }
 .nav__logo img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .nav__logo .on-dark { opacity: 0; }
 .nav.is-dark .nav__logo .on-dark { opacity: 1; }
@@ -229,7 +230,7 @@ p, li, dt, dd, h2, h3, label, legend { overflow-wrap: break-word; }
 @media (max-width: 809.98px) {
   .nav__bar { display: flex; gap: var(--s4); }
   .nav__logo { height: 44px; width: 111px; aspect-ratio: auto; margin-right: auto; }
-  .nav__logo img { inset: 3px 0 auto 0; height: 38px; }
+  .nav__logo img { inset: 2px 0 auto 0; height: 40px; }
   /* shown as: logo, DONATE, menu button. In the source the button comes before its links. */
   .nav__cta { order: 1; margin: 0 var(--s4) 0 0; }
   .nav__menu { order: 2; display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 0; background: none; color: inherit; cursor: pointer; }
@@ -429,7 +430,7 @@ p, li, dt, dd, h2, h3, label, legend { overflow-wrap: break-word; }
   .prog > .plate { width: 100%; margin-top: var(--s56); }
 }
 
-/* definition rows: term in the serif, description in Inter, hairline between */
+/* definition rows: term in the light serif, description in body text, hairline between */
 .dl__row { display: grid; grid-template-columns: var(--g3); align-items: baseline; padding-block: var(--row-m); }
 .dl dt { grid-column: 1; padding-inline: var(--pad); }
 .dl dd { grid-column: 2 / 4; padding-inline: var(--pad); }
@@ -549,12 +550,12 @@ p, li, dt, dd, h2, h3, label, legend { overflow-wrap: break-word; }
 [type="submit"][aria-disabled="true"] { opacity: 0.6; pointer-events: none; }
 .field { grid-column: span 2; display: grid; gap: var(--s8); padding-inline: var(--pad); min-width: 0; border: 0; margin: 0; }
 .field--wide { grid-column: 1 / -1; }
-.field__label, .field legend { padding: 0; font: 500 var(--t-ui) / 1.5 var(--sans); color: var(--fg); }
+.field__label, .field legend { padding: 0; font: 400 var(--t-ui) / 1.5 var(--serif); color: var(--fg); }
 .field__req { color: var(--accent-small); }
 .field__opt { font-weight: 400; font-size: var(--t-small); color: var(--fg-soft); white-space: nowrap; }
 .field__hint { font-size: var(--t-small); line-height: var(--lh-small); color: var(--fg-soft); }
 .field__count { justify-self: end; }
-.input { width: 100%; height: var(--s56); padding: 0 var(--s16); border: 1px solid var(--control); border-radius: 0; background: var(--white); color: var(--ink); font: 400 var(--body) / 1.5 var(--sans); -webkit-appearance: none; appearance: none; }
+.input { width: 100%; height: var(--s56); padding: 0 var(--s16); border: 1px solid var(--control); border-radius: 0; background: var(--white); color: var(--ink); font: 400 var(--body) / 1.5 var(--serif); -webkit-appearance: none; appearance: none; }
 .input:hover, .input:focus-visible { border-color: var(--ink); }
 textarea.input { height: auto; min-height: var(--s168); padding: var(--s12) var(--s16); resize: vertical; }
 select.input { padding-right: var(--s40); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%230c0e11' stroke-width='1.2'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right var(--s16) center; }
@@ -588,7 +589,7 @@ select.input { padding-right: var(--s40); background-image: url("data:image/svg+
 .foot__in { position: relative; z-index: 1; margin-inline: var(--edge); padding-top: var(--s96); }
 .foot__top { align-items: end; padding-bottom: var(--s56); }
 /* the logo is exactly 1 column wide less the inset, so it ends on a column line */
-.foot__logo { grid-column: 1 / 2; display: block; margin-left: var(--pad); aspect-ratio: 1868 / 642; }
+.foot__logo { grid-column: 1 / 2; display: block; margin-left: var(--pad); aspect-ratio: 1866 / 671; }
 .foot__logo img { width: 100%; height: 100%; }
 .foot__updates { grid-column: 3 / 6; padding-inline: var(--pad); }
 .foot__updates > .small { margin-top: var(--s8); }
@@ -596,7 +597,7 @@ select.input { padding-right: var(--s40); background-image: url("data:image/svg+
 .foot__label { display: block; margin-top: var(--s16); font-size: var(--t-small); line-height: var(--lh-small); }
 .foot .field__req { color: var(--accent); }
 .foot__field { display: flex; align-items: stretch; border-bottom: 1px solid var(--control); }
-.foot__field input { flex: 1; min-width: 0; height: 48px; padding: 0; border: 0; background: none; color: var(--ivory); font: 400 var(--body) / 1 var(--sans); border-radius: 0; }
+.foot__field input { flex: 1; min-width: 0; height: 48px; padding: 0; border: 0; background: none; color: var(--ivory); font: 400 var(--body) / 1 var(--serif); border-radius: 0; }
 .foot__field .cta { color: var(--ivory); padding-left: var(--s16); }
 .foot .check { margin-top: var(--s8); font-size: var(--t-small); color: var(--fg-soft); }
 .foot .check input { background: transparent; }

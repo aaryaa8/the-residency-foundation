@@ -137,9 +137,12 @@ export const lines = {
   ownSelection:
     'The Residency Foundation runs its own selection and its own programming.',
   cost: 'Programs are free or need-based.',
+  // NEW, 24 November 2026. How to route an employer match through the fiscal sponsor.
+  employerMatch:
+    'Many employers match gifts. In your company’s giving portal, search for The Hack Foundation, EIN 81-2908499. Choose The Residency Foundation project if it is listed, or name The Residency Foundation in the comment field.',
   // Approved disclosure line. Wording is unverified against HCB's requirements.
   disclosure:
-    'The Residency Foundation is fiscally sponsored by Hack Club, a 501(c)(3) nonprofit (EIN 81-2908499). Donations are tax-deductible to the extent allowed by law.',
+    'The Residency Foundation is fiscally sponsored by The Hack Foundation (d.b.a. Hack Club), a 501(c)(3) nonprofit (EIN 81-2908499). Donations are tax-deductible to the extent allowed by law.',
   status:
     'The Foundation is fiscally sponsored by Hack Club, a 501(c)(3), and its own 501(c)(3) is in progress.',
   deductibleToday:
@@ -219,9 +222,9 @@ export const home = {
       { name: 'communities', tracks: ['Tribal Nations', 'Disaster-Struck Communities', 'Climate-Frontline'] },
       { name: 'open problems', tracks: ['Language Access', 'Rural Clinicians', 'Public-Interest AI'] },
     ],
-    // NEW wording, 19 November 2026: the educational programming added at Aaryaa's request. Needs her sign-off.
+    // Wording approved by Aaryaa, 19 November 2026.
     close:
-      'The Foundation would like to create pathways for builders in these tracks to learn to become entrepreneurs through its educational programming, find a community and receive guided introductions to investors, researchers and operators.',
+      'The Foundation would like to create pathways for builders in these tracks to learn entrepreneurship, find a community and receive guided introductions to investors, researchers and operators.',
   },
 
   get: {
@@ -234,9 +237,9 @@ export const home = {
       },
       {
         label: 'cohort',
-        text: `Other builders to work alongside for the full ${fig('programWeeks')} weeks.`,
+        text: `A group of ${said('cohortSize')} builders who work alongside each other for the full ${fig('programWeeks')} weeks.`,
       },
-      { label: 'resources', text: 'Access to compute, tools and mentors.' },
+      { label: 'stipend and resources', text: `A stipend of up to ${fig('stipend')}, plus access to compute, tools and mentors.` },
       {
         label: 'introductions',
         text: 'Guided introductions to investors, researchers and operators in San Francisco.',
@@ -334,6 +337,7 @@ export const donate = {
   // NEW
   larger: 'To talk about a larger gift, write to',
   deductible: lines.deductibleToday,
+  match: lines.employerMatch,
   disclosure: lines.disclosure,
   when: lines.firstCohort,
 };
@@ -350,7 +354,7 @@ export const fellowship = {
   sections: [
     {
       title: 'the program',
-      text: 'Fellows get the Foundation’s hands-on entrepreneurship programming, a cohort of builders, access to compute, tools and mentors, and guided introductions to the investors, researchers and operators in San Francisco.',
+      text: `Fellows get the Foundation’s hands-on entrepreneurship programming, a cohort of builders, a stipend of up to ${fig('stipend')}, access to compute, tools and mentors, and guided introductions to the investors, researchers and operators in San Francisco.`,
     },
     {
       title: 'the cost',
@@ -362,7 +366,7 @@ export const fellowship = {
     },
     {
       title: 'selection',
-      text: 'The Foundation runs the selection process, which is open and need-based, and it plans to publish the rubric.',
+      text: `The Foundation runs the selection process, which is open and need-based, and it plans to publish the rubric. Each cohort is expected to have ${said('cohortSize')} fellows.`,
     },
     {
       title: 'after the program',
@@ -516,14 +520,19 @@ export const faq = {
     {
       id: 'deductible',
       q: 'Is my donation tax-deductible?',
-      a: ['Yes, the Foundation is fiscally sponsored by Hack Club, a 501(c)(3) nonprofit (EIN 81-2908499), so gifts are tax-deductible to the extent allowed by law. The Foundation is forming its own 501(c)(3).'],
+      a: ['Yes, the Foundation is fiscally sponsored by The Hack Foundation (d.b.a. Hack Club), a 501(c)(3) nonprofit (EIN 81-2908499), so gifts are tax-deductible to the extent allowed by law. The Foundation is forming its own 501(c)(3).'],
+    },
+    {
+      id: 'match',
+      q: 'Can my employer match my gift?',
+      a: [lines.employerMatch],
     },
     {
       id: 'where',
       q: 'Where does my money go?',
       // Edited for the website: the raise total is removed and the gift levels
       // appear on the donate page only.
-      a: [`Your gift is expected to go to programming for fellows, which covers the curriculum, the cohort, resources such as compute, tools and mentors, introductions, and the support fellows need to take part. ${lines.programmingMoney}`],
+      a: [`Your gift is expected to go to programming for fellows, which covers the curriculum, the cohort, stipends of up to ${fig('stipend')}, resources such as compute, tools and mentors, and introductions. ${lines.programmingMoney}`],
     },
     {
       id: 'residency',
@@ -551,7 +560,7 @@ export const faq = {
     {
       id: 'get',
       q: 'What do fellows get?',
-      a: ['Fellows get the Foundation’s hands-on entrepreneurship programming, a cohort of builders, access to compute, tools and mentors, and guided introductions to the investors, researchers and operators in San Francisco. Fellows can take part in person, remote or hybrid.'],
+      a: [`Fellows get the Foundation’s hands-on entrepreneurship programming, a cohort of builders, a stipend of up to ${fig('stipend')}, access to compute, tools and mentors, and guided introductions to the investors, researchers and operators in San Francisco. Fellows can take part in person, remote or hybrid.`],
     },
     {
       id: 'cost',
